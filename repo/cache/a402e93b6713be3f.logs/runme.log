@@ -1,0 +1,61 @@
+
+*** Running vivado
+    with args -log system_vtg_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_vtg_0.tcl
+
+
+****** Vivado v2016.4 (64-bit)
+  **** SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+  **** IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source system_vtg_0.tcl -notrace
+Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 312.277 ; gain = 102.340
+INFO: [Synth 8-638] synthesizing module 'system_vtg_0' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ip/system_vtg_0/synth/system_vtg_0.vhd:96]
+INFO: [Synth 8-638] synthesizing module 'axi_lite_ipif' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0ba0/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:2948]
+INFO: [Synth 8-638] synthesizing module 'slave_attachment' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0ba0/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:2341]
+INFO: [Synth 8-638] synthesizing module 'address_decoder' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0ba0/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1775]
+INFO: [Synth 8-638] synthesizing module 'pselect_f' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0ba0/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-256] done synthesizing module 'pselect_f' (1#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0ba0/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-638] synthesizing module 'pselect_f__parameterized0' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0ba0/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-256] done synthesizing module 'pselect_f__parameterized0' (1#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0ba0/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-256] done synthesizing module 'address_decoder' (2#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0ba0/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1775]
+INFO: [Synth 8-256] done synthesizing module 'slave_attachment' (3#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0ba0/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:2341]
+INFO: [Synth 8-256] done synthesizing module 'axi_lite_ipif' (4#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0ba0/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:2948]
+INFO: [Synth 8-256] done synthesizing module 'system_vtg_0' (11#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ip/system_vtg_0/synth/system_vtg_0.vhd:96]
+Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 469.809 ; gain = 259.871
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 469.809 ; gain = 259.871
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.125 . Memory (MB): peak = 810.086 ; gain = 0.016
+Finished Constraint Validation : Time (s): cpu = 00:00:30 ; elapsed = 00:00:39 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:30 ; elapsed = 00:00:39 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:30 ; elapsed = 00:00:39 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:35 ; elapsed = 00:00:44 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:44 ; elapsed = 00:00:53 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:57 ; elapsed = 00:01:08 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished Timing Optimization : Time (s): cpu = 00:00:59 ; elapsed = 00:01:10 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished Technology Mapping : Time (s): cpu = 00:01:01 ; elapsed = 00:01:13 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished IO Insertion : Time (s): cpu = 00:01:02 ; elapsed = 00:01:14 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:02 ; elapsed = 00:01:14 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:03 ; elapsed = 00:01:14 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:03 ; elapsed = 00:01:15 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:03 ; elapsed = 00:01:15 . Memory (MB): peak = 810.086 ; gain = 600.148
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:03 ; elapsed = 00:01:15 . Memory (MB): peak = 810.086 ; gain = 600.148
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |CARRY4 |    31|
+|2     |LUT1   |    84|
+|3     |LUT2   |    47|
+|4     |LUT3   |   536|
+|5     |LUT4   |    53|
+|6     |LUT5   |   150|
+|7     |LUT6   |   396|
+|8     |MUXF7  |   134|
+|9     |SRL16E |     6|
+|10    |FDRE   |  2738|
+|11    |FDSE   |   184|
++------+-------+------+
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:03 ; elapsed = 00:01:15 . Memory (MB): peak = 810.086 ; gain = 600.148
+synth_design: Time (s): cpu = 00:01:06 ; elapsed = 00:01:15 . Memory (MB): peak = 1164.492 ; gain = 931.945

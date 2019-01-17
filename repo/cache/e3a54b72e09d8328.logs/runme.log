@@ -1,0 +1,87 @@
+
+*** Running vivado
+    with args -log system_xbar_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_xbar_0.tcl
+
+
+****** Vivado v2016.4 (64-bit)
+  **** SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+  **** IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source system_xbar_0.tcl -notrace
+Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 328.949 ; gain = 119.121
+INFO: [Synth 8-638] synthesizing module 'system_xbar_0' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ip/system_xbar_0/synth/system_xbar_0.v:59]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_12_axi_crossbar' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:4882]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_12_crossbar_sasd' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:1240]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_12_addr_decoder' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:794]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_comparator_static' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_carry_and' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:62]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_carry_and' (1#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:62]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_comparator_static' (2#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_comparator_static__parameterized0' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_comparator_static__parameterized0' (2#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_comparator_static__parameterized1' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_comparator_static__parameterized1' (2#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_comparator_static__parameterized2' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_comparator_static__parameterized2' (2#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_comparator_static__parameterized3' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_comparator_static__parameterized3' (2#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_comparator_static__parameterized4' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_comparator_static__parameterized4' (2#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2133]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_12_addr_decoder' (3#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:794]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_12_decerr_slave' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:3500]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_12_decerr_slave' (4#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:3500]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_12_addr_arbiter_sasd' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:65]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_12_addr_arbiter_sasd' (5#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:65]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_12_splitter' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:4459]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_12_splitter' (6#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:4459]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_12_splitter__parameterized0' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:4459]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_12_splitter__parameterized0' (6#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:4459]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2452]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc' (7#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2452]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized0' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2452]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized0' (7#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2452]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized1' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2452]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized1' (7#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2452]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized2' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2452]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized2' (7#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2452]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice' (8#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized3' [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2452]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized3' (8#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:2452]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_12_crossbar_sasd' (9#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:1240]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_12_axi_crossbar' (10#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ipshared/896d/hdl/axi_crossbar_v2_1_vl_rfs.v:4882]
+INFO: [Synth 8-256] done synthesizing module 'system_xbar_0' (11#1) [d:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ip/system_xbar_0/synth/system_xbar_0.v:59]
+Finished RTL Elaboration : Time (s): cpu = 00:00:19 ; elapsed = 00:00:22 . Memory (MB): peak = 445.168 ; gain = 235.340
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:22 . Memory (MB): peak = 445.168 ; gain = 235.340
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.063 . Memory (MB): peak = 696.941 ; gain = 0.004
+Finished Constraint Validation : Time (s): cpu = 00:00:33 ; elapsed = 00:00:46 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:33 ; elapsed = 00:00:46 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:33 ; elapsed = 00:00:46 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:34 ; elapsed = 00:00:47 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:35 ; elapsed = 00:00:49 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:48 ; elapsed = 00:01:02 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished Timing Optimization : Time (s): cpu = 00:00:50 ; elapsed = 00:01:03 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished Technology Mapping : Time (s): cpu = 00:00:50 ; elapsed = 00:01:04 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished IO Insertion : Time (s): cpu = 00:00:50 ; elapsed = 00:01:04 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:50 ; elapsed = 00:01:04 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:51 ; elapsed = 00:01:05 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:51 ; elapsed = 00:01:05 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:51 ; elapsed = 00:01:05 . Memory (MB): peak = 696.941 ; gain = 487.113
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:51 ; elapsed = 00:01:05 . Memory (MB): peak = 696.941 ; gain = 487.113
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |LUT1 |     2|
+|2     |LUT2 |    52|
+|3     |LUT3 |    11|
+|4     |LUT4 |    90|
+|5     |LUT5 |    28|
+|6     |LUT6 |    99|
+|7     |FDRE |   135|
++------+-----+------+
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:51 ; elapsed = 00:01:05 . Memory (MB): peak = 696.941 ; gain = 487.113
+synth_design: Time (s): cpu = 00:00:48 ; elapsed = 00:01:00 . Memory (MB): peak = 696.941 ; gain = 452.113
