@@ -1,3 +1,9 @@
+/*
+ * i2c.c
+ *
+ *  Created on: Oct 3, 2016
+ *      Author: ddragut
+ */
 #include "xparameters.h"
 #include "xil_io.h"
 #include "../ov5647/defines.h"
@@ -6,6 +12,7 @@
 u8 WriteBuffer[sizeof(AddressType) + CHUNK_SIZE];
 #define PAGE_SIZE             4096
 u8 ReadBuffer[PAGE_SIZE];     /* Read buffer for reading a page.           */
+static u8 *fw = (u8*) 0x3f000000;
 u8 tmp[64];
 char inbyte(void);
 XIicPs_Config *Config;

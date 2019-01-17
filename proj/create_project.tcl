@@ -42,7 +42,7 @@ set_property "default_lib" "xil_defaultlib" $obj
 set_property "part" $part $obj
 #set_property "board_part" $brd_part $obj
 set_property "simulator_language" "Mixed" $obj
-set_property "target_language" "VHDL" $obj
+set_property "target_language" "Verilog" $obj
 
 # Uncomment the following 3 lines to greatly increase build speed while working with IP cores (and/or block diagrams)
 set_property "corecontainer.enable" "0" $obj
