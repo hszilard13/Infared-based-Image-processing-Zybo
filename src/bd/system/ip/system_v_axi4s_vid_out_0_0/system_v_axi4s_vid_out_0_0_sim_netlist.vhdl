@@ -1,10 +1,10 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
--- Date        : Thu Jan 17 12:08:36 2019
+-- Date        : Thu Jan 17 13:31:42 2019
 -- Host        : shegedus running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               D:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ip/system_v_axi4s_vid_out_0_0/system_v_axi4s_vid_out_0_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top system_v_axi4s_vid_out_0_0 -prefix
+--               system_v_axi4s_vid_out_0_0_ system_v_axi4s_vid_out_0_0_sim_netlist.vhdl
 -- Design      : system_v_axi4s_vid_out_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -38,8 +38,6 @@ entity system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_formatter is
     E : in STD_LOGIC_VECTOR ( 0 to 0 );
     D : in STD_LOGIC_VECTOR ( 23 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_formatter : entity is "v_axi4s_vid_out_v4_0_5_formatter";
 end system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_formatter;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_formatter is
@@ -476,8 +474,6 @@ entity system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_sync is
     \DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram_0\ : in STD_LOGIC_VECTOR ( 0 to 0 );
     vtg_field_id : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_sync : entity is "v_axi4s_vid_out_v4_0_5_sync";
 end system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_sync;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_sync is
@@ -4563,8 +4559,6 @@ entity system_v_axi4s_vid_out_0_0_blk_mem_gen_prim_wrapper is
     \gc0.count_d1_reg[9]\ : in STD_LOGIC_VECTOR ( 9 downto 0 );
     din : in STD_LOGIC_VECTOR ( 26 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_blk_mem_gen_prim_wrapper : entity is "blk_mem_gen_prim_wrapper";
 end system_v_axi4s_vid_out_0_0_blk_mem_gen_prim_wrapper;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_blk_mem_gen_prim_wrapper is
@@ -4837,8 +4831,6 @@ entity system_v_axi4s_vid_out_0_0_compare is
     comp1 : out STD_LOGIC;
     v1_reg : in STD_LOGIC_VECTOR ( 4 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_compare : entity is "compare";
 end system_v_axi4s_vid_out_0_0_compare;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_compare is
@@ -5095,8 +5087,6 @@ entity system_v_axi4s_vid_out_0_0_rd_bin_cntr is
     rd_clk : in STD_LOGIC;
     \ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2]\ : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_rd_bin_cntr : entity is "rd_bin_cntr";
 end system_v_axi4s_vid_out_0_0_rd_bin_cntr;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_rd_bin_cntr is
@@ -5469,8 +5459,6 @@ entity system_v_axi4s_vid_out_0_0_rd_dc_fwft_ext_as is
     rd_clk : in STD_LOGIC;
     \ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2]\ : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_rd_dc_fwft_ext_as : entity is "rd_dc_fwft_ext_as";
 end system_v_axi4s_vid_out_0_0_rd_dc_fwft_ext_as;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_rd_dc_fwft_ext_as is
@@ -5648,8 +5636,6 @@ entity system_v_axi4s_vid_out_0_0_rd_fwft is
     \gnxpm_cdc.wr_pntr_bin_reg[7]_0\ : in STD_LOGIC;
     \gnxpm_cdc.wr_pntr_bin_reg[7]_1\ : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_rd_fwft : entity is "rd_fwft";
 end system_v_axi4s_vid_out_0_0_rd_fwft;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_rd_fwft is
@@ -5943,8 +5929,6 @@ entity system_v_axi4s_vid_out_0_0_rd_handshaking_flags is
     p_1_out : in STD_LOGIC;
     rd_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_rd_handshaking_flags : entity is "rd_handshaking_flags";
 end system_v_axi4s_vid_out_0_0_rd_handshaking_flags;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_rd_handshaking_flags is
@@ -5972,8 +5956,6 @@ entity system_v_axi4s_vid_out_0_0_synchronizer_ff is
     in0 : in STD_LOGIC_VECTOR ( 0 to 0 );
     rd_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_synchronizer_ff : entity is "synchronizer_ff";
 end system_v_axi4s_vid_out_0_0_synchronizer_ff;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_synchronizer_ff is
@@ -7055,8 +7037,6 @@ entity system_v_axi4s_vid_out_0_0_wr_bin_cntr is
     wr_clk : in STD_LOGIC;
     AR : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_wr_bin_cntr : entity is "wr_bin_cntr";
 end system_v_axi4s_vid_out_0_0_wr_bin_cntr;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_wr_bin_cntr is
@@ -7643,8 +7623,6 @@ entity system_v_axi4s_vid_out_0_0_wr_handshaking_flags is
     ram_full_fb_i_reg : in STD_LOGIC;
     wr_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_wr_handshaking_flags : entity is "wr_handshaking_flags";
 end system_v_axi4s_vid_out_0_0_wr_handshaking_flags;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_wr_handshaking_flags is
@@ -7678,8 +7656,6 @@ entity system_v_axi4s_vid_out_0_0_blk_mem_gen_prim_width is
     \gc0.count_d1_reg[9]\ : in STD_LOGIC_VECTOR ( 9 downto 0 );
     din : in STD_LOGIC_VECTOR ( 26 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_blk_mem_gen_prim_width : entity is "blk_mem_gen_prim_width";
 end system_v_axi4s_vid_out_0_0_blk_mem_gen_prim_width;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_blk_mem_gen_prim_width is
@@ -7726,8 +7702,6 @@ entity system_v_axi4s_vid_out_0_0_clk_x_pntrs is
     rd_clk : in STD_LOGIC;
     \ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1]\ : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_clk_x_pntrs : entity is "clk_x_pntrs";
 end system_v_axi4s_vid_out_0_0_clk_x_pntrs;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_clk_x_pntrs is
@@ -8722,8 +8696,6 @@ entity system_v_axi4s_vid_out_0_0_rd_status_flags_as is
     rd_en : in STD_LOGIC;
     \gpregsm1.curr_fwft_state_reg[1]\ : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_rd_status_flags_as : entity is "rd_status_flags_as";
 end system_v_axi4s_vid_out_0_0_rd_status_flags_as;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_rd_status_flags_as is
@@ -8795,8 +8767,6 @@ entity system_v_axi4s_vid_out_0_0_reset_blk_ramfifo is
     wr_clk : in STD_LOGIC;
     rst : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_reset_blk_ramfifo : entity is "reset_blk_ramfifo";
 end system_v_axi4s_vid_out_0_0_reset_blk_ramfifo;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_reset_blk_ramfifo is
@@ -9093,8 +9063,6 @@ entity system_v_axi4s_vid_out_0_0_wr_status_flags_as is
     wr_en : in STD_LOGIC;
     wr_rst_busy : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_wr_status_flags_as : entity is "wr_status_flags_as";
 end system_v_axi4s_vid_out_0_0_wr_status_flags_as;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_wr_status_flags_as is
@@ -9188,8 +9156,6 @@ entity system_v_axi4s_vid_out_0_0_blk_mem_gen_generic_cstr is
     \gc0.count_d1_reg[9]\ : in STD_LOGIC_VECTOR ( 9 downto 0 );
     din : in STD_LOGIC_VECTOR ( 26 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_blk_mem_gen_generic_cstr : entity is "blk_mem_gen_generic_cstr";
 end system_v_axi4s_vid_out_0_0_blk_mem_gen_generic_cstr;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_blk_mem_gen_generic_cstr is
@@ -9238,8 +9204,6 @@ entity system_v_axi4s_vid_out_0_0_rd_logic is
     \gnxpm_cdc.wr_pntr_bin_reg[7]_1\ : in STD_LOGIC;
     \gnxpm_cdc.wr_pntr_bin_reg[7]_2\ : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_rd_logic : entity is "rd_logic";
 end system_v_axi4s_vid_out_0_0_rd_logic;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_rd_logic is
@@ -9333,8 +9297,6 @@ entity system_v_axi4s_vid_out_0_0_wr_logic is
     RD_PNTR_WR : in STD_LOGIC_VECTOR ( 9 downto 0 );
     wr_rst_busy : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_wr_logic : entity is "wr_logic";
 end system_v_axi4s_vid_out_0_0_wr_logic;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_wr_logic is
@@ -9390,8 +9352,6 @@ entity system_v_axi4s_vid_out_0_0_blk_mem_gen_top is
     \gc0.count_d1_reg[9]\ : in STD_LOGIC_VECTOR ( 9 downto 0 );
     din : in STD_LOGIC_VECTOR ( 26 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_blk_mem_gen_top : entity is "blk_mem_gen_top";
 end system_v_axi4s_vid_out_0_0_blk_mem_gen_top;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_blk_mem_gen_top is
@@ -9427,8 +9387,6 @@ entity system_v_axi4s_vid_out_0_0_blk_mem_gen_v8_3_5_synth is
     \gc0.count_d1_reg[9]\ : in STD_LOGIC_VECTOR ( 9 downto 0 );
     din : in STD_LOGIC_VECTOR ( 26 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_blk_mem_gen_v8_3_5_synth : entity is "blk_mem_gen_v8_3_5_synth";
 end system_v_axi4s_vid_out_0_0_blk_mem_gen_v8_3_5_synth;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_blk_mem_gen_v8_3_5_synth is
@@ -9464,8 +9422,6 @@ entity system_v_axi4s_vid_out_0_0_blk_mem_gen_v8_3_5 is
     \gc0.count_d1_reg[9]\ : in STD_LOGIC_VECTOR ( 9 downto 0 );
     din : in STD_LOGIC_VECTOR ( 26 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_blk_mem_gen_v8_3_5 : entity is "blk_mem_gen_v8_3_5";
 end system_v_axi4s_vid_out_0_0_blk_mem_gen_v8_3_5;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_blk_mem_gen_v8_3_5 is
@@ -9501,8 +9457,6 @@ entity system_v_axi4s_vid_out_0_0_memory is
     \gc0.count_d1_reg[9]\ : in STD_LOGIC_VECTOR ( 9 downto 0 );
     din : in STD_LOGIC_VECTOR ( 26 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_memory : entity is "memory";
 end system_v_axi4s_vid_out_0_0_memory;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_memory is
@@ -9541,8 +9495,6 @@ entity system_v_axi4s_vid_out_0_0_fifo_generator_ramfifo is
     rst : in STD_LOGIC;
     rd_en : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_fifo_generator_ramfifo : entity is "fifo_generator_ramfifo";
 end system_v_axi4s_vid_out_0_0_fifo_generator_ramfifo;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_fifo_generator_ramfifo is
@@ -9703,8 +9655,6 @@ entity system_v_axi4s_vid_out_0_0_fifo_generator_top is
     rst : in STD_LOGIC;
     rd_en : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_fifo_generator_top : entity is "fifo_generator_top";
 end system_v_axi4s_vid_out_0_0_fifo_generator_top;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_fifo_generator_top is
@@ -9746,8 +9696,6 @@ entity system_v_axi4s_vid_out_0_0_fifo_generator_v13_1_3_synth is
     rst : in STD_LOGIC;
     rd_en : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_fifo_generator_v13_1_3_synth : entity is "fifo_generator_v13_1_3_synth";
 end system_v_axi4s_vid_out_0_0_fifo_generator_v13_1_3_synth;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_fifo_generator_v13_1_3_synth is
@@ -10411,8 +10359,6 @@ entity system_v_axi4s_vid_out_0_0_fifo_generator_v13_1_3 is
   attribute C_WR_PNTR_WIDTH_WRCH of system_v_axi4s_vid_out_0_0_fifo_generator_v13_1_3 : entity is 4;
   attribute C_WR_RESPONSE_LATENCY : integer;
   attribute C_WR_RESPONSE_LATENCY of system_v_axi4s_vid_out_0_0_fifo_generator_v13_1_3 : entity is 1;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_fifo_generator_v13_1_3 : entity is "fifo_generator_v13_1_3";
 end system_v_axi4s_vid_out_0_0_fifo_generator_v13_1_3;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_fifo_generator_v13_1_3 is
@@ -10983,8 +10929,6 @@ entity system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_coupler is
     fifo_eol_dly : in STD_LOGIC;
     vid_io_out_reset : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_coupler : entity is "v_axi4s_vid_out_v4_0_5_coupler";
 end system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_coupler;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5_coupler is
@@ -11871,8 +11815,6 @@ entity system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5 is
   attribute C_VTG_MASTER_SLAVE of system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5 : entity is 1;
   attribute DowngradeIPIdentifiedWarnings : string;
   attribute DowngradeIPIdentifiedWarnings of system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5 : entity is "yes";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5 : entity is "v_axi4s_vid_out_v4_0_5";
 end system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5;
 
 architecture STRUCTURE of system_v_axi4s_vid_out_0_0_v_axi4s_vid_out_v4_0_5 is

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Jan 17 12:05:11 2019" VIVADOVERSION="2016.4">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Jan 22 09:57:32 2019" VIVADOVERSION="2016.4">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z020" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -40,6 +40,17 @@
     <PORT DIR="O" NAME="hdmi_tx_clk_n" SIGIS="undef"/>
     <PORT DIR="O" LEFT="2" NAME="hdmi_tx_data_p" RIGHT="0" SIGIS="undef"/>
     <PORT DIR="O" LEFT="2" NAME="hdmi_tx_data_n" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" NAME="AXI_Stream_Master_tuser" SIGIS="undef"/>
+    <PORT DIR="O" NAME="AXI_Stream_Master_tvalid" SIGIS="undef"/>
+    <PORT DIR="O" NAME="AXI_Stream_Master_tlast" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="23" NAME="AXI_Stream_Master_tdata" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" NAME="AXI_Stream_Master_tready" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="23" NAME="S_AXIS_S2MM_tdata" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="2" NAME="S_AXIS_S2MM_tkeep" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" NAME="S_AXIS_S2MM_tlast" SIGIS="undef"/>
+    <PORT DIR="O" NAME="S_AXIS_S2MM_tready" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="0" NAME="S_AXIS_S2MM_tuser" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" NAME="S_AXIS_S2MM_tvalid" SIGIS="undef"/>
     <PORT DIR="I" NAME="dphy_clk_lp_n" SIGIS="undef" SIGNAME="External_Ports_dphy_clk_lp_n">
       <CONNECTIONS>
         <CONNECTION INSTANCE="MIPI_D_PHY_RX_0" PORT="dphy_clk_lp_n"/>
@@ -68,6 +79,16 @@
     <PORT DIR="I" LEFT="1" NAME="dphy_data_lp_p" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_dphy_data_lp_p">
       <CONNECTIONS>
         <CONNECTION INSTANCE="MIPI_D_PHY_RX_0" PORT="dphy_data_lp_p"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT CLKFREQUENCY="150000000" DIR="O" NAME="clk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out2">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_out2"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="rst_n" RIGHT="0" SIGIS="rst" SIGNAME="rst_clk_wiz_0_50M_peripheral_aresetn">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="rst_clk_wiz_0_50M" PORT="peripheral_aresetn"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -145,6 +166,49 @@
         <PORTMAP LOGICAL="CLK_N" PHYSICAL="hdmi_tx_clk_n"/>
         <PORTMAP LOGICAL="DATA_P" PHYSICAL="hdmi_tx_data_p"/>
         <PORTMAP LOGICAL="DATA_N" PHYSICAL="hdmi_tx_data_n"/>
+      </PORTMAPS>
+    </BUSINTERFACE>
+    <BUSINTERFACE BUSNAME="AXI_GammaCorrection_0_AXI_Stream_Master" NAME="AXI_Stream_Master" TYPE="INITIATOR">
+      <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="3"/>
+      <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="TUSER_WIDTH" VALUE="1"/>
+      <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+      <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+      <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
+      <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+      <PARAMETER NAME="FREQ_HZ" VALUE="150000000"/>
+      <PARAMETER NAME="PHASE" VALUE="0.0"/>
+      <PARAMETER NAME="CLK_DOMAIN"/>
+      <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+      <PORTMAPS>
+        <PORTMAP LOGICAL="TUSER" PHYSICAL="AXI_Stream_Master_tuser"/>
+        <PORTMAP LOGICAL="TVALID" PHYSICAL="AXI_Stream_Master_tvalid"/>
+        <PORTMAP LOGICAL="TLAST" PHYSICAL="AXI_Stream_Master_tlast"/>
+        <PORTMAP LOGICAL="TDATA" PHYSICAL="AXI_Stream_Master_tdata"/>
+        <PORTMAP LOGICAL="TREADY" PHYSICAL="AXI_Stream_Master_tready"/>
+      </PORTMAPS>
+    </BUSINTERFACE>
+    <BUSINTERFACE BUSNAME="External_Interface_S_AXIS_S2MM" NAME="S_AXIS_S2MM" TYPE="TARGET">
+      <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="3"/>
+      <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="TUSER_WIDTH" VALUE="1"/>
+      <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
+      <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
+      <PARAMETER NAME="HAS_TKEEP" VALUE="1"/>
+      <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
+      <PARAMETER NAME="FREQ_HZ" VALUE="150000000"/>
+      <PARAMETER NAME="PHASE" VALUE="0.0"/>
+      <PARAMETER NAME="CLK_DOMAIN"/>
+      <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
+      <PORTMAPS>
+        <PORTMAP LOGICAL="TDATA" PHYSICAL="S_AXIS_S2MM_tdata"/>
+        <PORTMAP LOGICAL="TKEEP" PHYSICAL="S_AXIS_S2MM_tkeep"/>
+        <PORTMAP LOGICAL="TLAST" PHYSICAL="S_AXIS_S2MM_tlast"/>
+        <PORTMAP LOGICAL="TREADY" PHYSICAL="S_AXIS_S2MM_tready"/>
+        <PORTMAP LOGICAL="TUSER" PHYSICAL="S_AXIS_S2MM_tuser"/>
+        <PORTMAP LOGICAL="TVALID" PHYSICAL="S_AXIS_S2MM_tvalid"/>
       </PORTMAPS>
     </BUSINTERFACE>
   </EXTERNALINTERFACES>
@@ -316,31 +380,11 @@
             <CONNECTION INSTANCE="AXI_BayerToRGB_1" PORT="m_axis_video_tlast"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="m_axis_video_tready" SIGIS="undef" SIGNAME="AXI_GammaCorrection_0_m_axis_video_tready">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="axi_vdma_0" PORT="s_axis_s2mm_tready"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="23" NAME="m_axis_video_tdata" RIGHT="0" SIGIS="undef" SIGNAME="AXI_GammaCorrection_0_m_axis_video_tdata">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="axi_vdma_0" PORT="s_axis_s2mm_tdata"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="m_axis_video_tvalid" SIGIS="undef" SIGNAME="AXI_GammaCorrection_0_m_axis_video_tvalid">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="axi_vdma_0" PORT="s_axis_s2mm_tvalid"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="m_axis_video_tuser" SIGIS="undef" SIGNAME="AXI_GammaCorrection_0_m_axis_video_tuser">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="axi_vdma_0" PORT="s_axis_s2mm_tuser"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="m_axis_video_tlast" SIGIS="undef" SIGNAME="AXI_GammaCorrection_0_m_axis_video_tlast">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="axi_vdma_0" PORT="s_axis_s2mm_tlast"/>
-          </CONNECTIONS>
-        </PORT>
+        <PORT DIR="I" NAME="m_axis_video_tready" SIGIS="undef"/>
+        <PORT DIR="O" LEFT="23" NAME="m_axis_video_tdata" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" NAME="m_axis_video_tvalid" SIGIS="undef"/>
+        <PORT DIR="O" NAME="m_axis_video_tuser" SIGIS="undef"/>
+        <PORT DIR="O" NAME="m_axis_video_tlast" SIGIS="undef"/>
         <PORT CLKFREQUENCY="50000000" DIR="I" NAME="AxiLiteClk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out1">
           <CONNECTIONS>
             <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_out1"/>
@@ -4544,32 +4588,12 @@
             <CONNECTION INSTANCE="axi_mem_intercon_1" PORT="S00_AXI_bready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="23" NAME="s_axis_s2mm_tdata" RIGHT="0" SIGIS="undef" SIGNAME="AXI_GammaCorrection_0_m_axis_video_tdata">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AXI_GammaCorrection_0" PORT="m_axis_video_tdata"/>
-          </CONNECTIONS>
-        </PORT>
+        <PORT DIR="I" LEFT="23" NAME="s_axis_s2mm_tdata" RIGHT="0" SIGIS="undef"/>
         <PORT DIR="I" LEFT="2" NAME="s_axis_s2mm_tkeep" RIGHT="0" SIGIS="undef"/>
-        <PORT DIR="I" LEFT="0" NAME="s_axis_s2mm_tuser" RIGHT="0" SIGIS="undef" SIGNAME="AXI_GammaCorrection_0_m_axis_video_tuser">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AXI_GammaCorrection_0" PORT="m_axis_video_tuser"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="s_axis_s2mm_tvalid" SIGIS="undef" SIGNAME="AXI_GammaCorrection_0_m_axis_video_tvalid">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AXI_GammaCorrection_0" PORT="m_axis_video_tvalid"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="s_axis_s2mm_tready" SIGIS="undef" SIGNAME="AXI_GammaCorrection_0_m_axis_video_tready">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AXI_GammaCorrection_0" PORT="m_axis_video_tready"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="s_axis_s2mm_tlast" SIGIS="undef" SIGNAME="AXI_GammaCorrection_0_m_axis_video_tlast">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AXI_GammaCorrection_0" PORT="m_axis_video_tlast"/>
-          </CONNECTIONS>
-        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="s_axis_s2mm_tuser" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="I" NAME="s_axis_s2mm_tvalid" SIGIS="undef"/>
+        <PORT DIR="O" NAME="s_axis_s2mm_tready" SIGIS="undef"/>
+        <PORT DIR="I" NAME="s_axis_s2mm_tlast" SIGIS="undef"/>
         <PORT DIR="O" NAME="mm2s_introut" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="axi_vdma_0_mm2s_introut">
           <CONNECTIONS>
             <CONNECTION INSTANCE="xlconcat_0" PORT="In1"/>
@@ -4751,7 +4775,7 @@
             <PORTMAP LOGICAL="TVALID" PHYSICAL="m_axis_mm2s_tvalid"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="AXI_GammaCorrection_0_AXI_Stream_Master" NAME="S_AXIS_S2MM" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="External_Interface_S_AXIS_S2MM" NAME="S_AXIS_S2MM" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="3"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
           <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
@@ -5380,6 +5404,7 @@
         </PORT>
         <PORT CLKFREQUENCY="150000000" DIR="O" NAME="clk_out2" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out2">
           <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk"/>
             <CONNECTION INSTANCE="AXI_BayerToRGB_1" PORT="StreamClk"/>
             <CONNECTION INSTANCE="AXI_GammaCorrection_0" PORT="StreamClk"/>
             <CONNECTION INSTANCE="MIPI_CSI_2_RX_0" PORT="video_aclk"/>
@@ -8776,6 +8801,7 @@
         </PORT>
         <PORT DIR="O" LEFT="0" NAME="peripheral_aresetn" RIGHT="0" SIGIS="rst" SIGNAME="rst_clk_wiz_0_50M_peripheral_aresetn">
           <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="rst_n"/>
             <CONNECTION INSTANCE="AXI_BayerToRGB_1" PORT="sStreamReset_n"/>
             <CONNECTION INSTANCE="AXI_GammaCorrection_0" PORT="aAxiLiteReset_n"/>
             <CONNECTION INSTANCE="AXI_GammaCorrection_0" PORT="sStreamReset_n"/>

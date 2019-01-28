@@ -1,8 +1,8 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
---Date        : Thu Jan 17 11:41:59 2019
---Host        : shegedus running 64-bit major release  (build 9200)
+--Date        : Tue Dec 19 13:19:50 2017
+--Host        : WK73 running 64-bit Service Pack 1  (build 7601)
 --Command     : generate_target system_wrapper.bd
 --Design      : system_wrapper
 --Purpose     : IP block netlist
@@ -34,7 +34,7 @@ entity system_wrapper is
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
     FIXED_IO_ps_srstb : inout STD_LOGIC;
-    cam_gpio_tri_io : inout STD_LOGIC_VECTOR ( 1 downto 0 );
+    cam_gpio_tri_io : inout STD_LOGIC_VECTOR ( 0 to 0 );
     cam_iic_scl_io : inout STD_LOGIC;
     cam_iic_sda_io : inout STD_LOGIC;
     dphy_clk_lp_n : in STD_LOGIC;
@@ -76,9 +76,9 @@ architecture STRUCTURE of system_wrapper is
     FIXED_IO_ps_srstb : inout STD_LOGIC;
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
-    cam_gpio_tri_i : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    cam_gpio_tri_o : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    cam_gpio_tri_t : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    cam_gpio_tri_i : in STD_LOGIC_VECTOR ( 0 to 0 );
+    cam_gpio_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
+    cam_gpio_tri_t : out STD_LOGIC_VECTOR ( 0 to 0 );
     cam_iic_sda_i : in STD_LOGIC;
     cam_iic_sda_o : out STD_LOGIC;
     cam_iic_sda_t : out STD_LOGIC;
@@ -108,13 +108,9 @@ architecture STRUCTURE of system_wrapper is
   );
   end component IOBUF;
   signal cam_gpio_tri_i_0 : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal cam_gpio_tri_i_1 : STD_LOGIC_VECTOR ( 1 to 1 );
   signal cam_gpio_tri_io_0 : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal cam_gpio_tri_io_1 : STD_LOGIC_VECTOR ( 1 to 1 );
   signal cam_gpio_tri_o_0 : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal cam_gpio_tri_o_1 : STD_LOGIC_VECTOR ( 1 to 1 );
   signal cam_gpio_tri_t_0 : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal cam_gpio_tri_t_1 : STD_LOGIC_VECTOR ( 1 to 1 );
   signal cam_iic_scl_i : STD_LOGIC;
   signal cam_iic_scl_o : STD_LOGIC;
   signal cam_iic_scl_t : STD_LOGIC;
@@ -128,13 +124,6 @@ cam_gpio_tri_iobuf_0: component IOBUF
       IO => cam_gpio_tri_io(0),
       O => cam_gpio_tri_i_0(0),
       T => cam_gpio_tri_t_0(0)
-    );
-cam_gpio_tri_iobuf_1: component IOBUF
-     port map (
-      I => cam_gpio_tri_o_1(1),
-      IO => cam_gpio_tri_io(1),
-      O => cam_gpio_tri_i_1(1),
-      T => cam_gpio_tri_t_1(1)
     );
 cam_iic_scl_iobuf: component IOBUF
      port map (
@@ -173,11 +162,8 @@ system_i: component system
       FIXED_IO_ps_clk => FIXED_IO_ps_clk,
       FIXED_IO_ps_porb => FIXED_IO_ps_porb,
       FIXED_IO_ps_srstb => FIXED_IO_ps_srstb,
-      cam_gpio_tri_i(1) => cam_gpio_tri_i_1(1),
       cam_gpio_tri_i(0) => cam_gpio_tri_i_0(0),
-      cam_gpio_tri_o(1) => cam_gpio_tri_o_1(1),
       cam_gpio_tri_o(0) => cam_gpio_tri_o_0(0),
-      cam_gpio_tri_t(1) => cam_gpio_tri_t_1(1),
       cam_gpio_tri_t(0) => cam_gpio_tri_t_0(0),
       cam_iic_scl_i => cam_iic_scl_i,
       cam_iic_scl_o => cam_iic_scl_o,

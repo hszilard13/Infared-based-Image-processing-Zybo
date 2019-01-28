@@ -1,10 +1,10 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
--- Date        : Thu Jan 17 12:08:23 2019
+-- Date        : Thu Jan 17 13:31:45 2019
 -- Host        : shegedus running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               D:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ip/system_xbar_0/system_xbar_0_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top system_xbar_0 -prefix
+--               system_xbar_0_ system_xbar_0_stub.vhdl
 -- Design      : system_xbar_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z020clg400-1

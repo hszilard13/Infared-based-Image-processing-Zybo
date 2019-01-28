@@ -1,10 +1,10 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
--- Date        : Thu Jan 17 12:07:11 2019
+-- Date        : Thu Jan 17 13:31:18 2019
 -- Host        : shegedus running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               D:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ip/system_vtg_0/system_vtg_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top system_vtg_0 -prefix
+--               system_vtg_0_ system_vtg_0_sim_netlist.vhdl
 -- Design      : system_vtg_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -29,8 +29,6 @@ entity system_vtg_0_address_decoder is
     start2_reg : in STD_LOGIC;
     \bus2ip_addr_i_reg[8]\ : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_vtg_0_address_decoder : entity is "address_decoder";
 end system_vtg_0_address_decoder;
 
 architecture STRUCTURE of system_vtg_0_address_decoder is
@@ -771,8 +769,6 @@ entity system_vtg_0_mux_tree is
     \AXI4_LITE_INTERFACE.core_control_regs_int_reg[1][0]\ : in STD_LOGIC_VECTOR ( 0 to 0 );
     \AXI4_LITE_INTERFACE.core_control_regs_int_reg[0][0]\ : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_vtg_0_mux_tree : entity is "mux_tree";
 end system_vtg_0_mux_tree;
 
 architecture STRUCTURE of system_vtg_0_mux_tree is
@@ -14727,8 +14723,6 @@ entity system_vtg_0_tc_generator is
     \time_control_regs[24]\ : in STD_LOGIC_VECTOR ( 23 downto 0 );
     \time_control_regs[23]\ : in STD_LOGIC_VECTOR ( 23 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_vtg_0_tc_generator : entity is "tc_generator";
 end system_vtg_0_tc_generator;
 
 architecture STRUCTURE of system_vtg_0_tc_generator is
@@ -19449,8 +19443,6 @@ entity system_vtg_0_video_clock_cross is
     \AXI4_LITE_INTERFACE.proc_sync1_reg[44]\ : in STD_LOGIC_VECTOR ( 44 downto 0 );
     vid_aclk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_vtg_0_video_clock_cross : entity is "video_clock_cross";
 end system_vtg_0_video_clock_cross;
 
 architecture STRUCTURE of system_vtg_0_video_clock_cross is
@@ -29314,8 +29306,6 @@ entity system_vtg_0_slave_attachment is
     ipif_RdAck : in STD_LOGIC;
     ipif_WrAck : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_vtg_0_slave_attachment : entity is "slave_attachment";
 end system_vtg_0_slave_attachment;
 
 architecture STRUCTURE of system_vtg_0_slave_attachment is
@@ -30434,8 +30424,6 @@ entity system_vtg_0_tc_top is
     \time_control_regs[24]\ : in STD_LOGIC_VECTOR ( 23 downto 0 );
     \time_control_regs[23]\ : in STD_LOGIC_VECTOR ( 23 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_vtg_0_tc_top : entity is "tc_top";
 end system_vtg_0_tc_top;
 
 architecture STRUCTURE of system_vtg_0_tc_top is
@@ -30712,8 +30700,6 @@ entity system_vtg_0_axi_lite_ipif is
     ipif_RdAck : in STD_LOGIC;
     ipif_WrAck : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_vtg_0_axi_lite_ipif : entity is "axi_lite_ipif";
 end system_vtg_0_axi_lite_ipif;
 
 architecture STRUCTURE of system_vtg_0_axi_lite_ipif is
@@ -30938,8 +30924,6 @@ entity system_vtg_0_video_ctrl is
   attribute C_VERSION_MINOR of system_vtg_0_video_ctrl : entity is 1;
   attribute C_VERSION_REVISION : integer;
   attribute C_VERSION_REVISION of system_vtg_0_video_ctrl : entity is 0;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_vtg_0_video_ctrl : entity is "video_ctrl";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of system_vtg_0_video_ctrl : entity is "yes";
 end system_vtg_0_video_ctrl;
@@ -54076,8 +54060,6 @@ entity system_vtg_0_v_tc is
   attribute C_S_AXI_CLK_FREQ_HZ of system_vtg_0_v_tc : entity is 100000000;
   attribute C_S_AXI_DATA_WIDTH : integer;
   attribute C_S_AXI_DATA_WIDTH of system_vtg_0_v_tc : entity is 32;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of system_vtg_0_v_tc : entity is "v_tc";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of system_vtg_0_v_tc : entity is "yes";
 end system_vtg_0_v_tc;

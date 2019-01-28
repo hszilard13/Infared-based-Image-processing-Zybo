@@ -1,10 +1,10 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-// Date        : Thu Jan 17 12:06:40 2019
+// Date        : Thu Jan 17 13:30:39 2019
 // Host        : shegedus running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               D:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ip/system_clk_wiz_0_0/system_clk_wiz_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top system_clk_wiz_0_0 -prefix
+//               system_clk_wiz_0_0_ system_clk_wiz_0_0_sim_netlist.v
 // Design      : system_clk_wiz_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -39,7 +39,6 @@ module system_clk_wiz_0_0
         .locked(locked));
 endmodule
 
-(* ORIG_REF_NAME = "system_clk_wiz_0_0_clk_wiz" *) 
 module system_clk_wiz_0_0_system_clk_wiz_0_0_clk_wiz
    (clk_out1,
     clk_out2,

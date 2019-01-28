@@ -2,9 +2,9 @@
 <Root MajorVersion="0" MinorVersion="33">
   <CompositeFile CompositeFileTopName="system" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1547719513"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1547719513"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1547719513"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1548143854"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1548143854"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1548143854"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip\system_AXI_BayerToRGB_1_0\system_AXI_BayerToRGB_1_0.xci" Type="IP">
         <Instance HierarchyPath="AXI_BayerToRGB_1"/>
@@ -150,6 +150,13 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
+      <File Name="hdl\system.v" Type="Verilog">
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
       <File Name="ip\system_auto_pc_0\system_auto_pc_0.xci" Type="IP">
         <Instance HierarchyPath="axi_mem_intercon/s00_couplers/auto_pc"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
@@ -169,13 +176,6 @@
       <File Name="ip\system_auto_pc_2\system_auto_pc_2.xci" Type="IP">
         <Instance HierarchyPath="ps7_0_axi_periph/s00_couplers/auto_pc"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="hdl\system.v" Type="Verilog">
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
         <UsedIn Val="IMPLEMENTATION"/>

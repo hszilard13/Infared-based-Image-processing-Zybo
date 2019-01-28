@@ -1,7 +1,7 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-//Date        : Thu Jan 17 12:04:51 2019
+//Date        : Tue Jan 22 09:57:28 2019
 //Host        : shegedus running 64-bit major release  (build 9200)
 //Command     : generate_target system_wrapper.bd
 //Design      : system_wrapper
@@ -10,7 +10,12 @@
 `timescale 1 ps / 1 ps
 
 module system_wrapper
-   (DDR_addr,
+   (AXI_Stream_Master_tdata,
+    AXI_Stream_Master_tlast,
+    AXI_Stream_Master_tready,
+    AXI_Stream_Master_tuser,
+    AXI_Stream_Master_tvalid,
+    DDR_addr,
     DDR_ba,
     DDR_cas_n,
     DDR_ck_n,
@@ -31,9 +36,16 @@ module system_wrapper
     FIXED_IO_ps_clk,
     FIXED_IO_ps_porb,
     FIXED_IO_ps_srstb,
+    S_AXIS_S2MM_tdata,
+    S_AXIS_S2MM_tkeep,
+    S_AXIS_S2MM_tlast,
+    S_AXIS_S2MM_tready,
+    S_AXIS_S2MM_tuser,
+    S_AXIS_S2MM_tvalid,
     cam_gpio_tri_io,
     cam_iic_scl_io,
     cam_iic_sda_io,
+    clk,
     dphy_clk_lp_n,
     dphy_clk_lp_p,
     dphy_data_hs_n,
@@ -45,7 +57,13 @@ module system_wrapper
     hdmi_tx_clk_n,
     hdmi_tx_clk_p,
     hdmi_tx_data_n,
-    hdmi_tx_data_p);
+    hdmi_tx_data_p,
+    rst_n);
+  output [23:0]AXI_Stream_Master_tdata;
+  output AXI_Stream_Master_tlast;
+  input AXI_Stream_Master_tready;
+  output AXI_Stream_Master_tuser;
+  output AXI_Stream_Master_tvalid;
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -67,9 +85,16 @@ module system_wrapper
   inout FIXED_IO_ps_clk;
   inout FIXED_IO_ps_porb;
   inout FIXED_IO_ps_srstb;
+  input [23:0]S_AXIS_S2MM_tdata;
+  input [2:0]S_AXIS_S2MM_tkeep;
+  input S_AXIS_S2MM_tlast;
+  output S_AXIS_S2MM_tready;
+  input [0:0]S_AXIS_S2MM_tuser;
+  input S_AXIS_S2MM_tvalid;
   inout [1:0]cam_gpio_tri_io;
   inout cam_iic_scl_io;
   inout cam_iic_sda_io;
+  output clk;
   input dphy_clk_lp_n;
   input dphy_clk_lp_p;
   input [1:0]dphy_data_hs_n;
@@ -82,7 +107,13 @@ module system_wrapper
   output hdmi_tx_clk_p;
   output [2:0]hdmi_tx_data_n;
   output [2:0]hdmi_tx_data_p;
+  output [0:0]rst_n;
 
+  wire [23:0]AXI_Stream_Master_tdata;
+  wire AXI_Stream_Master_tlast;
+  wire AXI_Stream_Master_tready;
+  wire AXI_Stream_Master_tuser;
+  wire AXI_Stream_Master_tvalid;
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
   wire DDR_cas_n;
@@ -104,6 +135,12 @@ module system_wrapper
   wire FIXED_IO_ps_clk;
   wire FIXED_IO_ps_porb;
   wire FIXED_IO_ps_srstb;
+  wire [23:0]S_AXIS_S2MM_tdata;
+  wire [2:0]S_AXIS_S2MM_tkeep;
+  wire S_AXIS_S2MM_tlast;
+  wire S_AXIS_S2MM_tready;
+  wire [0:0]S_AXIS_S2MM_tuser;
+  wire S_AXIS_S2MM_tvalid;
   wire [0:0]cam_gpio_tri_i_0;
   wire [1:1]cam_gpio_tri_i_1;
   wire [0:0]cam_gpio_tri_io_0;
@@ -120,6 +157,7 @@ module system_wrapper
   wire cam_iic_sda_io;
   wire cam_iic_sda_o;
   wire cam_iic_sda_t;
+  wire clk;
   wire dphy_clk_lp_n;
   wire dphy_clk_lp_p;
   wire [1:0]dphy_data_hs_n;
@@ -132,6 +170,7 @@ module system_wrapper
   wire hdmi_tx_clk_p;
   wire [2:0]hdmi_tx_data_n;
   wire [2:0]hdmi_tx_data_p;
+  wire [0:0]rst_n;
 
   IOBUF cam_gpio_tri_iobuf_0
        (.I(cam_gpio_tri_o_0),
@@ -154,7 +193,12 @@ module system_wrapper
         .O(cam_iic_sda_i),
         .T(cam_iic_sda_t));
   system system_i
-       (.DDR_addr(DDR_addr),
+       (.AXI_Stream_Master_tdata(AXI_Stream_Master_tdata),
+        .AXI_Stream_Master_tlast(AXI_Stream_Master_tlast),
+        .AXI_Stream_Master_tready(AXI_Stream_Master_tready),
+        .AXI_Stream_Master_tuser(AXI_Stream_Master_tuser),
+        .AXI_Stream_Master_tvalid(AXI_Stream_Master_tvalid),
+        .DDR_addr(DDR_addr),
         .DDR_ba(DDR_ba),
         .DDR_cas_n(DDR_cas_n),
         .DDR_ck_n(DDR_ck_n),
@@ -175,6 +219,12 @@ module system_wrapper
         .FIXED_IO_ps_clk(FIXED_IO_ps_clk),
         .FIXED_IO_ps_porb(FIXED_IO_ps_porb),
         .FIXED_IO_ps_srstb(FIXED_IO_ps_srstb),
+        .S_AXIS_S2MM_tdata(S_AXIS_S2MM_tdata),
+        .S_AXIS_S2MM_tkeep(S_AXIS_S2MM_tkeep),
+        .S_AXIS_S2MM_tlast(S_AXIS_S2MM_tlast),
+        .S_AXIS_S2MM_tready(S_AXIS_S2MM_tready),
+        .S_AXIS_S2MM_tuser(S_AXIS_S2MM_tuser),
+        .S_AXIS_S2MM_tvalid(S_AXIS_S2MM_tvalid),
         .cam_gpio_tri_i({cam_gpio_tri_i_1,cam_gpio_tri_i_0}),
         .cam_gpio_tri_o({cam_gpio_tri_o_1,cam_gpio_tri_o_0}),
         .cam_gpio_tri_t({cam_gpio_tri_t_1,cam_gpio_tri_t_0}),
@@ -184,6 +234,7 @@ module system_wrapper
         .cam_iic_sda_i(cam_iic_sda_i),
         .cam_iic_sda_o(cam_iic_sda_o),
         .cam_iic_sda_t(cam_iic_sda_t),
+        .clk(clk),
         .dphy_clk_lp_n(dphy_clk_lp_n),
         .dphy_clk_lp_p(dphy_clk_lp_p),
         .dphy_data_hs_n(dphy_data_hs_n),
@@ -195,5 +246,6 @@ module system_wrapper
         .hdmi_tx_clk_n(hdmi_tx_clk_n),
         .hdmi_tx_clk_p(hdmi_tx_clk_p),
         .hdmi_tx_data_n(hdmi_tx_data_n),
-        .hdmi_tx_data_p(hdmi_tx_data_p));
+        .hdmi_tx_data_p(hdmi_tx_data_p),
+        .rst_n(rst_n));
 endmodule

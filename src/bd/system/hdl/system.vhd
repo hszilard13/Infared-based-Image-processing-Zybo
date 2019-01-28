@@ -1,8 +1,8 @@
 --Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
---Date        : Thu Jan 17 11:41:59 2019
---Host        : shegedus running 64-bit major release  (build 9200)
+--Date        : Tue Dec 19 13:19:50 2017
+--Host        : WK73 running 64-bit Service Pack 1  (build 7601)
 --Command     : generate_target system.bd
 --Design      : system
 --Purpose     : IP block netlist
@@ -2827,9 +2827,9 @@ entity system is
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
     FIXED_IO_ps_srstb : inout STD_LOGIC;
-    cam_gpio_tri_i : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    cam_gpio_tri_o : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    cam_gpio_tri_t : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    cam_gpio_tri_i : in STD_LOGIC_VECTOR ( 0 to 0 );
+    cam_gpio_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
+    cam_gpio_tri_t : out STD_LOGIC_VECTOR ( 0 to 0 );
     cam_iic_scl_i : in STD_LOGIC;
     cam_iic_scl_o : out STD_LOGIC;
     cam_iic_scl_t : out STD_LOGIC;
@@ -3126,9 +3126,9 @@ architecture STRUCTURE of system is
   end component system_clk_wiz_0_0;
   component system_processing_system7_0_0 is
   port (
-    GPIO_I : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    GPIO_O : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    GPIO_T : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    GPIO_I : in STD_LOGIC_VECTOR ( 0 to 0 );
+    GPIO_O : out STD_LOGIC_VECTOR ( 0 to 0 );
+    GPIO_T : out STD_LOGIC_VECTOR ( 0 to 0 );
     I2C0_SDA_I : in STD_LOGIC;
     I2C0_SDA_O : out STD_LOGIC;
     I2C0_SDA_T : out STD_LOGIC;
@@ -3578,9 +3578,9 @@ architecture STRUCTURE of system is
   signal processing_system7_0_FIXED_IO_PS_CLK : STD_LOGIC;
   signal processing_system7_0_FIXED_IO_PS_PORB : STD_LOGIC;
   signal processing_system7_0_FIXED_IO_PS_SRSTB : STD_LOGIC;
-  signal processing_system7_0_GPIO_0_TRI_I : STD_LOGIC_VECTOR ( 1 downto 0 );
-  signal processing_system7_0_GPIO_0_TRI_O : STD_LOGIC_VECTOR ( 1 downto 0 );
-  signal processing_system7_0_GPIO_0_TRI_T : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal processing_system7_0_GPIO_0_TRI_I : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal processing_system7_0_GPIO_0_TRI_O : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal processing_system7_0_GPIO_0_TRI_T : STD_LOGIC_VECTOR ( 0 to 0 );
   signal processing_system7_0_IIC_0_SCL_I : STD_LOGIC;
   signal processing_system7_0_IIC_0_SCL_O : STD_LOGIC;
   signal processing_system7_0_IIC_0_SCL_T : STD_LOGIC;
@@ -3827,8 +3827,8 @@ architecture STRUCTURE of system is
   signal NLW_v_axi4s_vid_out_0_status_UNCONNECTED : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal NLW_vtg_fsync_out_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
 begin
-  cam_gpio_tri_o(1 downto 0) <= processing_system7_0_GPIO_0_TRI_O(1 downto 0);
-  cam_gpio_tri_t(1 downto 0) <= processing_system7_0_GPIO_0_TRI_T(1 downto 0);
+  cam_gpio_tri_o(0) <= processing_system7_0_GPIO_0_TRI_O(0);
+  cam_gpio_tri_t(0) <= processing_system7_0_GPIO_0_TRI_T(0);
   cam_iic_scl_o <= processing_system7_0_IIC_0_SCL_O;
   cam_iic_scl_t <= processing_system7_0_IIC_0_SCL_T;
   cam_iic_sda_o <= processing_system7_0_IIC_0_SDA_O;
@@ -3845,7 +3845,7 @@ begin
   hdmi_tx_clk_p <= rgb2dvi_0_TMDS_CLK_P;
   hdmi_tx_data_n(2 downto 0) <= rgb2dvi_0_TMDS_DATA_N(2 downto 0);
   hdmi_tx_data_p(2 downto 0) <= rgb2dvi_0_TMDS_DATA_P(2 downto 0);
-  processing_system7_0_GPIO_0_TRI_I(1 downto 0) <= cam_gpio_tri_i(1 downto 0);
+  processing_system7_0_GPIO_0_TRI_I(0) <= cam_gpio_tri_i(0);
   processing_system7_0_IIC_0_SCL_I <= cam_iic_scl_i;
   processing_system7_0_IIC_0_SDA_I <= cam_iic_sda_i;
 AXI_BayerToRGB_1: component system_AXI_BayerToRGB_1_0
@@ -4211,9 +4211,9 @@ processing_system7_0: component system_processing_system7_0_0
       DDR_WEB => DDR_we_n,
       FCLK_CLK0 => processing_system7_0_FCLK_CLK0,
       FCLK_RESET0_N => processing_system7_0_FCLK_RESET0_N,
-      GPIO_I(1 downto 0) => processing_system7_0_GPIO_0_TRI_I(1 downto 0),
-      GPIO_O(1 downto 0) => processing_system7_0_GPIO_0_TRI_O(1 downto 0),
-      GPIO_T(1 downto 0) => processing_system7_0_GPIO_0_TRI_T(1 downto 0),
+      GPIO_I(0) => processing_system7_0_GPIO_0_TRI_I(0),
+      GPIO_O(0) => processing_system7_0_GPIO_0_TRI_O(0),
+      GPIO_T(0) => processing_system7_0_GPIO_0_TRI_T(0),
       I2C0_SCL_I => processing_system7_0_IIC_0_SCL_I,
       I2C0_SCL_O => processing_system7_0_IIC_0_SCL_O,
       I2C0_SCL_T => processing_system7_0_IIC_0_SCL_T,

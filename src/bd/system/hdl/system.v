@@ -1,7 +1,7 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-//Date        : Thu Jan 17 12:04:51 2019
+//Date        : Tue Jan 22 09:57:28 2019
 //Host        : shegedus running 64-bit major release  (build 9200)
 //Command     : generate_target system.bd
 //Design      : system
@@ -1513,7 +1513,12 @@ endmodule
 
 (* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=30,numReposBlks=18,numNonXlnxBlks=6,numHierBlks=12,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "system.hwdef" *) 
 module system
-   (DDR_addr,
+   (AXI_Stream_Master_tdata,
+    AXI_Stream_Master_tlast,
+    AXI_Stream_Master_tready,
+    AXI_Stream_Master_tuser,
+    AXI_Stream_Master_tvalid,
+    DDR_addr,
     DDR_ba,
     DDR_cas_n,
     DDR_ck_n,
@@ -1534,6 +1539,12 @@ module system
     FIXED_IO_ps_clk,
     FIXED_IO_ps_porb,
     FIXED_IO_ps_srstb,
+    S_AXIS_S2MM_tdata,
+    S_AXIS_S2MM_tkeep,
+    S_AXIS_S2MM_tlast,
+    S_AXIS_S2MM_tready,
+    S_AXIS_S2MM_tuser,
+    S_AXIS_S2MM_tvalid,
     cam_gpio_tri_i,
     cam_gpio_tri_o,
     cam_gpio_tri_t,
@@ -1543,6 +1554,7 @@ module system
     cam_iic_sda_i,
     cam_iic_sda_o,
     cam_iic_sda_t,
+    clk,
     dphy_clk_lp_n,
     dphy_clk_lp_p,
     dphy_data_hs_n,
@@ -1554,7 +1566,13 @@ module system
     hdmi_tx_clk_n,
     hdmi_tx_clk_p,
     hdmi_tx_data_n,
-    hdmi_tx_data_p);
+    hdmi_tx_data_p,
+    rst_n);
+  output [23:0]AXI_Stream_Master_tdata;
+  output AXI_Stream_Master_tlast;
+  input AXI_Stream_Master_tready;
+  output AXI_Stream_Master_tuser;
+  output AXI_Stream_Master_tvalid;
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -1576,6 +1594,12 @@ module system
   inout FIXED_IO_ps_clk;
   inout FIXED_IO_ps_porb;
   inout FIXED_IO_ps_srstb;
+  input [23:0]S_AXIS_S2MM_tdata;
+  input [2:0]S_AXIS_S2MM_tkeep;
+  input S_AXIS_S2MM_tlast;
+  output S_AXIS_S2MM_tready;
+  input [0:0]S_AXIS_S2MM_tuser;
+  input S_AXIS_S2MM_tvalid;
   input [1:0]cam_gpio_tri_i;
   output [1:0]cam_gpio_tri_o;
   output [1:0]cam_gpio_tri_t;
@@ -1585,6 +1609,7 @@ module system
   input cam_iic_sda_i;
   output cam_iic_sda_o;
   output cam_iic_sda_t;
+  output clk;
   input dphy_clk_lp_n;
   input dphy_clk_lp_p;
   input [1:0]dphy_data_hs_n;
@@ -1597,6 +1622,7 @@ module system
   output hdmi_tx_clk_p;
   output [2:0]hdmi_tx_data_n;
   output [2:0]hdmi_tx_data_p;
+  output [0:0]rst_n;
 
   wire [31:0]AXI_BayerToRGB_1_AXI_Stream_Master_TDATA;
   wire AXI_BayerToRGB_1_AXI_Stream_Master_TLAST;
@@ -1628,6 +1654,12 @@ module system
   wire MIPI_D_PHY_RX_0_D_PHY_PPI_DL1_RXVALIDHS;
   wire MIPI_D_PHY_RX_0_RxByteClkHS;
   wire PixelClk_Generator_clk_out1;
+  wire [23:0]S_AXIS_S2MM_1_TDATA;
+  wire [2:0]S_AXIS_S2MM_1_TKEEP;
+  wire S_AXIS_S2MM_1_TLAST;
+  wire S_AXIS_S2MM_1_TREADY;
+  wire [0:0]S_AXIS_S2MM_1_TUSER;
+  wire S_AXIS_S2MM_1_TVALID;
   wire axi_dynclk_0_LOCKED_O;
   wire axi_dynclk_0_PXL_CLK_5X_O;
   wire [31:0]axi_mem_intercon_1_M00_AXI_AWADDR;
@@ -1913,12 +1945,24 @@ module system
   wire v_tc_0_vtiming_out_VSYNC;
   wire [2:0]xlconcat_0_dout;
 
+  assign AXI_GammaCorrection_0_AXI_Stream_Master_TREADY = AXI_Stream_Master_tready;
+  assign AXI_Stream_Master_tdata[23:0] = AXI_GammaCorrection_0_AXI_Stream_Master_TDATA;
+  assign AXI_Stream_Master_tlast = AXI_GammaCorrection_0_AXI_Stream_Master_TLAST;
+  assign AXI_Stream_Master_tuser = AXI_GammaCorrection_0_AXI_Stream_Master_TUSER;
+  assign AXI_Stream_Master_tvalid = AXI_GammaCorrection_0_AXI_Stream_Master_TVALID;
+  assign S_AXIS_S2MM_1_TDATA = S_AXIS_S2MM_tdata[23:0];
+  assign S_AXIS_S2MM_1_TKEEP = S_AXIS_S2MM_tkeep[2:0];
+  assign S_AXIS_S2MM_1_TLAST = S_AXIS_S2MM_tlast;
+  assign S_AXIS_S2MM_1_TUSER = S_AXIS_S2MM_tuser[0];
+  assign S_AXIS_S2MM_1_TVALID = S_AXIS_S2MM_tvalid;
+  assign S_AXIS_S2MM_tready = S_AXIS_S2MM_1_TREADY;
   assign cam_gpio_tri_o[1:0] = processing_system7_0_GPIO_0_TRI_O;
   assign cam_gpio_tri_t[1:0] = processing_system7_0_GPIO_0_TRI_T;
   assign cam_iic_scl_o = processing_system7_0_IIC_0_SCL_O;
   assign cam_iic_scl_t = processing_system7_0_IIC_0_SCL_T;
   assign cam_iic_sda_o = processing_system7_0_IIC_0_SDA_O;
   assign cam_iic_sda_t = processing_system7_0_IIC_0_SDA_T;
+  assign clk = mm_clk_150;
   assign dphy_clk_lp_n_1 = dphy_clk_lp_n;
   assign dphy_clk_lp_p_1 = dphy_clk_lp_p;
   assign dphy_data_hs_n_1 = dphy_data_hs_n[1:0];
@@ -1934,6 +1978,7 @@ module system
   assign processing_system7_0_GPIO_0_TRI_I = cam_gpio_tri_i[1:0];
   assign processing_system7_0_IIC_0_SCL_I = cam_iic_scl_i;
   assign processing_system7_0_IIC_0_SDA_I = cam_iic_sda_i;
+  assign rst_n[0] = rst_clk_wiz_0_50M_peripheral_aresetn;
   system_AXI_BayerToRGB_1_0 AXI_BayerToRGB_1
        (.StreamClk(mm_clk_150),
         .m_axis_video_tdata(AXI_BayerToRGB_1_AXI_Stream_Master_TDATA),
@@ -2215,12 +2260,12 @@ module system
         .s_axi_lite_wready(ps7_0_axi_periph_M00_AXI_WREADY),
         .s_axi_lite_wvalid(ps7_0_axi_periph_M00_AXI_WVALID),
         .s_axis_s2mm_aclk(mm_clk_150),
-        .s_axis_s2mm_tdata(AXI_GammaCorrection_0_AXI_Stream_Master_TDATA),
-        .s_axis_s2mm_tkeep({1'b1,1'b1,1'b1}),
-        .s_axis_s2mm_tlast(AXI_GammaCorrection_0_AXI_Stream_Master_TLAST),
-        .s_axis_s2mm_tready(AXI_GammaCorrection_0_AXI_Stream_Master_TREADY),
-        .s_axis_s2mm_tuser(AXI_GammaCorrection_0_AXI_Stream_Master_TUSER),
-        .s_axis_s2mm_tvalid(AXI_GammaCorrection_0_AXI_Stream_Master_TVALID));
+        .s_axis_s2mm_tdata(S_AXIS_S2MM_1_TDATA),
+        .s_axis_s2mm_tkeep(S_AXIS_S2MM_1_TKEEP),
+        .s_axis_s2mm_tlast(S_AXIS_S2MM_1_TLAST),
+        .s_axis_s2mm_tready(S_AXIS_S2MM_1_TREADY),
+        .s_axis_s2mm_tuser(S_AXIS_S2MM_1_TUSER),
+        .s_axis_s2mm_tvalid(S_AXIS_S2MM_1_TVALID));
   system_clk_wiz_0_0 clk_wiz_0
        (.clk_in1(processing_system7_0_FCLK_CLK0),
         .clk_out1(s_axil_clk_50),

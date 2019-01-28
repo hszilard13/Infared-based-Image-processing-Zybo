@@ -1,11 +1,11 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-// Date        : Thu Jan 17 12:07:43 2019
+// Date        : Thu Jan 17 13:30:39 2019
 // Host        : shegedus running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub
-//               D:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ip/system_rst_clk_wiz_0_50M_0/system_rst_clk_wiz_0_50M_0_stub.v
-// Design      : system_rst_clk_wiz_0_50M_0
+// Command     : write_verilog -force -mode synth_stub -rename_top system_rst_clk_wiz_0_50M_0 -prefix
+//               system_rst_clk_wiz_0_50M_0_ system_rst_vid_clk_dyn_0_stub.v
+// Design      : system_rst_vid_clk_dyn_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z020clg400-1
 // --------------------------------------------------------------------------------
