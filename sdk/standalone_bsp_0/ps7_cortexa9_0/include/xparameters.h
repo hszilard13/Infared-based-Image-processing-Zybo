@@ -13,6 +13,11 @@
 
 /******************************************************************/
 
+
+/* Definitions for interface APB_M */
+#define XPAR_APB_M_BASEADDR 0x43C00000
+#define XPAR_APB_M_HIGHADDR 0x43C0FFFF
+
 #include "xparameters_ps.h"
 
 #define STDIN_BASEADDRESS 0xE0001000
@@ -25,8 +30,8 @@
 
 /* Definitions for peripheral MIPI_CSI_2_RX_0 */
 #define XPAR_MIPI_CSI_2_RX_0_DEVICE_ID 0
-#define XPAR_MIPI_CSI_2_RX_0_S_AXI_LITE_BASEADDR 0x43C30000
-#define XPAR_MIPI_CSI_2_RX_0_S_AXI_LITE_HIGHADDR 0x43C3FFFF
+#define XPAR_MIPI_CSI_2_RX_0_S_AXI_LITE_BASEADDR 0x43C20000
+#define XPAR_MIPI_CSI_2_RX_0_S_AXI_LITE_HIGHADDR 0x43C2FFFF
 
 
 /******************************************************************/
@@ -36,8 +41,8 @@
 
 /* Definitions for peripheral MIPI_D_PHY_RX_0 */
 #define XPAR_MIPI_D_PHY_RX_0_DEVICE_ID 0
-#define XPAR_MIPI_D_PHY_RX_0_S_AXI_LITE_BASEADDR 0x43C20000
-#define XPAR_MIPI_D_PHY_RX_0_S_AXI_LITE_HIGHADDR 0x43C2FFFF
+#define XPAR_MIPI_D_PHY_RX_0_S_AXI_LITE_BASEADDR 0x43C30000
+#define XPAR_MIPI_D_PHY_RX_0_S_AXI_LITE_HIGHADDR 0x43C3FFFF
 
 
 /******************************************************************/
@@ -140,8 +145,8 @@
 
 /* Definitions for peripheral VIDEO_DYNCLK */
 #define XPAR_VIDEO_DYNCLK_DEVICE_ID 0
-#define XPAR_VIDEO_DYNCLK_S_AXI_LITE_BASEADDR 0x43C00000
-#define XPAR_VIDEO_DYNCLK_S_AXI_LITE_HIGHADDR 0x43C0FFFF
+#define XPAR_VIDEO_DYNCLK_S_AXI_LITE_BASEADDR 0x43C40000
+#define XPAR_VIDEO_DYNCLK_S_AXI_LITE_HIGHADDR 0x43C4FFFF
 
 
 /******************************************************************/
@@ -230,8 +235,8 @@
 
 
 /* Definitions for peripheral AXI_GAMMACORRECTION_0 */
-#define XPAR_AXI_GAMMACORRECTION_0_BASEADDR 0x43C40000
-#define XPAR_AXI_GAMMACORRECTION_0_HIGHADDR 0x43C4FFFF
+#define XPAR_AXI_GAMMACORRECTION_0_BASEADDR 0x43C10000
+#define XPAR_AXI_GAMMACORRECTION_0_HIGHADDR 0x43C1FFFF
 
 
 /* Definitions for peripheral PS7_AFI_0 */
@@ -539,8 +544,8 @@
 
 /* Definitions for peripheral VTG */
 #define XPAR_VTG_DEVICE_ID 0
-#define XPAR_VTG_BASEADDR 0x43C10000
-#define XPAR_VTG_HIGHADDR 0x43C1FFFF
+#define XPAR_VTG_BASEADDR 0x43C50000
+#define XPAR_VTG_HIGHADDR 0x43C5FFFF
 #define XPAR_VTG_GENERATE_EN 1
 #define XPAR_VTG_DETECT_EN 0
 #define XPAR_VTG_DET_HSYNC_EN 1
@@ -555,8 +560,8 @@
 
 /* Canonical definitions for peripheral VTG */
 #define XPAR_VTC_0_DEVICE_ID XPAR_VTG_DEVICE_ID
-#define XPAR_VTC_0_BASEADDR 0x43C10000
-#define XPAR_VTC_0_HIGHADDR 0x43C1FFFF
+#define XPAR_VTC_0_BASEADDR 0x43C50000
+#define XPAR_VTC_0_HIGHADDR 0x43C5FFFF
 #define XPAR_VTC_0_GENERATE_EN 1
 #define XPAR_VTC_0_DETECT_EN 0
 #define XPAR_VTC_0_DET_HSYNC_EN 1

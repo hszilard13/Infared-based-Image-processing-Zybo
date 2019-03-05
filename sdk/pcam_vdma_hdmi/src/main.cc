@@ -3,6 +3,7 @@
 #include "platform/platform.h"
 #include "ov5647/OV5647.h"
 
+#include "IR_FILTERS_regs.h"
 
 #include "MIPI_D_PHY_RX.h"
 #include "MIPI_CSI_2_RX.h"
@@ -11,22 +12,48 @@
 #include "ov5647/PS_GPIO.h"
 #include "ov5647/ScuGicInterruptController.h"
 
+#include "xil_io.h"
+#include "xil_printf.h"
+
 
 #define IRPT_CTL_DEVID 		XPAR_PS7_SCUGIC_0_DEVICE_ID
 #define GPIO_DEVID			XPAR_PS7_GPIO_0_DEVICE_ID
-#define GPIO_IRPT_ID			XPAR_PS7_GPIO_0_INTR
+#define GPIO_IRPT_ID	    XPAR_PS7_GPIO_0_INTR
 #define CAM_I2C_DEVID		XPAR_PS7_I2C_0_DEVICE_ID
 #define CAM_I2C_IRPT_ID		XPAR_PS7_I2C_0_INTR
 #define VDMA_DEVID			XPAR_AXIVDMA_0_DEVICE_ID
 #define VDMA_MM2S_IRPT_ID	XPAR_FABRIC_AXI_VDMA_0_MM2S_INTROUT_INTR
 #define VDMA_S2MM_IRPT_ID	XPAR_FABRIC_AXI_VDMA_0_S2MM_INTROUT_INTR
 #define CAM_I2C_SCLK_RATE	100000
+#define APB_BASE_ADDR       XPAR_APB_M_BASEADDR
 
 #define DDR_BASE_ADDR		XPAR_DDR_MEM_BASEADDR
 #define MEM_BASE_ADDR		(DDR_BASE_ADDR + 0x0A000000)
 
 
+#define FRM_INPU_CODE 0x00
+#define PIX_CORR_IN_CODE 0x01
+#define MEDIAN_IN_CODE 0x02
+#define LAPLACE_IN_CODE 0x04
+#define SHARP_IN_CODE 0x08
+#define SMOOTH_IN_CODE 0x10
+
+
 using namespace digilent;
+
+void filter_cfg()
+{
+	Xil_Out32(APB_BASE_ADDR + CFG_IMG_WIDTH_ADDR, 1920);
+	Xil_Out32(APB_BASE_ADDR + CFG_PIX_CORR_SEL_ADDR, 0);
+	Xil_Out32(APB_BASE_ADDR + CFG_SHARP_SEL_ADDR, 0);
+	Xil_Out32(APB_BASE_ADDR + CFG_SMOOTH_SEL_ADDR, 0);
+	Xil_Out32(APB_BASE_ADDR + CFG_MEDIAN_SEL_ADDR, 0);
+	Xil_Out32(APB_BASE_ADDR + CFG_LAPLACE_SEL_ADDR, LAPLACE_IN_CODE);
+	Xil_Out32(APB_BASE_ADDR + CFG_OUTPUT_SEL_ADDR, LAPLACE_IN_CODE);
+	Xil_Out32(APB_BASE_ADDR + CFG_PIX_CORR_THR_ADDR, 0);
+	Xil_Out32(APB_BASE_ADDR + CFG_SHARP_COEF_ADDR, 0);
+	Xil_Out32(APB_BASE_ADDR + CFG_TEST_MODE_EN_ADDR, 0);
+}
 
 void pipeline_mode_change(AXI_VDMA<ScuGicInterruptController>& vdma_driver, OV5647& cam, VideoOutput& vid, Resolution res, OV5647_cfg::mode_t mode)
 {
@@ -69,6 +96,8 @@ void pipeline_mode_change(AXI_VDMA<ScuGicInterruptController>& vdma_driver, OV56
 int main()
 {
 	init_platform();
+
+	filter_cfg();
 
 	ScuGicInterruptController irpt_ctl(IRPT_CTL_DEVID);
 	PS_GPIO<ScuGicInterruptController> gpio_driver(GPIO_DEVID, irpt_ctl, GPIO_IRPT_ID);
