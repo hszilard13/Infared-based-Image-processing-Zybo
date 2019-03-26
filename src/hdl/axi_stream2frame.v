@@ -16,7 +16,8 @@ module axi_stream2frame#(
   input                       clk                   , // Syste clock
   input                       rst_n                 , // Asynchronous reset active low
 //------------------------- Configuration interface ----------------------------------------------
-  input  [10:0]               cfg_img_w             , // Image width
+  input  [11:0]               cfg_img_w             , // Image width
+  input  [11:0]               cfg_img_h             , // Image width
 //------------------------- AXI-Stream interface -------------------------------------------------
   input                       m_axi_stream_tuser    , // Start of frame 
   input                       m_axi_stream_tvalid   , // Slave has valid data to be transferred
@@ -33,39 +34,57 @@ module axi_stream2frame#(
   output reg                  s_frm_eol               // End of Line
 );
 
-reg [11:0] pix_cnt;
+reg [11:0] pix_cnt ;
+reg [11:0] line_cnt;
 
 wire invalrdy;
-assign invalrdy = m_axi_stream_tvalid & s_frm_rdy;
-assign m_axi_stream_tready = s_frm_rdy; 
+wire outvalrdy;
+
+assign invalrdy = m_axi_stream_tvalid & m_axi_stream_tready;
+assign outvalrdy = s_frm_rdy & s_frm_val;
+
+assign m_axi_stream_tready = s_frm_rdy;
 
 always@(posedge clk or negedge rst_n)
-  if(~rst_n                       ) pix_cnt <= 11'd0         ; else
-  if(pix_cnt == (cfg_img_w - 1'd1)) pix_cnt <= 11'd0         ; else
-  if(invalrdy                     ) pix_cnt <= pix_cnt + 1'd1;
-
-always@(posedge clk or negedge rst_n)
-  if(~rst_n) s_frm_sol <= 1'b0                         ; else
-             s_frm_sol <= pix_cnt == (cfg_img_w - 1'd1); 
-				
-always@(posedge clk or negedge rst_n)
-  if(~rst_n) s_frm_eol <= 1'b0                         ; else
-             s_frm_eol <= pix_cnt == (cfg_img_w - 2'd2); 
+if(~rst_n                        ) pix_cnt <= 11'd0         ; else
+if(m_axi_stream_tuser & invalrdy ) pix_cnt <= 11'd0         ; else
+if(m_axi_stream_tlast & invalrdy ) pix_cnt <= 11'd0         ; else
+if(invalrdy                      ) pix_cnt <= pix_cnt + 1'd1;
   
 always@(posedge clk or negedge rst_n)
-  if(~rst_n) s_frm_val <= 1'b0               ; else
-             s_frm_val <= m_axi_stream_tvalid;
+if(~rst_n                       ) line_cnt <= 11'd0          ; else
+if(m_axi_stream_tuser & invalrdy) line_cnt <= 11'd0          ; else
+if(m_axi_stream_tlast & invalrdy) line_cnt <= line_cnt + 1'd1;  
+  
+
+always@(posedge clk or negedge rst_n)
+if(~rst_n                              ) s_frm_sol <= 1'b0; else
+if(outvalrdy & s_frm_sol               ) s_frm_sol <= 1'b0; else
+if(m_axi_stream_tuser & invalrdy       ) s_frm_sol <= 1'b1; else
+if(outvalrdy & s_frm_eol & (~s_frm_eof)) s_frm_sol <= 1'b1; 
+				
+always@(posedge clk or negedge rst_n)
+if(~rst_n                                                           ) s_frm_eof <= 1'b0; else
+if(outvalrdy & s_frm_eof                                            ) s_frm_eof <= 1'b0; else
+if((line_cnt == (cfg_img_h - 1'd1))  & m_axi_stream_tlast & invalrdy) s_frm_eof <= 1'b1; 
+  
+always@(posedge clk or negedge rst_n)
+if(~rst_n                            ) s_frm_val <= 1'b0; else
+if(s_frm_rdy & (~m_axi_stream_tvalid)) s_frm_val <= 1'b0; else
+if(invalrdy                          ) s_frm_val <= 1'b1; 
 			 
 always@(posedge clk or negedge rst_n)
-  if(~rst_n) s_frm_eof <= 1'b0              ; else
-             s_frm_eof <= m_axi_stream_tlast;
+if(~rst_n                       ) s_frm_eol <= 1'b0; else
+if(outvalrdy & s_frm_eol        ) s_frm_eol <= 1'b0; else
+if(m_axi_stream_tlast & invalrdy) s_frm_eol <= 1'b1;
 			 
 always@(posedge clk or negedge rst_n)
-  if(~rst_n) s_frm_sof <= 1'b0              ; else
-             s_frm_sof <= m_axi_stream_tuser;
+if(~rst_n                        ) s_frm_sof <= 1'b0; else
+if(outvalrdy & s_frm_sof         ) s_frm_sof <= 1'b0; else
+if(m_axi_stream_tuser  & invalrdy) s_frm_sof <= 1'b1;
 			 			 
 always@(posedge clk or negedge rst_n)
-  if(~rst_n) s_frm_data <= {(DATA_WIDTH){1'b0}}; else
-             s_frm_data <= m_axi_stream_tdata  ;
-			 
+if(~rst_n  ) s_frm_data <= {(DATA_WIDTH){1'b0}}; else
+if(invalrdy) s_frm_data <= m_axi_stream_tdata  ;
+  			 
 endmodule //axi_stream2Frame

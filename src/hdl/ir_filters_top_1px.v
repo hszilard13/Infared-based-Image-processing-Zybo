@@ -17,6 +17,7 @@ module ir_filters_top_1px#(
 )(
   input                      clk                     , // System clock
   input                      rst_n                   , // Asynchronous reset active low
+  input                      sw_rst                  ,
 //------------------------------- Configuration interface -----------------------------------------
   input  [3*DATA_WIDTH-1:0]  cfg_bkg                 ,
   input  [             7:0]  cfg_pix_corr_in_sel     ,
@@ -28,21 +29,21 @@ module ir_filters_top_1px#(
   input  [             7:0]  cfg_sharp_coef          ,
   input  [             7:0]  cfg_out_sel             ,
 //--------------------------------Input frame interface---------------------------------------------
-  input                      frm_val                 , // Master has valid data to be transferred
-  output                     frm_rdy                 , // Slave is ready to receive the data
-  input  [3*DATA_WIDTH-1:0]  frm_data                , // Data transferred from master to slave
-  input                      frm_sof                 , // Start of Frame
-  input                      frm_eof                 , // End of Frame
-  input                      frm_sol                 , // Start of Line
-  input                      frm_eol                 , // End of Line
+  (* mark_debug = "true" *) input                      frm_val                 , // Master has valid data to be transferred
+  (* mark_debug = "true" *) output                     frm_rdy                 , // Slave is ready to receive the data
+   input  [3*DATA_WIDTH-1:0]  frm_data                , // Data transferred from master to slave
+  (* mark_debug = "true" *) input                      frm_sof                 , // Start of Frame
+  (* mark_debug = "true" *) input                      frm_eof                 , // End of Frame
+  (* mark_debug = "true" *) input                      frm_sol                 , // Start of Line
+  (* mark_debug = "true" *) input                      frm_eol                 , // End of Line
 //--------------------------------Output frame interface---------------------------------------------   
-  output                     filt_val                , // Master has valid data to be transferred      
-  input                      filt_rdy                , // Slave is ready to receive the data           
-  output [3*DATA_WIDTH-1:0]  filt_data               , // Data transferred from master to slave        
-  output                     filt_sof                , // Start of Frame                               
-  output                     filt_eof                , // End of Frame                                 
-  output                     filt_sol                , // Start of Line                                
-  output                     filt_eol                , // End of Line                                  
+  (* mark_debug = "true" *)  output                     filt_val                , // Master has valid data to be transferred      
+  (* mark_debug = "true" *) input                      filt_rdy                , // Slave is ready to receive the data           
+   output [3*DATA_WIDTH-1:0]  filt_data               , // Data transferred from master to slave        
+  (* mark_debug = "true" *) output                     filt_sof                , // Start of Frame                               
+  (* mark_debug = "true" *) output                     filt_eof                , // End of Frame                                 
+  (* mark_debug = "true" *) output                     filt_sol                , // Start of Line                                
+  (* mark_debug = "true" *) output                     filt_eol                , // End of Line                                  
 //-----------------------------------FIFO interface-------------------------------------------------
   output                     smooth_lb_fifo_push     , // Master pushes data into FIFO
   output [3*2*DATA_WIDTH-1:0]smooth_lb_fifo_pushdata , // Data stored into FIFO
@@ -78,16 +79,15 @@ module ir_filters_top_1px#(
   output                     median_lb_fifo_pop        , // Master pops data from FIFO
   input  [3*2*DATA_WIDTH-1:0]median_lb_fifo_popdata    , // Data retrived from FIFO
   input                      median_lb_fifo_empty      , // FIFO empty
-  input  [   USEDW_BITS-1:0] median_lb_fifo_usedwords    // Used words in FIFO
-// ----------------------------------- APB interface -----------------------------------------
+  input  [   USEDW_BITS-1:0] median_lb_fifo_usedwords  , // Used words in FIFO
+  
+  output                    smooth_lb_fifo_clr         ,
+  output                    sharp_lb_fifo_clr          ,
+  output                    median_lb_fifo_clr         ,
+  output                    laplace_lb_fifo_clr        ,
+  output                    pix_corr_lb_fifo_clr      
  
 );
-
-wire smooth_lb_fifo_clr  ;
-wire sharp_lb_fifo_clr   ;
-wire median_lb_fifo_clr  ;
-wire laplace_lb_fifo_clr ;
-wire pix_corr_lb_fifo_clr;
 
 wire                   smooth_lb_in_frm_val ;
 wire                   smooth_lb_in_frm_rdy ;
@@ -117,31 +117,31 @@ wire [9*DATA_WIDTH-1:0] smooth_lb_out_data_ch0;
 wire [9*DATA_WIDTH-1:0] smooth_lb_out_data_ch1;
 wire [9*DATA_WIDTH-1:0] smooth_lb_out_data_ch2;
 
-wire                   laplace_frm_val ;
-wire                   laplace_frm_rdy ;
-wire [3*DATA_WIDTH-1:0]laplace_frm_data;
-wire                   laplace_frm_sof ;
-wire                   laplace_frm_eof ;
-wire                   laplace_frm_sol ;
-wire                   laplace_frm_eol ;
+ wire                   laplace_frm_val ;
+ wire                   laplace_frm_rdy ;
+ wire [3*DATA_WIDTH-1:0]laplace_frm_data;
+ wire                   laplace_frm_sof ;
+ wire                   laplace_frm_eof ;
+ wire                   laplace_frm_sol ;
+ wire                   laplace_frm_eol ;
 
 
-wire                   laplace_lb_in_frm_val ;
-wire                   laplace_lb_in_frm_rdy ;
-wire [3*DATA_WIDTH-1:0]laplace_lb_in_frm_data;
-wire                   laplace_lb_in_frm_sof ;
-wire                   laplace_lb_in_frm_eof ;
-wire                   laplace_lb_in_frm_sol ;
-wire                   laplace_lb_in_frm_eol ;
+ wire                   laplace_lb_in_frm_val ;
+ wire                   laplace_lb_in_frm_rdy ;
+ wire [3*DATA_WIDTH-1:0]laplace_lb_in_frm_data;
+ wire                   laplace_lb_in_frm_sof ;
+ wire                   laplace_lb_in_frm_eof ;
+ wire                   laplace_lb_in_frm_sol ;
+ wire                   laplace_lb_in_frm_eol ;
 
 
-wire                     laplace_lb_out_val ;
-wire                     laplace_lb_out_rdy ;
-wire [9*3*DATA_WIDTH-1:0]laplace_lb_out_data;
-wire                     laplace_lb_out_sof ;
-wire                     laplace_lb_out_eof ;
-wire                     laplace_lb_out_sol ;
-wire                     laplace_lb_out_eol ;
+ wire                     laplace_lb_out_val ;
+ wire                     laplace_lb_out_rdy ;
+ wire [9*3*DATA_WIDTH-1:0]laplace_lb_out_data;
+ wire                     laplace_lb_out_sof ;
+ wire                     laplace_lb_out_eof ;
+ wire                     laplace_lb_out_sol ;
+ wire                     laplace_lb_out_eol ;
 
 wire [9*DATA_WIDTH-1:0] laplace_lb_out_data_ch0;
 wire [9*DATA_WIDTH-1:0] laplace_lb_out_data_ch1;
@@ -154,7 +154,6 @@ wire                   sharp_frm_sof ;
 wire                   sharp_frm_eof ;
 wire                   sharp_frm_sol ;
 wire                   sharp_frm_eol ;
-
 
 wire                   sharp_lb_in_frm_val ;
 wire                   sharp_lb_in_frm_rdy ;
@@ -337,11 +336,11 @@ assign pix_corr_frm_rdy = pix_corr0_frm_rdy | pix_corr2_frm_rdy | pix_corr3_frm_
 assign median_frm_rdy   = median1_frm_rdy | median2_frm_rdy | median3_frm_rdy | median4_frm_rdy | median5_frm_rdy;
 assign laplace_frm_rdy  = laplace0_frm_rdy | laplace1_frm_rdy | laplace3_frm_rdy | laplace4_frm_rdy | laplace5_frm_rdy;
 assign smooth_frm_rdy   = smooth0_frm_rdy | smooth1_frm_rdy | smooth2_frm_rdy | smooth3_frm_rdy | smooth5_frm_rdy;
-assign sharp_frm_rdy    = sharp0_frm_rdy | sharp1_frm_rdy | sharp2_frm_rdy | sharp4_frm_rdy;
+assign sharp_frm_rdy    = sharp0_frm_rdy | sharp1_frm_rdy | sharp2_frm_rdy | sharp4_frm_rdy | sharp5_frm_rdy;
 assign frm_rdy          = frm0_rdy | frm1_rdy  | frm2_rdy | frm3_rdy | frm4_rdy | frm5_rdy;	
 
 assign pix_corr_frm_data = {pix_corr_ch2_frm_data, pix_corr_ch1_frm_data, pix_corr_ch0_frm_data};
-assign laplace_frm_data  = {laplace_ch1_frm_data, laplace_ch2_frm_data, laplace_ch0_frm_data}   ; 
+assign laplace_frm_data  = {laplace_ch2_frm_data, laplace_ch1_frm_data, laplace_ch0_frm_data}   ; 
 assign sharp_frm_data    = {sharp_ch2_frm_data, sharp_ch1_frm_data, sharp_ch0_frm_data}         ; 
 assign smooth_frm_data   = {smooth_ch2_frm_data, smooth_ch1_frm_data, smooth_ch0_frm_data}      ; 
 assign median_frm_data   = {median_ch2_frm_data, median_ch1_frm_data, median_ch0_frm_data}      ; 
@@ -355,6 +354,7 @@ line_buffer#(
   .clk           (clk                     ), // System clock
   .rst_n         (rst_n                   ), // Asynchronous reset active low
   .cfg_bkg       (cfg_bkg                 ),
+  .sw_rst        (sw_rst                  ), 
   .frm_val       (smooth_lb_in_frm_val    ), // Master has valid data to be transferred
   .frm_rdy       (smooth_lb_in_frm_rdy    ), // Slave is ready to receive the data
   .frm_data      (smooth_lb_in_frm_data   ), // Data transferred from master to slave
@@ -386,6 +386,7 @@ line_buffer#(
 )sharp_filter_lb(
   .clk           (clk                    ), // System clock
   .rst_n         (rst_n                  ), // Asynchronous reset active low
+  .sw_rst        (sw_rst                  ), 
   .cfg_bkg       (cfg_bkg                ),
   .frm_val       (sharp_lb_in_frm_val    ), // Master has valid data to be transferred
   .frm_rdy       (sharp_lb_in_frm_rdy    ), // Slave is ready to receive the data
@@ -418,6 +419,7 @@ line_buffer#(
 )laplace_filter_lb(
   .clk           (clk                      ), // System clock
   .rst_n         (rst_n                    ), // Asynchronous reset active low
+  .sw_rst        (sw_rst                   ), 
   .cfg_bkg       (cfg_bkg                  ),
   .frm_val       (laplace_lb_in_frm_val    ), // Master has valid data to be transferred
   .frm_rdy       (laplace_lb_in_frm_rdy    ), // Slave is ready to receive the data
@@ -450,6 +452,7 @@ line_buffer#(
 )pix_corr_filter_lb(
   .clk           (clk                       ), // System clock
   .rst_n         (rst_n                     ), // Asynchronous reset active low
+  .sw_rst        (sw_rst                    ), 
   .cfg_bkg       (cfg_bkg                   ),
   .frm_val       (pix_corr_lb_in_frm_val    ), // Master has valid data to be transferred
   .frm_rdy       (pix_corr_lb_in_frm_rdy    ), // Slave is ready to receive the data
@@ -482,6 +485,7 @@ line_buffer#(
 )median_filter_lb(
   .clk           (clk                     ), // System clock
   .rst_n         (rst_n                   ), // Asynchronous reset active low
+  .sw_rst        (sw_rst                  ), 
   .cfg_bkg       (cfg_bkg                 ),
   .frm_val       (median_lb_in_frm_val    ), // Master has valid data to be transferred
   .frm_rdy       (median_lb_in_frm_rdy    ), // Slave is ready to receive the data
@@ -556,7 +560,7 @@ smooth_filter_1px#(
   .rst_n     (rst_n                 ), // Asynchronous reset active low
   .in3x3_val (smooth_lb_out_val     ), // Master has valid data to be transferred
   .in3x3_rdy (                      ), // Slave is ready to receive the data
-  .in3x3_data(smooth_lb_out_data_ch1), // Data transferred from master to slave
+  .in3x3_data(smooth_lb_out_data_ch2), // Data transferred from master to slave
   .in3x3_sof (smooth_lb_out_sof     ), // Start of Frame
   .in3x3_eof (smooth_lb_out_eof     ), // End of Frame
   .in3x3_sol (smooth_lb_out_sol     ), // Start of Line
@@ -577,7 +581,7 @@ laplace_filter_1px#(
   .rst_n     (rst_n                  ), // Asynchronous reset active low
   .in3x3_val (laplace_lb_out_val     ), // Master has valid data to be transferred
   .in3x3_rdy (laplace_lb_out_rdy     ), // Slave is ready to receive the data
-  .in3x3_data(laplace_lb_out_data_ch2), // Data transferred from master to slave
+  .in3x3_data(laplace_lb_out_data_ch0), // Data transferred from master to slave
   .in3x3_sof (laplace_lb_out_sof     ), // Start of Frame
   .in3x3_eof (laplace_lb_out_eof     ), // End of Frame
   .in3x3_sol (laplace_lb_out_sol     ), // Start of Line
@@ -598,7 +602,7 @@ laplace_filter_1px#(
   .rst_n     (rst_n                  ), // Asynchronous reset active low
   .in3x3_val (laplace_lb_out_val     ), // Master has valid data to be transferred
   .in3x3_rdy (                       ), // Slave is ready to receive the data
-  .in3x3_data(laplace_lb_out_data_ch2), // Data transferred from master to slave
+  .in3x3_data(laplace_lb_out_data_ch1), // Data transferred from master to slave
   .in3x3_sof (laplace_lb_out_sof     ), // Start of Frame
   .in3x3_eof (laplace_lb_out_eof     ), // End of Frame
   .in3x3_sol (laplace_lb_out_sol     ), // Start of Line

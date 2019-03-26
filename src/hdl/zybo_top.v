@@ -1,5 +1,8 @@
 
-module zybo_top
+module zybo_top#(
+  parameter DATA_WIDTH = 8, 
+  parameter USEDW_BITS = 11
+)
 (
 inout [14:0]  DDR_addr            ,
 inout [2:0]   DDR_ba              ,
@@ -41,10 +44,10 @@ output [2:0]  hdmi_tx_data_p
 
  
 wire [23:0] AXI_Stream_Master_tdata ;
-wire        AXI_Stream_Master_tlast ;
-wire        AXI_Stream_Master_tready;
-wire [0:0]  AXI_Stream_Master_tuser ;
-wire        AXI_Stream_Master_tvalid;
+(* mark_debug = "true" *) wire        AXI_Stream_Master_tlast ;
+(* mark_debug = "true" *) wire        AXI_Stream_Master_tready;
+(* mark_debug = "true" *) wire [0:0]  AXI_Stream_Master_tuser ;
+(* mark_debug = "true" *) wire        AXI_Stream_Master_tvalid;
 
 wire [0:0]  rst_n              ;
 wire        s_axil_clk_50      ;
@@ -99,6 +102,36 @@ wire  [47:0]pix_corr_lb_fifo_popdata   ;
 wire        pix_corr_lb_fifo_empty     ;
 wire [10:0] pix_corr_lb_fifo_usedwords ;
 
+wire [4*3*DATA_WIDTH - 1:0]smooth_lb_mem_wr_data;
+wire [8                 :0]smooth_lb_mem_addr   ;
+wire                       smooth_lb_mem_cen    ;
+wire                       smooth_lb_mem_rwn    ;
+wire [4*3*DATA_WIDTH - 1:0]smooth_lb_mem_rd_data;
+
+wire [4*3*DATA_WIDTH - 1:0]pix_corr_lb_mem_wr_data;
+wire [8                 :0]pix_corr_lb_mem_addr   ;
+wire                       pix_corr_lb_mem_cen    ;
+wire                       pix_corr_lb_mem_rwn    ;
+wire [4*3*DATA_WIDTH - 1:0]pix_corr_lb_mem_rd_data;
+
+wire [4*3*DATA_WIDTH - 1:0]laplace_lb_mem_wr_data;
+wire [8                 :0]laplace_lb_mem_addr   ;
+wire                       laplace_lb_mem_cen    ;
+wire                       laplace_lb_mem_rwn    ;
+wire [4*3*DATA_WIDTH - 1:0]laplace_lb_mem_rd_data;
+
+wire [4*3*DATA_WIDTH - 1:0]sharp_lb_mem_wr_data;
+wire [8                 :0]sharp_lb_mem_addr   ;
+wire                       sharp_lb_mem_cen    ;
+wire                       sharp_lb_mem_rwn    ;
+wire [4*3*DATA_WIDTH - 1:0]sharp_lb_mem_rd_data;
+
+wire [4*3*DATA_WIDTH - 1:0]median_lb_mem_wr_data;
+wire [8                 :0]median_lb_mem_addr   ;
+wire                       median_lb_mem_cen    ;
+wire                       median_lb_mem_rwn    ;
+wire [4*3*DATA_WIDTH - 1:0]median_lb_mem_rd_data;
+
 wire       frm_val ; 
 wire       frm_rdy ;
 wire [23:0]frm_data;
@@ -118,10 +151,10 @@ wire       test_frm_eol ;
 wire clk;
 
 wire [23:0] S_AXIS_S2MM_tdata ;
-wire        S_AXIS_S2MM_tlast ;
-wire        S_AXIS_S2MM_tready;
-wire [0:0]  S_AXIS_S2MM_tuser ;
-wire        S_AXIS_S2MM_tvalid;
+(* mark_debug = "true" *) wire        S_AXIS_S2MM_tlast ;
+(* mark_debug = "true" *) wire        S_AXIS_S2MM_tready;
+(* mark_debug = "true" *) wire [0:0]  S_AXIS_S2MM_tuser ;
+(* mark_debug = "true" *) wire        S_AXIS_S2MM_tvalid;
 
 
 wire [31:0] APB_M_paddr  ;
@@ -134,8 +167,8 @@ wire [31:0] APB_M_pwdata ;
 wire        APB_M_pwrite ;
 
 
-wire [10:0] cfg_img_width      ;   // Image width
-wire [10:0] cfg_img_height     ;   // Image height
+wire [15:0] cfg_img_width      ;   // Image width
+wire [15:0] cfg_img_height     ;   // Image height
 wire [10:0] cfg_stride         ;   // Stride
 wire [31:0] cfg_map0_ba        ;   // Map 0 base address
 wire [31:0] cfg_map1_ba        ;   // Map 1 base address
@@ -156,6 +189,8 @@ wire [7:0] cfg_output_sel      ;   // Output selection
 wire [7:0] cfg_pix_corr_thr    ;   // Pixel correction threshold
 wire [7:0] cfg_sharp_coef      ;   // Sharpening filter coeficient
 wire [0:0] cfg_test_mode_en    ;
+wire [23:0] cfg_bkg;
+wire        sw_rst;         
 
 wire [31:0]S00_AXI_araddr ;
 wire [1 :0]S00_AXI_arburst;
@@ -268,27 +303,52 @@ wire       S02_AXI_wready;
 wire [3:0] S02_AXI_wstrb;
 wire       S02_AXI_wvalid; 
 
-wire       fifo_ch0_empty   ;
-wire [63:0]fifo_ch0_pushdata;
-wire       fifo_ch0_push    ;
-wire       fifo_ch0_full    ;
-wire[63:0] fifo_ch0_popdata ;
-wire       fifo_ch0_pop     ;
+wire         fifo_ch0_empty  ;
+wire         fifo_ch1_empty  ;
+wire         fifo_ch2_empty  ;
+wire [63:0]  fifo_data0      ;
+wire [63:0]  fifo_data1      ;
+wire [63:0]  fifo_data2      ;
+wire         fifo_ch0_pop    ;
+wire         fifo_ch1_pop    ;
+wire         fifo_ch2_pop    ;
+wire [63:0]  fifo_ch0_data   ;
+wire [63:0]  fifo_ch1_data   ;
+wire [63:0]  fifo_ch2_data   ;
+wire [10:0]  fifo_words_used0;
+wire [10:0]  fifo_words_used1;
+wire [10:0]  fifo_words_used2;
+wire         fifo_push0      ;
+wire         fifo_push1      ;
+wire         fifo_push2      ;
+wire         fifo_full0      ;
+wire         fifo_full1      ;
+wire         fifo_full2      ;
+ 
+wire                   int_fifo_push        ; // Master pushes data into FIFO
+wire [3*DATA_WIDTH-1:0]int_fifo_pushdata    ; // Data stored into FIFO
+wire                   int_fifo_full        ; // FIFO full
+wire                   int_fifo_almost_full ; // FIFO full
+wire                   int_fifo_pop         ; // Master pops data from FIFO
+wire [3*DATA_WIDTH-1:0]int_fifo_popdata     ; // Data retrived from FIFO
+wire                   int_fifo_empty       ; // FIFO empty
+wire                   int_fifo_almost_empty; // FIFO empty
 
-wire       fifo_ch1_empty   ;
-wire [63:0]fifo_ch1_pushdata;
-wire       fifo_ch1_push    ;
-wire       fifo_ch1_full    ;
-wire[63:0] fifo_ch1_popdata ;
-wire       fifo_ch1_pop     ;
+wire        filt_val ; // Master has valid data to be transferred      
+wire        filt_rdy ; // Slave is ready to receive the data           
+wire [23:0] filt_data; // Data transferred from master to slave        
+wire        filt_sof ; // Start of Frame                               
+wire        filt_eof ; // End of Frame                                 
+wire        filt_sol ; // Start of Line                                
+wire        filt_eol ; // End of Line         
 
-wire       fifo_ch2_empty   ;
-wire [63:0]fifo_ch2_pushdata;
-wire       fifo_ch2_push    ;
-wire       fifo_ch2_full    ;
-wire[63:0] fifo_ch2_popdata ;
-wire       fifo_ch2_pop     ;
+wire laplace_lb_fifo_clr ;
+wire sharp_lb_fifo_clr   ;
+wire smooth_lb_fifo_clr  ;
+wire median_lb_fifo_clr  ;
+wire pix_corr_lb_fifo_clr;
 
+               
 assign S00_AXI_arcache = 4'd0;
 assign S00_AXI_arlock = 1'd0; 
 assign S00_AXI_arprot = 3'd0;
@@ -438,10 +498,22 @@ system_wrapper i_system_wrapper
   .S_AXIS_S2MM_tready       (S_AXIS_S2MM_tready       ),
   .S_AXIS_S2MM_tuser        (S_AXIS_S2MM_tuser        ),
   .S_AXIS_S2MM_tvalid       (S_AXIS_S2MM_tvalid       ),
+  .axi_clk_0                (clk_axi                  ),
+  .axi_clk_1                (clk_axi                  ),
+  .axi_clk_2                (clk_axi                  ),
+  .axi_rst_0                (rst_n                    ),
+  .axi_rst_1                (rst_n                    ),
+  .axi_rst_2                (rst_n                    ),
   .cam_gpio_tri_io          (cam_gpio_tri_io          ),
   .cam_iic_scl_io           (cam_iic_scl_io           ),
   .cam_iic_sda_io           (cam_iic_sda_io           ),
   .clk                      (clk                      ),
+  .clk_1                    (clk                      ),
+  .clk_2                    (clk                      ),
+  .clk_3                    (clk                      ),
+  .clk_4                    (clk                      ),
+  .clk_5                    (clk                      ),
+  .clk_axi                  (clk_axi                  ),
   .data_count               (laplace_lb_fifo_usedwords),
   .data_count_1             (sharp_lb_fifo_usedwords  ),
   .data_count_2             (smooth_lb_fifo_usedwords ),
@@ -462,6 +534,11 @@ system_wrapper i_system_wrapper
   .hdmi_tx_clk_p            (hdmi_tx_clk_p            ),
   .hdmi_tx_data_n           (hdmi_tx_data_n           ),
   .hdmi_tx_data_p           (hdmi_tx_data_p           ),
+  .rst                      (~rst_n | sharp_lb_fifo_clr   ),
+  .rst_1                    (~rst_n | laplace_lb_fifo_clr ),
+  .rst_2                    (~rst_n | sharp_lb_fifo_clr   ),
+  .rst_3                    (~rst_n | median_lb_fifo_clr  ),
+  .rst_4                    (~rst_n | pix_corr_lb_fifo_clr),
   .rst_n                    (rst_n                    ),
   .S00_AXI_araddr           (S00_AXI_araddr           ),
   .S00_AXI_arburst          (S00_AXI_arburst          ),
@@ -596,9 +673,11 @@ IR_FILTERS_regs regs(
     .cfg_pix_corr_thr    (cfg_pix_corr_thr    ),
     .cfg_sharp_coef      (cfg_sharp_coef      ),
 	.cfg_test_mode_en    (cfg_test_mode_en    ),
-    .PCLK                (clk                 ),
+	.cfg_bkg             (cfg_bkg             ),
+//	.sw_rst              (sw_rst              ), 
+    .PCLK                (clk_axi             ),
     .PRESETn             (rst_n               ), 
-    .PADDR               (APB_M_paddr         ),  
+    .PADDR               (APB_M_paddr[15:0]   ),  
     .PENABLE             (APB_M_penable       ),  
     .PWRITE              (APB_M_pwrite        ),  
     .PWDATA              (APB_M_pwdata        ),  
@@ -611,11 +690,12 @@ IR_FILTERS_regs regs(
  
  
 axi_stream2frame#(
-  .DATA_WIDTH(24)
+  .DATA_WIDTH(3*DATA_WIDTH)
 )interface_conv(
   .clk                (clk                     ), // System clock
   .rst_n              (rst_n                   ), // Asynchronous reset active low
-  .cfg_img_w          (cfg_img_width           ), // Image width
+  .cfg_img_w          (cfg_img_width[11:0]     ), // Image width
+  .cfg_img_h          (cfg_img_height[11:0]    ), // Image height
   .m_axi_stream_tdata (AXI_Stream_Master_tdata ), // Start of frame 
   .m_axi_stream_tlast (AXI_Stream_Master_tlast ), // Slave has valid data to be transferred
   .m_axi_stream_tready(AXI_Stream_Master_tready), // End of frame
@@ -632,11 +712,12 @@ axi_stream2frame#(
 
 
 ir_filters_top_1px#(
-  .USEDW_BITS   (11) ,
-  .DATA_WIDTH   (8 )  
+  .USEDW_BITS   (USEDW_BITS) ,
+  .DATA_WIDTH   (DATA_WIDTH)  
 )ir_filters(
   .clk                       (clk                       ), // System clock
   .rst_n                     (rst_n                     ), // Asynchronous reset active low
+  .sw_rst                    (sw_rst                    ), 
   .cfg_bkg                   (cfg_bkg                   ), 
   .cfg_pix_corr_in_sel       (cfg_pix_corr_sel          ), // Pixel correction input select
   .cfg_smooth_in_sel         (cfg_smooth_sel            ), // Image sharpening select
@@ -657,9 +738,9 @@ ir_filters_top_1px#(
   .filt_rdy                  (S_AXIS_S2MM_tready        ), // Slave is ready to receive the data           
   .filt_data                 (S_AXIS_S2MM_tdata         ), // Data transferred from master to slave        
   .filt_sof                  (S_AXIS_S2MM_tuser         ), // Start of Frame                               
-  .filt_eof                  (S_AXIS_S2MM_tlast         ), // End of Frame                                 
+  .filt_eof                  (                          ), // End of Frame                                 
   .filt_sol                  (                          ), // Start of Line                                
-  .filt_eol                  (                          ), // End of Line                            
+  .filt_eol                  (S_AXIS_S2MM_tlast         ), // End of Line                            
   .laplace_lb_fifo_push      (laplace_lb_fifo_push      ), // Master pushes data into FIFO
   .laplace_lb_fifo_pushdata  (laplace_lb_fifo_pushdata  ), // Data stored into FIFO
   .laplace_lb_fifo_full      (laplace_lb_fifo_full      ), // FIFO full
@@ -694,14 +775,20 @@ ir_filters_top_1px#(
   .pix_corr_lb_fifo_pop      (pix_corr_lb_fifo_pop      ), // Master pops data from FIFO
   .pix_corr_lb_fifo_popdata  (pix_corr_lb_fifo_popdata  ), // Data retrived from FIFO
   .pix_corr_lb_fifo_empty    (pix_corr_lb_fifo_empty    ), // FIFO empty
-  .pix_corr_lb_fifo_usedwords(pix_corr_lb_fifo_usedwords) // Used words in FIFO
+  .pix_corr_lb_fifo_usedwords(pix_corr_lb_fifo_usedwords), // Used words in FIFO
+  .laplace_lb_fifo_clr       (laplace_lb_fifo_clr       ),
+  .sharp_lb_fifo_clr         (sharp_lb_fifo_clr         ),
+  .smooth_lb_fifo_clr        (smooth_lb_fifo_clr        ),
+  .median_lb_fifo_clr        (median_lb_fifo_clr        ),
+  .pix_corr_lb_fifo_clr      (pix_corr_lb_fifo_clr      )
+  
 );
 
 axi2frame#(
   .MEM_WIDTH (64  ), 
   .ADDR_WIDTH(10  )
 )test_mode(
-  .clk                 (clk                 ), // System clock
+  .clk                 (clk_axi             ), // System clock
   .rst_n               (rst_n               ), // Asynchronous reset active low
   .axi0_araddr         (S00_AXI_araddr      ), // Channel 0 Address
   .axi0_arlen          (S00_AXI_arlen       ), // Channel 0 Burst length 
@@ -785,7 +872,7 @@ axi2frame#(
  );
  
 selector_2i#(
-  .DATA_WIDTH(24) 
+  .DATA_WIDTH(3*DATA_WIDTH) 
 )input_sel(
   .clk         (clk             ), // System clock
   .rst_n       (rst_n           ), // Asynchronous reset active low

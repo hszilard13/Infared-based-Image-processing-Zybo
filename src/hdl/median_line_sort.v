@@ -26,7 +26,7 @@ input      [DATA_WIDTH - 1:0] pix0     ,
 input      [DATA_WIDTH - 1:0] pix1     ,
 input      [DATA_WIDTH - 1:0] pix2     ,
 input                         win_val  ,
-output reg                    win_rdy  ,
+output                        win_rdy  ,
 input                         win_sol  ,
 input                         win_eol  ,
 input                         win_sof  ,
@@ -40,6 +40,8 @@ output reg                    sort_eof ,
 output reg [3*DATA_WIDTH-1:0] sort_data
 );
 
+wire invalrdy;
+
 wire [DATA_WIDTH-1:0] comp0_max;
 wire [DATA_WIDTH-1:0] comp1_max;
 wire [DATA_WIDTH-1:0] comp2_max;
@@ -48,6 +50,10 @@ wire [DATA_WIDTH-1:0] comp0_min;
 wire [DATA_WIDTH-1:0] comp1_min;
 wire [DATA_WIDTH-1:0] comp2_min;
 
+assign win_rdy = sort_rdy;
+
+assign invalrdy = win_val & win_rdy;
+
 // Assign maximum and minimum values
 assign {comp0_max, comp0_min} = (pix0      > pix1     ) ? {pix0     , pix1     } : {pix1     , pix0      };
 assign {comp1_max, comp1_min} = (comp0_max > pix2     ) ? {comp0_max, pix2     } : {pix2     , comp0_max };
@@ -55,8 +61,8 @@ assign {comp2_max, comp2_min} = (comp0_min > comp1_max) ? {comp0_min, comp1_max}
 
 //Create data
 always@(posedge clk or negedge rst_n)
-  if(~rst_n           ) sort_data <= {DATA_WIDTH{1'b0}}               ; else
-  if(win_val & win_rdy) sort_data <= {comp2_max, comp2_min, comp1_min};
+  if(~rst_n  ) sort_data <= {DATA_WIDTH{1'b0}}               ; else
+  if(invalrdy) sort_data <= {comp2_max, comp2_min, comp1_min};
   
 //Control signals
 always@(posedge clk or negedge rst_n)
@@ -80,13 +86,9 @@ if(sort_rdy & sort_val & sort_sol) sort_sol <= 1'b0; else
 if((win_sol & win_val & win_rdy) ) sort_sol <= 1'b1;
 
 always@(posedge clk or negedge rst_n)
-if(~rst_n             ) win_rdy <= 1'b1; else
-if(sort_rdy & sort_val) win_rdy <= 1'b1; else
-if(win_val            ) win_rdy <= 1'b0; 
- 
-always@(posedge clk or negedge rst_n)
-if(~rst_n             ) sort_val <= 1'b0; else
-if(sort_rdy & sort_val) sort_val <= 1'b0; else
-if(win_val            ) sort_val <= 1'b1; 
+if(~rst_n               ) sort_val <= 1'b0; else
+if(sort_rdy & (~win_val)) sort_val <= 1'b0; else
+if(invalrdy             ) sort_val <= 1'b1; 
+
   
 endmodule

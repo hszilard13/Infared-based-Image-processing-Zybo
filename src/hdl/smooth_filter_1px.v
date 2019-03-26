@@ -27,7 +27,7 @@ parameter DATA_WIDTH = 8
 input                         clk       ,
 input                         rst_n     ,
 input                         in3x3_val , // Master has valid data to be transferred
-output reg                    in3x3_rdy , // Slave is ready to receive the data
+output                        in3x3_rdy , // Slave is ready to receive the data
 input      [9*DATA_WIDTH-1:0] in3x3_data, // Data transferred from master to slave
 input                         in3x3_sof , // Start of frame
 input                         in3x3_sol , // Start of line
@@ -55,6 +55,11 @@ wire [DATA_WIDTH-1:0] p21; //Pixel in window
 wire [DATA_WIDTH-1:0] p22; //Pixel in window
 
 wire [DATA_WIDTH+4:0] sum;
+
+wire invalrdy;
+
+assign invalrdy =  in3x3_rdy & in3x3_val;
+assign in3x3_rdy = out_rdy;
 
 assign p00 = in3x3_data[9*DATA_WIDTH-1:8*DATA_WIDTH];
 assign p01 = in3x3_data[8*DATA_WIDTH-1:7*DATA_WIDTH];
@@ -93,15 +98,10 @@ always@(posedge clk or negedge rst_n)
 if(~rst_n                                                             ) out_sol <= 1'b0; else
 if(out_rdy & out_val & out_sol                                        ) out_sol <= 1'b0; else
 if((in3x3_sol & in3x3_val & in3x3_rdy) | (out_rdy & out_val & out_eol)) out_sol <= 1'b1;
-
-always@(posedge clk or negedge rst_n)
-if(~rst_n           ) in3x3_rdy <= 1'b1; else
-if(out_rdy & out_val) in3x3_rdy <= 1'b1; else
-if(in3x3_val        ) in3x3_rdy <= 1'b0; 
  
 always@(posedge clk or negedge rst_n)
-if(~rst_n           ) out_val <= 1'b0; else
-if(out_rdy & out_val) out_val <= 1'b0; else
-if(in3x3_val        ) out_val <= 1'b1;   
+if(~rst_n                ) out_val <= 1'b0; else
+if(out_rdy & (~in3x3_val)) out_val <= 1'b0; else
+if(invalrdy              ) out_val <= 1'b1; 
 
 endmodule

@@ -44,44 +44,43 @@ wire                   lap_eof ;
 wire                   lap_sol ;
 wire                   lap_eol ;
 
-reg lap_rdy;
+wire lap_rdy;
+wire invalrdy;
+
+assign invalrdy =  in3x3_rdy & in3x3_val;
+assign lap_rdy  = 1'b1;
 
 // Output control signals are the delayed version of the input
 	 
 always@(posedge clk or negedge rst_n)
 if(~rst_n                     ) out_eof <= 1'b0; else
 if(out_rdy & out_val & out_eof) out_eof <= 1'b0; else
-if(lap_eof & lap_val & lap_rdy) out_eof <= 1'b1;
+if(lap_eof & lap_val          ) out_eof <= 1'b1;
 
 always@(posedge clk or negedge rst_n)
 if(~rst_n                     ) out_sof <= 1'b0; else
 if(out_rdy & out_val & out_sof) out_sof <= 1'b0; else
-if(lap_sof & lap_val & lap_rdy) out_sof <= 1'b1;
+if(lap_sof & lap_val          ) out_sof <= 1'b1;
 
 
 always@(posedge clk or negedge rst_n)
 if(~rst_n                     ) out_eol <= 1'b0; else
 if(out_rdy & out_val & out_eol) out_eol <= 1'b0; else
-if(lap_eol & lap_val & lap_rdy) out_eol <= 1'b1;
+if(lap_eol & lap_val          ) out_eol <= 1'b1;
 
 always@(posedge clk or negedge rst_n)
 if(~rst_n                     ) out_sol <= 1'b0; else
 if(out_rdy & out_val & out_sol) out_sol <= 1'b0; else
-if(lap_sol & lap_val & lap_rdy) out_sol <= 1'b1;
+if(lap_sol & lap_val          ) out_sol <= 1'b1;
 
 always@(posedge clk or negedge rst_n)
-if(~rst_n           ) lap_rdy <= 1'b1; else
-if(out_rdy & out_val) lap_rdy <= 1'b1; else
-if(lap_val          ) lap_rdy <= 1'b0; 
- 
-always@(posedge clk or negedge rst_n)
-if(~rst_n           ) out_val <= 1'b0; else
-if(out_rdy & out_val) out_val <= 1'b0; else
-if(lap_val          ) out_val <= 1'b1; 
+if(~rst_n                ) out_val <= 1'b0; else
+if(out_rdy & (~in3x3_val)) out_val <= 1'b0; else
+if(invalrdy              ) out_val <= 1'b1; 
 			 
 always@(posedge clk or negedge rst_n)
-  if(~rst_n               ) in_data_d <= {(DATA_WIDTH){1'd0}}                     ; else
-  if(in3x3_rdy & in3x3_val) in_data_d <= in3x3_data[5*DATA_WIDTH-1 : 4*DATA_WIDTH];
+if(~rst_n               ) in_data_d <= {(DATA_WIDTH){1'd0}}                     ; else
+if(in3x3_rdy & in3x3_val) in_data_d <= in3x3_data[5*DATA_WIDTH-1 : 4*DATA_WIDTH];
 			 
 wire [DATA_WIDTH:0] out_data_temp;
 

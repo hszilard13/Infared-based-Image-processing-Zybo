@@ -220,9 +220,9 @@ median_line_sort#(
 )diag0(
   .clk      (clk                                    ),
   .rst_n    (rst_n                                  ), 
-  .pix0     (hor02_data[  DATA_WIDTH-1:           0]),
+  .pix2     (hor02_data[  DATA_WIDTH-1:           0]),
   .pix1     (hor01_data[2*DATA_WIDTH-1:  DATA_WIDTH]),
-  .pix2     (hor00_data[3*DATA_WIDTH-1:2*DATA_WIDTH]),
+  .pix0     (hor00_data[3*DATA_WIDTH-1:2*DATA_WIDTH]),
   .win_val  (hor_val                                ),
   .win_rdy  (hor0_rdy                               ),
   .win_sol  (win1_sol                               ),
