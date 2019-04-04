@@ -150,7 +150,7 @@ output wire [31 : 0] status;
     .C_NATIVE_DATA_WIDTH(24),
     .C_S_AXIS_TDATA_WIDTH(24),
     .C_HAS_ASYNC_CLK(1),
-    .C_ADDR_WIDTH(10),
+    .C_ADDR_WIDTH(11),
     .C_VTG_MASTER_SLAVE(1),
     .C_HYSTERESIS_LEVEL(12),
     .C_SYNC_LOCK_THRESHOLD(4)

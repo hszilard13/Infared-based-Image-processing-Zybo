@@ -1,10 +1,10 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
--- Date        : Mon Jan 21 14:58:27 2019
+-- Date        : Mon Apr 01 15:53:52 2019
 -- Host        : shegedus running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
---               D:/Projects/2018/Zybo-Z7-20-pcam-5c/src/bd/system/ip/system_AXI_GammaCorrection_0_0/system_AXI_GammaCorrection_0_0_sim_netlist.vhdl
+--               D:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_AXI_GammaCorrection_0_0/system_AXI_GammaCorrection_0_0_sim_netlist.vhdl
 -- Design      : system_AXI_GammaCorrection_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.

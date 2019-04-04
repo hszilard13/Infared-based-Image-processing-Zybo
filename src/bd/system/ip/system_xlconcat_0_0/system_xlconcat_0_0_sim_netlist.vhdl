@@ -1,7 +1,7 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
--- Date        : Thu Jan 17 13:30:37 2019
+-- Date        : Thu Mar 28 14:34:17 2019
 -- Host        : shegedus running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim -rename_top system_xlconcat_0_0 -prefix
 --               system_xlconcat_0_0_ system_xlconcat_0_0_sim_netlist.vhdl
@@ -19,7 +19,9 @@ entity system_xlconcat_0_0 is
     In0 : in STD_LOGIC_VECTOR ( 0 to 0 );
     In1 : in STD_LOGIC_VECTOR ( 0 to 0 );
     In2 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    dout : out STD_LOGIC_VECTOR ( 2 downto 0 )
+    In3 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    In4 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    dout : out STD_LOGIC_VECTOR ( 4 downto 0 )
   );
   attribute NotValidForBitStream : boolean;
   attribute NotValidForBitStream of system_xlconcat_0_0 : entity is true;
@@ -35,10 +37,16 @@ architecture STRUCTURE of system_xlconcat_0_0 is
   signal \^in0\ : STD_LOGIC_VECTOR ( 0 to 0 );
   signal \^in1\ : STD_LOGIC_VECTOR ( 0 to 0 );
   signal \^in2\ : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal \^in3\ : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal \^in4\ : STD_LOGIC_VECTOR ( 0 to 0 );
 begin
   \^in0\(0) <= In0(0);
   \^in1\(0) <= In1(0);
   \^in2\(0) <= In2(0);
+  \^in3\(0) <= In3(0);
+  \^in4\(0) <= In4(0);
+  dout(4) <= \^in4\(0);
+  dout(3) <= \^in3\(0);
   dout(2) <= \^in2\(0);
   dout(1) <= \^in1\(0);
   dout(0) <= \^in0\(0);

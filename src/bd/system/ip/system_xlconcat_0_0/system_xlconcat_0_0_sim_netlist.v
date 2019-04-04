@@ -1,7 +1,7 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-// Date        : Thu Jan 17 13:30:37 2019
+// Date        : Thu Mar 28 14:34:17 2019
 // Host        : shegedus running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim -rename_top system_xlconcat_0_0 -prefix
 //               system_xlconcat_0_0_ system_xlconcat_0_0_sim_netlist.v
@@ -18,16 +18,24 @@ module system_xlconcat_0_0
    (In0,
     In1,
     In2,
+    In3,
+    In4,
     dout);
   input [0:0]In0;
   input [0:0]In1;
   input [0:0]In2;
-  output [2:0]dout;
+  input [0:0]In3;
+  input [0:0]In4;
+  output [4:0]dout;
 
   wire [0:0]In0;
   wire [0:0]In1;
   wire [0:0]In2;
+  wire [0:0]In3;
+  wire [0:0]In4;
 
+  assign dout[4] = In4;
+  assign dout[3] = In3;
   assign dout[2] = In2;
   assign dout[1] = In1;
   assign dout[0] = In0;
