@@ -44,10 +44,10 @@ output [2:0]  hdmi_tx_data_p
 
  
 wire [23:0] AXI_Stream_Master_tdata ;
-(* mark_debug = "true" *) wire        AXI_Stream_Master_tlast ;
-(* mark_debug = "true" *) wire        AXI_Stream_Master_tready;
-(* mark_debug = "true" *) wire [0:0]  AXI_Stream_Master_tuser ;
-(* mark_debug = "true" *) wire        AXI_Stream_Master_tvalid;
+wire        AXI_Stream_Master_tlast ;
+wire        AXI_Stream_Master_tready;
+wire [0:0]  AXI_Stream_Master_tuser ;
+wire        AXI_Stream_Master_tvalid;
 
 wire [0:0]  rst_n              ;
 wire        s_axil_clk_50      ;
@@ -102,36 +102,6 @@ wire  [47:0]pix_corr_lb_fifo_popdata   ;
 wire        pix_corr_lb_fifo_empty     ;
 wire [10:0] pix_corr_lb_fifo_usedwords ;
 
-wire [4*3*DATA_WIDTH - 1:0]smooth_lb_mem_wr_data;
-wire [8                 :0]smooth_lb_mem_addr   ;
-wire                       smooth_lb_mem_cen    ;
-wire                       smooth_lb_mem_rwn    ;
-wire [4*3*DATA_WIDTH - 1:0]smooth_lb_mem_rd_data;
-
-wire [4*3*DATA_WIDTH - 1:0]pix_corr_lb_mem_wr_data;
-wire [8                 :0]pix_corr_lb_mem_addr   ;
-wire                       pix_corr_lb_mem_cen    ;
-wire                       pix_corr_lb_mem_rwn    ;
-wire [4*3*DATA_WIDTH - 1:0]pix_corr_lb_mem_rd_data;
-
-wire [4*3*DATA_WIDTH - 1:0]laplace_lb_mem_wr_data;
-wire [8                 :0]laplace_lb_mem_addr   ;
-wire                       laplace_lb_mem_cen    ;
-wire                       laplace_lb_mem_rwn    ;
-wire [4*3*DATA_WIDTH - 1:0]laplace_lb_mem_rd_data;
-
-wire [4*3*DATA_WIDTH - 1:0]sharp_lb_mem_wr_data;
-wire [8                 :0]sharp_lb_mem_addr   ;
-wire                       sharp_lb_mem_cen    ;
-wire                       sharp_lb_mem_rwn    ;
-wire [4*3*DATA_WIDTH - 1:0]sharp_lb_mem_rd_data;
-
-wire [4*3*DATA_WIDTH - 1:0]median_lb_mem_wr_data;
-wire [8                 :0]median_lb_mem_addr   ;
-wire                       median_lb_mem_cen    ;
-wire                       median_lb_mem_rwn    ;
-wire [4*3*DATA_WIDTH - 1:0]median_lb_mem_rd_data;
-
 wire       frm_val ; 
 wire       frm_rdy ;
 wire [23:0]frm_data;
@@ -151,10 +121,10 @@ wire       test_frm_eol ;
 wire clk;
 
 wire [23:0] S_AXIS_S2MM_tdata ;
-(* mark_debug = "true" *) wire        S_AXIS_S2MM_tlast ;
-(* mark_debug = "true" *) wire        S_AXIS_S2MM_tready;
-(* mark_debug = "true" *) wire [0:0]  S_AXIS_S2MM_tuser ;
-(* mark_debug = "true" *) wire        S_AXIS_S2MM_tvalid;
+wire        S_AXIS_S2MM_tlast ;
+wire        S_AXIS_S2MM_tready;
+wire [0:0]  S_AXIS_S2MM_tuser ;
+wire        S_AXIS_S2MM_tvalid;
 
 
 wire [31:0] APB_M_paddr  ;
@@ -418,11 +388,6 @@ system_wrapper i_system_wrapper
   .APB_M_pslverr            (APB_M_pslverr            ),
   .APB_M_pwdata             (APB_M_pwdata             ),
   .APB_M_pwrite             (APB_M_pwrite             ),
-  .AXI_Stream_Master_tdata  (AXI_Stream_Master_tdata  ),
-  .AXI_Stream_Master_tlast  (AXI_Stream_Master_tlast  ),
-  .AXI_Stream_Master_tready (AXI_Stream_Master_tready ),
-  .AXI_Stream_Master_tuser  (AXI_Stream_Master_tuser  ),
-  .AXI_Stream_Master_tvalid (AXI_Stream_Master_tvalid ),
   .DDR_addr                 (DDR_addr                 ),
   .DDR_ba                   (DDR_ba                   ),
   .DDR_cas_n                (DDR_cas_n                ),
@@ -492,15 +457,21 @@ system_wrapper i_system_wrapper
   .FIXED_IO_ps_clk          (FIXED_IO_ps_clk          ),
   .FIXED_IO_ps_porb         (FIXED_IO_ps_porb         ),
   .FIXED_IO_ps_srstb        (FIXED_IO_ps_srstb        ),
+  .M_AXIS_MM2S_tdata        (AXI_Stream_Master_tdata  ), 
+  .M_AXIS_MM2S_tkeep        (                         ), 
+  .M_AXIS_MM2S_tlast        (AXI_Stream_Master_tlast  ), 
+  .M_AXIS_MM2S_tready       (AXI_Stream_Master_tready ),
+  .M_AXIS_MM2S_tuser        (AXI_Stream_Master_tuser  ),
+  .M_AXIS_MM2S_tvalid       (AXI_Stream_Master_tvalid ),
   .S_AXIS_S2MM_tdata        (S_AXIS_S2MM_tdata        ),
   .S_AXIS_S2MM_tkeep        (3'b111                   ),
   .S_AXIS_S2MM_tlast        (S_AXIS_S2MM_tlast        ),
   .S_AXIS_S2MM_tready       (S_AXIS_S2MM_tready       ),
   .S_AXIS_S2MM_tuser        (S_AXIS_S2MM_tuser        ),
   .S_AXIS_S2MM_tvalid       (S_AXIS_S2MM_tvalid       ),
-  .axi_clk_0                (clk_axi                  ),
-  .axi_clk_1                (clk_axi                  ),
-  .axi_clk_2                (clk_axi                  ),
+  .axi_clk_0                (clk                      ),
+  .axi_clk_1                (clk                      ),
+  .axi_clk_2                (clk                      ),
   .axi_rst_0                (rst_n                    ),
   .axi_rst_1                (rst_n                    ),
   .axi_rst_2                (rst_n                    ),
@@ -536,7 +507,7 @@ system_wrapper i_system_wrapper
   .hdmi_tx_data_p           (hdmi_tx_data_p           ),
   .rst                      (~rst_n | sharp_lb_fifo_clr   ),
   .rst_1                    (~rst_n | laplace_lb_fifo_clr ),
-  .rst_2                    (~rst_n | sharp_lb_fifo_clr   ),
+  .rst_2                    (~rst_n | smooth_lb_fifo_clr  ),
   .rst_3                    (~rst_n | median_lb_fifo_clr  ),
   .rst_4                    (~rst_n | pix_corr_lb_fifo_clr),
   .rst_n                    (rst_n                    ),
@@ -674,7 +645,6 @@ IR_FILTERS_regs regs(
     .cfg_sharp_coef      (cfg_sharp_coef      ),
 	.cfg_test_mode_en    (cfg_test_mode_en    ),
 	.cfg_bkg             (cfg_bkg             ),
-//	.sw_rst              (sw_rst              ), 
     .PCLK                (clk_axi             ),
     .PRESETn             (rst_n               ), 
     .PADDR               (APB_M_paddr[15:0]   ),  
@@ -788,7 +758,7 @@ axi2frame#(
   .MEM_WIDTH (64  ), 
   .ADDR_WIDTH(10  )
 )test_mode(
-  .clk                 (clk_axi             ), // System clock
+  .clk                 (clk                 ), // System clock
   .rst_n               (rst_n               ), // Asynchronous reset active low
   .axi0_araddr         (S00_AXI_araddr      ), // Channel 0 Address
   .axi0_arlen          (S00_AXI_arlen       ), // Channel 0 Burst length 
