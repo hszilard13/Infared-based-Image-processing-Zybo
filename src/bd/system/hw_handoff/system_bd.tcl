@@ -44,6 +44,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 set list_projs [get_projects -quiet]
 if { $list_projs eq "" } {
    create_project project_1 myproj -part xc7z020clg400-1
+   set_property BOARD_PART digilentinc.com:zybo-z7-20:part0:1.0 [current_project]
 }
 
 
@@ -151,22 +152,123 @@ proc create_root_design { parentCell } {
 
 
   # Create interface ports
-  set AXI_Stream_Master [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 AXI_Stream_Master ]
-  set_property -dict [ list \
-CONFIG.FREQ_HZ {150000000} \
-CONFIG.PHASE {0.0} \
- ] $AXI_Stream_Master
+  set APB_M [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:apb_rtl:1.0 APB_M ]
   set DDR [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:ddrx_rtl:1.0 DDR ]
+  set FIFO_READ [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_read_rtl:1.0 FIFO_READ ]
+  set FIFO_READ_1 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_read_rtl:1.0 FIFO_READ_1 ]
+  set FIFO_READ_2 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_read_rtl:1.0 FIFO_READ_2 ]
+  set FIFO_READ_3 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_read_rtl:1.0 FIFO_READ_3 ]
+  set FIFO_READ_4 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_read_rtl:1.0 FIFO_READ_4 ]
+  set FIFO_READ_5 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_read_rtl:1.0 FIFO_READ_5 ]
+  set FIFO_READ_6 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_read_rtl:1.0 FIFO_READ_6 ]
+  set FIFO_READ_7 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_read_rtl:1.0 FIFO_READ_7 ]
+  set FIFO_WRITE [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_write_rtl:1.0 FIFO_WRITE ]
+  set FIFO_WRITE_1 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_write_rtl:1.0 FIFO_WRITE_1 ]
+  set FIFO_WRITE_2 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_write_rtl:1.0 FIFO_WRITE_2 ]
+  set FIFO_WRITE_3 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_write_rtl:1.0 FIFO_WRITE_3 ]
+  set FIFO_WRITE_4 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_write_rtl:1.0 FIFO_WRITE_4 ]
+  set FIFO_WRITE_5 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_write_rtl:1.0 FIFO_WRITE_5 ]
+  set FIFO_WRITE_6 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_write_rtl:1.0 FIFO_WRITE_6 ]
+  set FIFO_WRITE_7 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:fifo_write_rtl:1.0 FIFO_WRITE_7 ]
   set FIXED_IO [ create_bd_intf_port -mode Master -vlnv xilinx.com:display_processing_system7:fixedio_rtl:1.0 FIXED_IO ]
+  set M_AXIS_MM2S [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 M_AXIS_MM2S ]
+  set S00_AXI [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S00_AXI ]
+  set_property -dict [ list \
+CONFIG.ADDR_WIDTH {32} \
+CONFIG.ARUSER_WIDTH {0} \
+CONFIG.AWUSER_WIDTH {0} \
+CONFIG.BUSER_WIDTH {0} \
+CONFIG.DATA_WIDTH {32} \
+CONFIG.HAS_BRESP {1} \
+CONFIG.HAS_BURST {1} \
+CONFIG.HAS_CACHE {1} \
+CONFIG.HAS_LOCK {1} \
+CONFIG.HAS_PROT {1} \
+CONFIG.HAS_QOS {1} \
+CONFIG.HAS_REGION {0} \
+CONFIG.HAS_RRESP {1} \
+CONFIG.HAS_WSTRB {1} \
+CONFIG.ID_WIDTH {2} \
+CONFIG.MAX_BURST_LENGTH {256} \
+CONFIG.NUM_READ_OUTSTANDING {2} \
+CONFIG.NUM_READ_THREADS {1} \
+CONFIG.NUM_WRITE_OUTSTANDING {2} \
+CONFIG.NUM_WRITE_THREADS {1} \
+CONFIG.PROTOCOL {AXI4} \
+CONFIG.READ_WRITE_MODE {READ_WRITE} \
+CONFIG.RUSER_BITS_PER_BYTE {0} \
+CONFIG.RUSER_WIDTH {0} \
+CONFIG.SUPPORTS_NARROW_BURST {1} \
+CONFIG.WUSER_BITS_PER_BYTE {0} \
+CONFIG.WUSER_WIDTH {0} \
+ ] $S00_AXI
+  set S01_AXI [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S01_AXI ]
+  set_property -dict [ list \
+CONFIG.ADDR_WIDTH {32} \
+CONFIG.ARUSER_WIDTH {0} \
+CONFIG.AWUSER_WIDTH {0} \
+CONFIG.BUSER_WIDTH {0} \
+CONFIG.DATA_WIDTH {32} \
+CONFIG.HAS_BRESP {1} \
+CONFIG.HAS_BURST {1} \
+CONFIG.HAS_CACHE {1} \
+CONFIG.HAS_LOCK {1} \
+CONFIG.HAS_PROT {1} \
+CONFIG.HAS_QOS {1} \
+CONFIG.HAS_REGION {0} \
+CONFIG.HAS_RRESP {1} \
+CONFIG.HAS_WSTRB {1} \
+CONFIG.ID_WIDTH {2} \
+CONFIG.MAX_BURST_LENGTH {256} \
+CONFIG.NUM_READ_OUTSTANDING {2} \
+CONFIG.NUM_READ_THREADS {1} \
+CONFIG.NUM_WRITE_OUTSTANDING {2} \
+CONFIG.NUM_WRITE_THREADS {1} \
+CONFIG.PROTOCOL {AXI4} \
+CONFIG.READ_WRITE_MODE {READ_WRITE} \
+CONFIG.RUSER_BITS_PER_BYTE {0} \
+CONFIG.RUSER_WIDTH {0} \
+CONFIG.SUPPORTS_NARROW_BURST {1} \
+CONFIG.WUSER_BITS_PER_BYTE {0} \
+CONFIG.WUSER_WIDTH {0} \
+ ] $S01_AXI
+  set S02_AXI [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S02_AXI ]
+  set_property -dict [ list \
+CONFIG.ADDR_WIDTH {32} \
+CONFIG.ARUSER_WIDTH {0} \
+CONFIG.AWUSER_WIDTH {0} \
+CONFIG.BUSER_WIDTH {0} \
+CONFIG.DATA_WIDTH {32} \
+CONFIG.HAS_BRESP {1} \
+CONFIG.HAS_BURST {1} \
+CONFIG.HAS_CACHE {1} \
+CONFIG.HAS_LOCK {1} \
+CONFIG.HAS_PROT {1} \
+CONFIG.HAS_QOS {1} \
+CONFIG.HAS_REGION {0} \
+CONFIG.HAS_RRESP {1} \
+CONFIG.HAS_WSTRB {1} \
+CONFIG.ID_WIDTH {2} \
+CONFIG.MAX_BURST_LENGTH {256} \
+CONFIG.NUM_READ_OUTSTANDING {2} \
+CONFIG.NUM_READ_THREADS {1} \
+CONFIG.NUM_WRITE_OUTSTANDING {2} \
+CONFIG.NUM_WRITE_THREADS {1} \
+CONFIG.PROTOCOL {AXI4} \
+CONFIG.READ_WRITE_MODE {READ_WRITE} \
+CONFIG.RUSER_BITS_PER_BYTE {0} \
+CONFIG.RUSER_WIDTH {0} \
+CONFIG.SUPPORTS_NARROW_BURST {1} \
+CONFIG.WUSER_BITS_PER_BYTE {0} \
+CONFIG.WUSER_WIDTH {0} \
+ ] $S02_AXI
   set S_AXIS_S2MM [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 S_AXIS_S2MM ]
   set_property -dict [ list \
-CONFIG.FREQ_HZ {150000000} \
 CONFIG.HAS_TKEEP {1} \
 CONFIG.HAS_TLAST {1} \
 CONFIG.HAS_TREADY {1} \
 CONFIG.HAS_TSTRB {0} \
 CONFIG.LAYERED_METADATA {undef} \
-CONFIG.PHASE {0.0} \
 CONFIG.TDATA_NUM_BYTES {3} \
 CONFIG.TDEST_WIDTH {0} \
 CONFIG.TID_WIDTH {0} \
@@ -181,13 +283,81 @@ CONFIG.FREQ_HZ {336000000} \
   set hdmi_tx [ create_bd_intf_port -mode Master -vlnv digilentinc.com:interface:tmds_rtl:1.0 hdmi_tx ]
 
   # Create ports
+  set axi_clk_0 [ create_bd_port -dir I -type clk axi_clk_0 ]
+  set_property -dict [ list \
+CONFIG.CLK_DOMAIN {system_clk_wiz_0_0_clk_out1} \
+CONFIG.FREQ_HZ {50000000} \
+CONFIG.PHASE {0.0} \
+ ] $axi_clk_0
+  set axi_clk_1 [ create_bd_port -dir I -type clk axi_clk_1 ]
+  set_property -dict [ list \
+CONFIG.CLK_DOMAIN {system_clk_wiz_0_0_clk_out1} \
+CONFIG.FREQ_HZ {50000000} \
+CONFIG.PHASE {0.0} \
+ ] $axi_clk_1
+  set axi_clk_2 [ create_bd_port -dir I -type clk axi_clk_2 ]
+  set_property -dict [ list \
+CONFIG.CLK_DOMAIN {system_clk_wiz_0_0_clk_out1} \
+CONFIG.FREQ_HZ {50000000} \
+CONFIG.PHASE {0.0} \
+ ] $axi_clk_2
+  set axi_rst_0 [ create_bd_port -dir I axi_rst_0 ]
+  set axi_rst_1 [ create_bd_port -dir I axi_rst_1 ]
+  set axi_rst_2 [ create_bd_port -dir I axi_rst_2 ]
   set clk [ create_bd_port -dir O -type clk clk ]
+  set_property -dict [ list \
+CONFIG.ASSOCIATED_BUSIF {S_AXIS_S2MM:M_AXIS_MM2S:S02_AXI:S01_AXI:S00_AXI} \
+ ] $clk
+  set clk_1 [ create_bd_port -dir I -type clk clk_1 ]
+  set_property -dict [ list \
+CONFIG.CLK_DOMAIN {system_clk_wiz_0_0_clk_out1} \
+CONFIG.FREQ_HZ {150000000} \
+CONFIG.PHASE {0.0} \
+ ] $clk_1
+  set clk_2 [ create_bd_port -dir I -type clk clk_2 ]
+  set_property -dict [ list \
+CONFIG.CLK_DOMAIN {system_clk_wiz_0_0_clk_out1} \
+CONFIG.FREQ_HZ {150000000} \
+CONFIG.PHASE {0.0} \
+ ] $clk_2
+  set clk_3 [ create_bd_port -dir I -type clk clk_3 ]
+  set_property -dict [ list \
+CONFIG.CLK_DOMAIN {system_clk_wiz_0_0_clk_out1} \
+CONFIG.FREQ_HZ {150000000} \
+CONFIG.PHASE {0.0} \
+ ] $clk_3
+  set clk_4 [ create_bd_port -dir I -type clk clk_4 ]
+  set_property -dict [ list \
+CONFIG.CLK_DOMAIN {system_clk_wiz_0_0_clk_out1} \
+CONFIG.FREQ_HZ {150000000} \
+CONFIG.PHASE {0.0} \
+ ] $clk_4
+  set clk_5 [ create_bd_port -dir I -type clk clk_5 ]
+  set_property -dict [ list \
+CONFIG.CLK_DOMAIN {system_clk_wiz_0_0_clk_out1} \
+CONFIG.FREQ_HZ {150000000} \
+CONFIG.PHASE {0.0} \
+ ] $clk_5
+  set clk_axi [ create_bd_port -dir O -type clk clk_axi ]
+  set data_count [ create_bd_port -dir O -from 10 -to 0 data_count ]
+  set data_count_1 [ create_bd_port -dir O -from 10 -to 0 data_count_1 ]
+  set data_count_2 [ create_bd_port -dir O -from 10 -to 0 data_count_2 ]
+  set data_count_3 [ create_bd_port -dir O -from 10 -to 0 data_count_3 ]
+  set data_count_4 [ create_bd_port -dir O -from 10 -to 0 data_count_4 ]
+  set data_count_5 [ create_bd_port -dir O -from 10 -to 0 data_count_5 ]
+  set data_count_6 [ create_bd_port -dir O -from 10 -to 0 data_count_6 ]
+  set data_count_7 [ create_bd_port -dir O -from 10 -to 0 data_count_7 ]
   set dphy_clk_lp_n [ create_bd_port -dir I dphy_clk_lp_n ]
   set dphy_clk_lp_p [ create_bd_port -dir I dphy_clk_lp_p ]
   set dphy_data_hs_n [ create_bd_port -dir I -from 1 -to 0 dphy_data_hs_n ]
   set dphy_data_hs_p [ create_bd_port -dir I -from 1 -to 0 dphy_data_hs_p ]
   set dphy_data_lp_n [ create_bd_port -dir I -from 1 -to 0 dphy_data_lp_n ]
   set dphy_data_lp_p [ create_bd_port -dir I -from 1 -to 0 dphy_data_lp_p ]
+  set rst [ create_bd_port -dir I rst ]
+  set rst_1 [ create_bd_port -dir I rst_1 ]
+  set rst_2 [ create_bd_port -dir I rst_2 ]
+  set rst_3 [ create_bd_port -dir I rst_3 ]
+  set rst_4 [ create_bd_port -dir I rst_4 ]
   set rst_n [ create_bd_port -dir O -from 0 -to 0 -type rst rst_n ]
 
   # Create instance: AXI_BayerToRGB_1, and set properties
@@ -221,45 +391,80 @@ CONFIG.kNoOfDataLanes {2} \
 CONFIG.kGenerateAXIL.VALUE_SRC {DEFAULT} \
  ] $MIPI_D_PHY_RX_0
 
+  # Create instance: axi_apb_bridge_0, and set properties
+  set axi_apb_bridge_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_apb_bridge:3.0 axi_apb_bridge_0 ]
+  set_property -dict [ list \
+CONFIG.C_APB_NUM_SLAVES {1} \
+ ] $axi_apb_bridge_0
+
+  # Create instance: axi_interconnect_0, and set properties
+  set axi_interconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_interconnect_0 ]
+  set_property -dict [ list \
+CONFIG.NUM_MI {1} \
+CONFIG.NUM_SI {3} \
+ ] $axi_interconnect_0
+
   # Create instance: axi_mem_intercon, and set properties
   set axi_mem_intercon [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_mem_intercon ]
   set_property -dict [ list \
 CONFIG.NUM_MI {1} \
+CONFIG.NUM_SI {2} \
  ] $axi_mem_intercon
 
   # Create instance: axi_mem_intercon_1, and set properties
   set axi_mem_intercon_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_mem_intercon_1 ]
   set_property -dict [ list \
 CONFIG.NUM_MI {1} \
+CONFIG.NUM_SI {2} \
  ] $axi_mem_intercon_1
 
   # Create instance: axi_vdma_0, and set properties
   set axi_vdma_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_vdma:6.2 axi_vdma_0 ]
   set_property -dict [ list \
+CONFIG.c_addr_width {32} \
 CONFIG.c_include_mm2s_dre {0} \
 CONFIG.c_include_s2mm {1} \
+CONFIG.c_include_s2mm_dre {0} \
 CONFIG.c_m_axi_s2mm_data_width {64} \
 CONFIG.c_m_axis_mm2s_tdata_width {24} \
-CONFIG.c_mm2s_linebuffer_depth {1024} \
+CONFIG.c_mm2s_genlock_mode {3} \
+CONFIG.c_mm2s_linebuffer_depth {2048} \
+CONFIG.c_num_fstores {3} \
 CONFIG.c_s2mm_genlock_mode {2} \
-CONFIG.c_s2mm_linebuffer_depth {1024} \
+CONFIG.c_s2mm_linebuffer_depth {2048} \
  ] $axi_vdma_0
+
+  # Create instance: axi_vdma_1, and set properties
+  set axi_vdma_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_vdma:6.2 axi_vdma_1 ]
+  set_property -dict [ list \
+CONFIG.c_addr_width {32} \
+CONFIG.c_include_mm2s_dre {0} \
+CONFIG.c_include_s2mm {1} \
+CONFIG.c_include_s2mm_dre {0} \
+CONFIG.c_m_axi_s2mm_data_width {64} \
+CONFIG.c_m_axis_mm2s_tdata_width {24} \
+CONFIG.c_mm2s_genlock_mode {3} \
+CONFIG.c_mm2s_linebuffer_depth {2048} \
+CONFIG.c_num_fstores {3} \
+CONFIG.c_s2mm_genlock_mode {2} \
+CONFIG.c_s2mm_linebuffer_depth {2048} \
+ ] $axi_vdma_1
 
   # Create instance: clk_wiz_0, and set properties
   set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:5.3 clk_wiz_0 ]
   set_property -dict [ list \
 CONFIG.CLKOUT1_DRIVES {BUFG} \
-CONFIG.CLKOUT1_JITTER {174.353} \
-CONFIG.CLKOUT1_PHASE_ERROR {132.063} \
+CONFIG.CLKOUT1_JITTER {151.636} \
+CONFIG.CLKOUT1_PHASE_ERROR {98.575} \
 CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {50} \
 CONFIG.CLKOUT2_DRIVES {BUFG} \
-CONFIG.CLKOUT2_JITTER {139.594} \
-CONFIG.CLKOUT2_PHASE_ERROR {132.063} \
-CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {150} \
+CONFIG.CLKOUT2_JITTER {130.958} \
+CONFIG.CLKOUT2_PHASE_ERROR {98.575} \
+CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {100} \
 CONFIG.CLKOUT2_USED {true} \
 CONFIG.CLKOUT3_DRIVES {BUFG} \
-CONFIG.CLKOUT3_JITTER {132.221} \
-CONFIG.CLKOUT3_PHASE_ERROR {132.063} \
+CONFIG.CLKOUT3_JITTER {114.829} \
+CONFIG.CLKOUT3_PHASE_ERROR {98.575} \
 CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {200} \
 CONFIG.CLKOUT3_USED {true} \
 CONFIG.CLKOUT4_DRIVES {BUFG} \
@@ -268,12 +473,12 @@ CONFIG.CLKOUT6_DRIVES {BUFG} \
 CONFIG.CLKOUT7_DRIVES {BUFG} \
 CONFIG.CLK_OUT2_PORT {clk_out2} \
 CONFIG.CLK_OUT3_PORT {clk_out3} \
-CONFIG.MMCM_CLKFBOUT_MULT_F {6.000} \
+CONFIG.MMCM_CLKFBOUT_MULT_F {10.000} \
 CONFIG.MMCM_CLKIN1_PERIOD {10.0} \
 CONFIG.MMCM_CLKIN2_PERIOD {10.0} \
-CONFIG.MMCM_CLKOUT0_DIVIDE_F {12.000} \
-CONFIG.MMCM_CLKOUT1_DIVIDE {4} \
-CONFIG.MMCM_CLKOUT2_DIVIDE {3} \
+CONFIG.MMCM_CLKOUT0_DIVIDE_F {20.000} \
+CONFIG.MMCM_CLKOUT1_DIVIDE {10} \
+CONFIG.MMCM_CLKOUT2_DIVIDE {5} \
 CONFIG.MMCM_COMPENSATION {ZHOLD} \
 CONFIG.MMCM_DIVCLK_DIVIDE {1} \
 CONFIG.NUM_OUT_CLKS {3} \
@@ -287,12 +492,163 @@ CONFIG.USE_RESET {false} \
 
   # Need to retain value_src of defaults
   set_property -dict [ list \
-CONFIG.CLKOUT2_REQUESTED_OUT_FREQ.VALUE_SRC {DEFAULT} \
 CONFIG.CLKOUT3_REQUESTED_OUT_FREQ.VALUE_SRC {DEFAULT} \
 CONFIG.MMCM_CLKIN1_PERIOD.VALUE_SRC {DEFAULT} \
 CONFIG.MMCM_CLKIN2_PERIOD.VALUE_SRC {DEFAULT} \
 CONFIG.MMCM_COMPENSATION.VALUE_SRC {DEFAULT} \
  ] $clk_wiz_0
+
+  # Create instance: fifo_generator_0, and set properties
+  set fifo_generator_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fifo_generator:13.1 fifo_generator_0 ]
+  set_property -dict [ list \
+CONFIG.Data_Count {true} \
+CONFIG.Data_Count_Width {11} \
+CONFIG.Fifo_Implementation {Common_Clock_Block_RAM} \
+CONFIG.Full_Flags_Reset_Value {1} \
+CONFIG.Full_Threshold_Assert_Value {2046} \
+CONFIG.Full_Threshold_Negate_Value {2045} \
+CONFIG.Input_Data_Width {48} \
+CONFIG.Input_Depth {2048} \
+CONFIG.Output_Data_Width {48} \
+CONFIG.Output_Depth {2048} \
+CONFIG.Read_Data_Count_Width {11} \
+CONFIG.Reset_Type {Asynchronous_Reset} \
+CONFIG.Use_Embedded_Registers {false} \
+CONFIG.Write_Data_Count_Width {11} \
+ ] $fifo_generator_0
+
+  # Create instance: fifo_generator_1, and set properties
+  set fifo_generator_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fifo_generator:13.1 fifo_generator_1 ]
+  set_property -dict [ list \
+CONFIG.Data_Count {true} \
+CONFIG.Data_Count_Width {11} \
+CONFIG.Fifo_Implementation {Common_Clock_Block_RAM} \
+CONFIG.Full_Flags_Reset_Value {1} \
+CONFIG.Full_Threshold_Assert_Value {2046} \
+CONFIG.Full_Threshold_Negate_Value {2045} \
+CONFIG.Input_Data_Width {48} \
+CONFIG.Input_Depth {2048} \
+CONFIG.Output_Data_Width {48} \
+CONFIG.Output_Depth {2048} \
+CONFIG.Read_Data_Count_Width {11} \
+CONFIG.Reset_Type {Asynchronous_Reset} \
+CONFIG.Use_Embedded_Registers {false} \
+CONFIG.Write_Data_Count_Width {11} \
+ ] $fifo_generator_1
+
+  # Create instance: fifo_generator_2, and set properties
+  set fifo_generator_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fifo_generator:13.1 fifo_generator_2 ]
+  set_property -dict [ list \
+CONFIG.Data_Count {true} \
+CONFIG.Data_Count_Width {11} \
+CONFIG.Fifo_Implementation {Common_Clock_Block_RAM} \
+CONFIG.Full_Flags_Reset_Value {1} \
+CONFIG.Full_Threshold_Assert_Value {2046} \
+CONFIG.Full_Threshold_Negate_Value {2045} \
+CONFIG.Input_Data_Width {48} \
+CONFIG.Input_Depth {2048} \
+CONFIG.Output_Data_Width {48} \
+CONFIG.Output_Depth {2048} \
+CONFIG.Read_Data_Count_Width {11} \
+CONFIG.Reset_Type {Asynchronous_Reset} \
+CONFIG.Use_Embedded_Registers {false} \
+CONFIG.Write_Data_Count_Width {11} \
+ ] $fifo_generator_2
+
+  # Create instance: fifo_generator_3, and set properties
+  set fifo_generator_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fifo_generator:13.1 fifo_generator_3 ]
+  set_property -dict [ list \
+CONFIG.Data_Count {true} \
+CONFIG.Data_Count_Width {11} \
+CONFIG.Fifo_Implementation {Common_Clock_Block_RAM} \
+CONFIG.Full_Flags_Reset_Value {1} \
+CONFIG.Full_Threshold_Assert_Value {2046} \
+CONFIG.Full_Threshold_Negate_Value {2045} \
+CONFIG.Input_Data_Width {48} \
+CONFIG.Input_Depth {2048} \
+CONFIG.Output_Data_Width {48} \
+CONFIG.Output_Depth {2048} \
+CONFIG.Read_Data_Count_Width {11} \
+CONFIG.Reset_Type {Asynchronous_Reset} \
+CONFIG.Use_Embedded_Registers {false} \
+CONFIG.Write_Data_Count_Width {11} \
+ ] $fifo_generator_3
+
+  # Create instance: fifo_generator_4, and set properties
+  set fifo_generator_4 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fifo_generator:13.1 fifo_generator_4 ]
+  set_property -dict [ list \
+CONFIG.Data_Count {true} \
+CONFIG.Data_Count_Width {11} \
+CONFIG.Fifo_Implementation {Common_Clock_Block_RAM} \
+CONFIG.Full_Flags_Reset_Value {1} \
+CONFIG.Full_Threshold_Assert_Value {2046} \
+CONFIG.Full_Threshold_Negate_Value {2045} \
+CONFIG.Input_Data_Width {48} \
+CONFIG.Input_Depth {2048} \
+CONFIG.Output_Data_Width {48} \
+CONFIG.Output_Depth {2048} \
+CONFIG.Read_Data_Count_Width {11} \
+CONFIG.Reset_Type {Asynchronous_Reset} \
+CONFIG.Use_Embedded_Registers {false} \
+CONFIG.Write_Data_Count_Width {11} \
+ ] $fifo_generator_4
+
+  # Create instance: fifo_generator_5, and set properties
+  set fifo_generator_5 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fifo_generator:13.1 fifo_generator_5 ]
+  set_property -dict [ list \
+CONFIG.Data_Count {true} \
+CONFIG.Data_Count_Width {11} \
+CONFIG.Fifo_Implementation {Common_Clock_Block_RAM} \
+CONFIG.Full_Flags_Reset_Value {1} \
+CONFIG.Full_Threshold_Assert_Value {2046} \
+CONFIG.Full_Threshold_Negate_Value {2045} \
+CONFIG.Input_Data_Width {64} \
+CONFIG.Input_Depth {2048} \
+CONFIG.Output_Data_Width {64} \
+CONFIG.Output_Depth {2048} \
+CONFIG.Read_Data_Count_Width {11} \
+CONFIG.Reset_Type {Asynchronous_Reset} \
+CONFIG.Use_Embedded_Registers {false} \
+CONFIG.Write_Data_Count_Width {11} \
+ ] $fifo_generator_5
+
+  # Create instance: fifo_generator_6, and set properties
+  set fifo_generator_6 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fifo_generator:13.1 fifo_generator_6 ]
+  set_property -dict [ list \
+CONFIG.Data_Count {true} \
+CONFIG.Data_Count_Width {11} \
+CONFIG.Fifo_Implementation {Common_Clock_Block_RAM} \
+CONFIG.Full_Flags_Reset_Value {1} \
+CONFIG.Full_Threshold_Assert_Value {2046} \
+CONFIG.Full_Threshold_Negate_Value {2045} \
+CONFIG.Input_Data_Width {64} \
+CONFIG.Input_Depth {2048} \
+CONFIG.Output_Data_Width {64} \
+CONFIG.Output_Depth {2048} \
+CONFIG.Read_Data_Count_Width {11} \
+CONFIG.Reset_Type {Asynchronous_Reset} \
+CONFIG.Use_Embedded_Registers {false} \
+CONFIG.Write_Data_Count_Width {11} \
+ ] $fifo_generator_6
+
+  # Create instance: fifo_generator_7, and set properties
+  set fifo_generator_7 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fifo_generator:13.1 fifo_generator_7 ]
+  set_property -dict [ list \
+CONFIG.Data_Count {true} \
+CONFIG.Data_Count_Width {11} \
+CONFIG.Fifo_Implementation {Common_Clock_Block_RAM} \
+CONFIG.Full_Flags_Reset_Value {1} \
+CONFIG.Full_Threshold_Assert_Value {2046} \
+CONFIG.Full_Threshold_Negate_Value {2045} \
+CONFIG.Input_Data_Width {64} \
+CONFIG.Input_Depth {2048} \
+CONFIG.Output_Data_Width {64} \
+CONFIG.Output_Depth {2048} \
+CONFIG.Read_Data_Count_Width {11} \
+CONFIG.Reset_Type {Asynchronous_Reset} \
+CONFIG.Use_Embedded_Registers {false} \
+CONFIG.Write_Data_Count_Width {11} \
+ ] $fifo_generator_7
 
   # Create instance: processing_system7_0, and set properties
   set processing_system7_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0 ]
@@ -1154,7 +1510,7 @@ CONFIG.PCW_USE_S_AXI_GP1 {0} \
 CONFIG.PCW_USE_S_AXI_HP0 {1} \
 CONFIG.PCW_USE_S_AXI_HP1 {0} \
 CONFIG.PCW_USE_S_AXI_HP2 {1} \
-CONFIG.PCW_USE_S_AXI_HP3 {0} \
+CONFIG.PCW_USE_S_AXI_HP3 {1} \
 CONFIG.PCW_USE_TRACE {0} \
 CONFIG.PCW_USE_TRACE_DATA_EDGE_DETECTOR {0} \
 CONFIG.PCW_VALUE_SILVERSION {3} \
@@ -1168,7 +1524,8 @@ CONFIG.PCW_WDT_WDT_IO {<Select>} \
   # Create instance: ps7_0_axi_periph, and set properties
   set ps7_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 ps7_0_axi_periph ]
   set_property -dict [ list \
-CONFIG.NUM_MI {6} \
+CONFIG.NUM_MI {8} \
+CONFIG.NUM_SI {1} \
  ] $ps7_0_axi_periph
 
   # Create instance: rgb2dvi_0, and set properties
@@ -1189,6 +1546,7 @@ CONFIG.kRstActiveHigh {false} \
   # Create instance: v_axi4s_vid_out_0, and set properties
   set v_axi4s_vid_out_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_axi4s_vid_out:4.0 v_axi4s_vid_out_0 ]
   set_property -dict [ list \
+CONFIG.C_ADDR_WIDTH {11} \
 CONFIG.C_HAS_ASYNC_CLK {1} \
 CONFIG.C_VTG_MASTER_SLAVE {1} \
  ] $v_axi4s_vid_out_0
@@ -1220,25 +1578,58 @@ CONFIG.GEN_HSYNC_START {1390} \
 CONFIG.GEN_VACTIVE_SIZE {720} \
 CONFIG.VIDEO_MODE {720p} \
 CONFIG.enable_detection {false} \
+CONFIG.max_clocks_per_line {4096} \
+CONFIG.max_lines_per_frame {4096} \
  ] $vtg
 
   # Create instance: xlconcat_0, and set properties
   set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
   set_property -dict [ list \
-CONFIG.NUM_PORTS {3} \
+CONFIG.NUM_PORTS {5} \
  ] $xlconcat_0
+
+  # Create instance: xlconstant_0, and set properties
+  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
+  set_property -dict [ list \
+CONFIG.CONST_VAL {7} \
+CONFIG.CONST_WIDTH {3} \
+ ] $xlconstant_0
 
   # Create interface connections
   connect_bd_intf_net -intf_net AXI_BayerToRGB_1_AXI_Stream_Master [get_bd_intf_pins AXI_BayerToRGB_1/AXI_Stream_Master] [get_bd_intf_pins AXI_GammaCorrection_0/AXI_Slave_Interface]
-  connect_bd_intf_net -intf_net AXI_GammaCorrection_0_AXI_Stream_Master [get_bd_intf_ports AXI_Stream_Master] [get_bd_intf_pins AXI_GammaCorrection_0/AXI_Stream_Master]
+  connect_bd_intf_net -intf_net AXI_GammaCorrection_0_AXI_Stream_Master [get_bd_intf_pins AXI_GammaCorrection_0/AXI_Stream_Master] [get_bd_intf_pins axi_vdma_1/S_AXIS_S2MM]
+  connect_bd_intf_net -intf_net FIFO_READ_1_1 [get_bd_intf_ports FIFO_READ_1] [get_bd_intf_pins fifo_generator_1/FIFO_READ]
+  connect_bd_intf_net -intf_net FIFO_READ_2_2 [get_bd_intf_ports FIFO_READ_2] [get_bd_intf_pins fifo_generator_2/FIFO_READ]
+  connect_bd_intf_net -intf_net FIFO_READ_3_2 [get_bd_intf_ports FIFO_READ_3] [get_bd_intf_pins fifo_generator_3/FIFO_READ]
+  connect_bd_intf_net -intf_net FIFO_READ_4_1 [get_bd_intf_ports FIFO_READ_4] [get_bd_intf_pins fifo_generator_4/FIFO_READ]
+  connect_bd_intf_net -intf_net FIFO_READ_5 [get_bd_intf_ports FIFO_READ] [get_bd_intf_pins fifo_generator_0/FIFO_READ]
+  connect_bd_intf_net -intf_net FIFO_READ_5_1 [get_bd_intf_ports FIFO_READ_5] [get_bd_intf_pins fifo_generator_5/FIFO_READ]
+  connect_bd_intf_net -intf_net FIFO_READ_6_1 [get_bd_intf_ports FIFO_READ_6] [get_bd_intf_pins fifo_generator_6/FIFO_READ]
+  connect_bd_intf_net -intf_net FIFO_READ_7_1 [get_bd_intf_ports FIFO_READ_7] [get_bd_intf_pins fifo_generator_7/FIFO_READ]
+  connect_bd_intf_net -intf_net FIFO_WRITE_1_1 [get_bd_intf_ports FIFO_WRITE_1] [get_bd_intf_pins fifo_generator_1/FIFO_WRITE]
+  connect_bd_intf_net -intf_net FIFO_WRITE_2_2 [get_bd_intf_ports FIFO_WRITE_2] [get_bd_intf_pins fifo_generator_2/FIFO_WRITE]
+  connect_bd_intf_net -intf_net FIFO_WRITE_3_2 [get_bd_intf_ports FIFO_WRITE_3] [get_bd_intf_pins fifo_generator_3/FIFO_WRITE]
+  connect_bd_intf_net -intf_net FIFO_WRITE_4_1 [get_bd_intf_ports FIFO_WRITE_4] [get_bd_intf_pins fifo_generator_4/FIFO_WRITE]
+  connect_bd_intf_net -intf_net FIFO_WRITE_5 [get_bd_intf_ports FIFO_WRITE] [get_bd_intf_pins fifo_generator_0/FIFO_WRITE]
+  connect_bd_intf_net -intf_net FIFO_WRITE_5_1 [get_bd_intf_ports FIFO_WRITE_5] [get_bd_intf_pins fifo_generator_5/FIFO_WRITE]
+  connect_bd_intf_net -intf_net FIFO_WRITE_6_1 [get_bd_intf_ports FIFO_WRITE_6] [get_bd_intf_pins fifo_generator_6/FIFO_WRITE]
+  connect_bd_intf_net -intf_net FIFO_WRITE_7_1 [get_bd_intf_ports FIFO_WRITE_7] [get_bd_intf_pins fifo_generator_7/FIFO_WRITE]
   connect_bd_intf_net -intf_net MIPI_CSI_2_RX_0_m_axis_video [get_bd_intf_pins AXI_BayerToRGB_1/AXI_Slave_Interface] [get_bd_intf_pins MIPI_CSI_2_RX_0/m_axis_video]
   connect_bd_intf_net -intf_net MIPI_D_PHY_RX_0_D_PHY_PPI [get_bd_intf_pins MIPI_CSI_2_RX_0/rx_mipi_ppi] [get_bd_intf_pins MIPI_D_PHY_RX_0/D_PHY_PPI]
+  connect_bd_intf_net -intf_net S00_AXI_1 [get_bd_intf_ports S00_AXI] [get_bd_intf_pins axi_interconnect_0/S00_AXI]
+  connect_bd_intf_net -intf_net S01_AXI_1 [get_bd_intf_ports S01_AXI] [get_bd_intf_pins axi_interconnect_0/S01_AXI]
+  connect_bd_intf_net -intf_net S02_AXI_1 [get_bd_intf_ports S02_AXI] [get_bd_intf_pins axi_interconnect_0/S02_AXI]
   connect_bd_intf_net -intf_net S_AXIS_S2MM_1 [get_bd_intf_ports S_AXIS_S2MM] [get_bd_intf_pins axi_vdma_0/S_AXIS_S2MM]
+  connect_bd_intf_net -intf_net axi_apb_bridge_0_APB_M [get_bd_intf_ports APB_M] [get_bd_intf_pins axi_apb_bridge_0/APB_M]
+  connect_bd_intf_net -intf_net axi_interconnect_0_M00_AXI [get_bd_intf_pins axi_interconnect_0/M00_AXI] [get_bd_intf_pins processing_system7_0/S_AXI_HP3]
   connect_bd_intf_net -intf_net axi_mem_intercon_1_M00_AXI [get_bd_intf_pins axi_mem_intercon_1/M00_AXI] [get_bd_intf_pins processing_system7_0/S_AXI_HP2]
   connect_bd_intf_net -intf_net axi_mem_intercon_M00_AXI [get_bd_intf_pins axi_mem_intercon/M00_AXI] [get_bd_intf_pins processing_system7_0/S_AXI_HP0]
   connect_bd_intf_net -intf_net axi_vdma_0_M_AXIS_MM2S [get_bd_intf_pins axi_vdma_0/M_AXIS_MM2S] [get_bd_intf_pins v_axi4s_vid_out_0/video_in]
-  connect_bd_intf_net -intf_net axi_vdma_0_M_AXI_MM2S [get_bd_intf_pins axi_mem_intercon/S00_AXI] [get_bd_intf_pins axi_vdma_0/M_AXI_MM2S]
+  connect_bd_intf_net -intf_net axi_vdma_0_M_AXI_MM2S [get_bd_intf_pins axi_mem_intercon/S01_AXI] [get_bd_intf_pins axi_vdma_0/M_AXI_MM2S]
   connect_bd_intf_net -intf_net axi_vdma_0_M_AXI_S2MM [get_bd_intf_pins axi_mem_intercon_1/S00_AXI] [get_bd_intf_pins axi_vdma_0/M_AXI_S2MM]
+  connect_bd_intf_net -intf_net axi_vdma_1_M_AXIS_MM2S [get_bd_intf_ports M_AXIS_MM2S] [get_bd_intf_pins axi_vdma_1/M_AXIS_MM2S]
+  connect_bd_intf_net -intf_net axi_vdma_1_M_AXI_MM2S [get_bd_intf_pins axi_mem_intercon/S00_AXI] [get_bd_intf_pins axi_vdma_1/M_AXI_MM2S]
+  connect_bd_intf_net -intf_net axi_vdma_1_M_AXI_S2MM [get_bd_intf_pins axi_mem_intercon_1/S01_AXI] [get_bd_intf_pins axi_vdma_1/M_AXI_S2MM]
   connect_bd_intf_net -intf_net dphy_hs_clock_1 [get_bd_intf_ports dphy_hs_clock] [get_bd_intf_pins MIPI_D_PHY_RX_0/dphy_hs_clock]
   connect_bd_intf_net -intf_net processing_system7_0_DDR [get_bd_intf_ports DDR] [get_bd_intf_pins processing_system7_0/DDR]
   connect_bd_intf_net -intf_net processing_system7_0_FIXED_IO [get_bd_intf_ports FIXED_IO] [get_bd_intf_pins processing_system7_0/FIXED_IO]
@@ -1251,6 +1642,8 @@ CONFIG.NUM_PORTS {3} \
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M03_AXI [get_bd_intf_pins MIPI_D_PHY_RX_0/S_AXI_LITE] [get_bd_intf_pins ps7_0_axi_periph/M03_AXI]
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M04_AXI [get_bd_intf_pins MIPI_CSI_2_RX_0/S_AXI_LITE] [get_bd_intf_pins ps7_0_axi_periph/M04_AXI]
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M05_AXI [get_bd_intf_pins AXI_GammaCorrection_0/AXI_Lite_Reg_Intf] [get_bd_intf_pins ps7_0_axi_periph/M05_AXI]
+  connect_bd_intf_net -intf_net ps7_0_axi_periph_M06_AXI [get_bd_intf_pins axi_apb_bridge_0/AXI4_LITE] [get_bd_intf_pins ps7_0_axi_periph/M06_AXI]
+  connect_bd_intf_net -intf_net ps7_0_axi_periph_M07_AXI [get_bd_intf_pins axi_vdma_1/S_AXI_LITE] [get_bd_intf_pins ps7_0_axi_periph/M07_AXI]
   connect_bd_intf_net -intf_net rgb2dvi_0_TMDS [get_bd_intf_ports hdmi_tx] [get_bd_intf_pins rgb2dvi_0/TMDS]
   connect_bd_intf_net -intf_net v_axi4s_vid_out_0_vid_io_out [get_bd_intf_pins rgb2dvi_0/RGB] [get_bd_intf_pins v_axi4s_vid_out_0/vid_io_out]
   connect_bd_intf_net -intf_net v_tc_0_vtiming_out [get_bd_intf_pins v_axi4s_vid_out_0/vtiming_in] [get_bd_intf_pins vtg/vtiming_out]
@@ -1262,6 +1655,16 @@ CONFIG.NUM_PORTS {3} \
   connect_bd_net -net axi_dynclk_0_PXL_CLK_5X_O [get_bd_pins rgb2dvi_0/SerialClk] [get_bd_pins video_dynclk/PXL_CLK_5X_O]
   connect_bd_net -net axi_vdma_0_mm2s_introut [get_bd_pins axi_vdma_0/mm2s_introut] [get_bd_pins xlconcat_0/In1]
   connect_bd_net -net axi_vdma_0_s2mm_introut [get_bd_pins axi_vdma_0/s2mm_introut] [get_bd_pins xlconcat_0/In2]
+  connect_bd_net -net axi_vdma_1_mm2s_introut [get_bd_pins axi_vdma_1/mm2s_introut] [get_bd_pins xlconcat_0/In3]
+  connect_bd_net -net axi_vdma_1_s2mm_introut [get_bd_pins axi_vdma_1/s2mm_introut] [get_bd_pins xlconcat_0/In4]
+  connect_bd_net -net clk_1_1 [get_bd_ports clk_1] [get_bd_pins fifo_generator_1/clk]
+  connect_bd_net -net clk_2_1 [get_bd_ports clk_2] [get_bd_pins fifo_generator_0/clk]
+  connect_bd_net -net clk_3_1 [get_bd_ports clk_3] [get_bd_pins fifo_generator_2/clk]
+  connect_bd_net -net clk_4_1 [get_bd_ports clk_4] [get_bd_pins fifo_generator_3/clk]
+  connect_bd_net -net clk_5_1 [get_bd_ports clk_5] [get_bd_pins fifo_generator_4/clk]
+  connect_bd_net -net clk_6_1 [get_bd_ports axi_clk_2] [get_bd_pins fifo_generator_6/clk]
+  connect_bd_net -net clk_7_1 [get_bd_ports axi_clk_0] [get_bd_pins fifo_generator_7/clk]
+  connect_bd_net -net clk_8_1 [get_bd_ports axi_clk_1] [get_bd_pins fifo_generator_5/clk]
   connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0/locked] [get_bd_pins rst_clk_wiz_0_50M/dcm_locked]
   connect_bd_net -net dphy_clk_lp_n_1 [get_bd_ports dphy_clk_lp_n] [get_bd_pins MIPI_D_PHY_RX_0/dphy_clk_lp_n]
   connect_bd_net -net dphy_clk_lp_p_1 [get_bd_ports dphy_clk_lp_p] [get_bd_pins MIPI_D_PHY_RX_0/dphy_clk_lp_p]
@@ -1269,121 +1672,255 @@ CONFIG.NUM_PORTS {3} \
   connect_bd_net -net dphy_data_hs_p_1 [get_bd_ports dphy_data_hs_p] [get_bd_pins MIPI_D_PHY_RX_0/dphy_data_hs_p]
   connect_bd_net -net dphy_data_lp_n_1 [get_bd_ports dphy_data_lp_n] [get_bd_pins MIPI_D_PHY_RX_0/dphy_data_lp_n]
   connect_bd_net -net dphy_data_lp_p_1 [get_bd_ports dphy_data_lp_p] [get_bd_pins MIPI_D_PHY_RX_0/dphy_data_lp_p]
-  connect_bd_net -net mm_clk_150 [get_bd_ports clk] [get_bd_pins AXI_BayerToRGB_1/StreamClk] [get_bd_pins AXI_GammaCorrection_0/StreamClk] [get_bd_pins MIPI_CSI_2_RX_0/video_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_mem_intercon_1/ACLK] [get_bd_pins axi_mem_intercon_1/M00_ACLK] [get_bd_pins axi_mem_intercon_1/S00_ACLK] [get_bd_pins axi_vdma_0/m_axi_mm2s_aclk] [get_bd_pins axi_vdma_0/m_axi_s2mm_aclk] [get_bd_pins axi_vdma_0/m_axis_mm2s_aclk] [get_bd_pins axi_vdma_0/s_axis_s2mm_aclk] [get_bd_pins clk_wiz_0/clk_out2] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP2_ACLK] [get_bd_pins v_axi4s_vid_out_0/aclk]
+  connect_bd_net -net fifo_generator_0_data_count [get_bd_ports data_count] [get_bd_pins fifo_generator_0/data_count]
+  connect_bd_net -net fifo_generator_1_data_count [get_bd_ports data_count_1] [get_bd_pins fifo_generator_1/data_count]
+  connect_bd_net -net fifo_generator_2_data_count [get_bd_ports data_count_2] [get_bd_pins fifo_generator_2/data_count]
+  connect_bd_net -net fifo_generator_3_data_count [get_bd_ports data_count_3] [get_bd_pins fifo_generator_3/data_count]
+  connect_bd_net -net fifo_generator_4_data_count [get_bd_ports data_count_4] [get_bd_pins fifo_generator_4/data_count]
+  connect_bd_net -net fifo_generator_5_data_count [get_bd_ports data_count_5] [get_bd_pins fifo_generator_5/data_count]
+  connect_bd_net -net fifo_generator_6_data_count [get_bd_ports data_count_6] [get_bd_pins fifo_generator_6/data_count]
+  connect_bd_net -net fifo_generator_7_data_count [get_bd_ports data_count_7] [get_bd_pins fifo_generator_7/data_count]
+  connect_bd_net -net mm_clk_100 [get_bd_ports clk] [get_bd_pins AXI_BayerToRGB_1/StreamClk] [get_bd_pins AXI_GammaCorrection_0/StreamClk] [get_bd_pins MIPI_CSI_2_RX_0/video_aclk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axi_interconnect_0/S01_ACLK] [get_bd_pins axi_interconnect_0/S02_ACLK] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_mem_intercon/S01_ACLK] [get_bd_pins axi_mem_intercon_1/ACLK] [get_bd_pins axi_mem_intercon_1/M00_ACLK] [get_bd_pins axi_mem_intercon_1/S00_ACLK] [get_bd_pins axi_mem_intercon_1/S01_ACLK] [get_bd_pins axi_vdma_0/m_axi_mm2s_aclk] [get_bd_pins axi_vdma_0/m_axi_s2mm_aclk] [get_bd_pins axi_vdma_0/m_axis_mm2s_aclk] [get_bd_pins axi_vdma_0/s_axis_s2mm_aclk] [get_bd_pins axi_vdma_1/m_axi_mm2s_aclk] [get_bd_pins axi_vdma_1/m_axi_s2mm_aclk] [get_bd_pins axi_vdma_1/m_axis_mm2s_aclk] [get_bd_pins axi_vdma_1/s_axis_s2mm_aclk] [get_bd_pins clk_wiz_0/clk_out2] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP2_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP3_ACLK] [get_bd_pins v_axi4s_vid_out_0/aclk]
   connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins clk_wiz_0/clk_in1] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins video_dynclk/REF_CLK_I]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_clk_wiz_0_50M/ext_reset_in] [get_bd_pins rst_vid_clk_dyn/ext_reset_in]
   connect_bd_net -net ref_clk_200 [get_bd_pins MIPI_D_PHY_RX_0/RefClk] [get_bd_pins clk_wiz_0/clk_out3]
-  connect_bd_net -net rst_clk_wiz_0_50M_interconnect_aresetn [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins axi_mem_intercon_1/ARESETN] [get_bd_pins ps7_0_axi_periph/ARESETN] [get_bd_pins rst_clk_wiz_0_50M/interconnect_aresetn]
-  connect_bd_net -net rst_clk_wiz_0_50M_peripheral_aresetn [get_bd_ports rst_n] [get_bd_pins AXI_BayerToRGB_1/sStreamReset_n] [get_bd_pins AXI_GammaCorrection_0/aAxiLiteReset_n] [get_bd_pins AXI_GammaCorrection_0/sStreamReset_n] [get_bd_pins MIPI_CSI_2_RX_0/s_axi_lite_aresetn] [get_bd_pins MIPI_D_PHY_RX_0/s_axi_lite_aresetn] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins axi_mem_intercon_1/M00_ARESETN] [get_bd_pins axi_mem_intercon_1/S00_ARESETN] [get_bd_pins axi_vdma_0/axi_resetn] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/M02_ARESETN] [get_bd_pins ps7_0_axi_periph/M03_ARESETN] [get_bd_pins ps7_0_axi_periph/M04_ARESETN] [get_bd_pins ps7_0_axi_periph/M05_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN] [get_bd_pins rst_clk_wiz_0_50M/peripheral_aresetn] [get_bd_pins v_axi4s_vid_out_0/aresetn] [get_bd_pins video_dynclk/s_axi_lite_aresetn] [get_bd_pins vtg/s_axi_aresetn]
+  connect_bd_net -net rst_1 [get_bd_ports rst] [get_bd_pins fifo_generator_1/rst]
+  connect_bd_net -net rst_1_1 [get_bd_ports rst_1] [get_bd_pins fifo_generator_0/rst]
+  connect_bd_net -net rst_2_1 [get_bd_ports rst_2] [get_bd_pins fifo_generator_2/rst]
+  connect_bd_net -net rst_3_1 [get_bd_ports rst_3] [get_bd_pins fifo_generator_3/rst]
+  connect_bd_net -net rst_4_1 [get_bd_ports rst_4] [get_bd_pins fifo_generator_4/rst]
+  connect_bd_net -net rst_5_1 [get_bd_ports axi_rst_2] [get_bd_pins fifo_generator_6/rst]
+  connect_bd_net -net rst_6_1 [get_bd_ports axi_rst_0] [get_bd_pins fifo_generator_7/rst]
+  connect_bd_net -net rst_7_1 [get_bd_ports axi_rst_1] [get_bd_pins fifo_generator_5/rst]
+  connect_bd_net -net rst_clk_wiz_0_50M_interconnect_aresetn [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins axi_interconnect_0/S01_ARESETN] [get_bd_pins axi_interconnect_0/S02_ARESETN] [get_bd_pins ps7_0_axi_periph/ARESETN] [get_bd_pins rst_clk_wiz_0_50M/interconnect_aresetn]
+  connect_bd_net -net rst_clk_wiz_0_50M_peripheral_aresetn [get_bd_ports rst_n] [get_bd_pins AXI_BayerToRGB_1/sStreamReset_n] [get_bd_pins AXI_GammaCorrection_0/aAxiLiteReset_n] [get_bd_pins AXI_GammaCorrection_0/sStreamReset_n] [get_bd_pins MIPI_CSI_2_RX_0/s_axi_lite_aresetn] [get_bd_pins MIPI_D_PHY_RX_0/s_axi_lite_aresetn] [get_bd_pins axi_apb_bridge_0/s_axi_aresetn] [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins axi_mem_intercon/S01_ARESETN] [get_bd_pins axi_mem_intercon_1/ARESETN] [get_bd_pins axi_mem_intercon_1/M00_ARESETN] [get_bd_pins axi_mem_intercon_1/S00_ARESETN] [get_bd_pins axi_mem_intercon_1/S01_ARESETN] [get_bd_pins axi_vdma_0/axi_resetn] [get_bd_pins axi_vdma_1/axi_resetn] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/M02_ARESETN] [get_bd_pins ps7_0_axi_periph/M03_ARESETN] [get_bd_pins ps7_0_axi_periph/M04_ARESETN] [get_bd_pins ps7_0_axi_periph/M05_ARESETN] [get_bd_pins ps7_0_axi_periph/M06_ARESETN] [get_bd_pins ps7_0_axi_periph/M07_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN] [get_bd_pins rst_clk_wiz_0_50M/peripheral_aresetn] [get_bd_pins v_axi4s_vid_out_0/aresetn] [get_bd_pins video_dynclk/s_axi_lite_aresetn] [get_bd_pins vtg/s_axi_aresetn]
   connect_bd_net -net rst_clk_wiz_0_50M_peripheral_reset [get_bd_pins MIPI_D_PHY_RX_0/aRst] [get_bd_pins rst_clk_wiz_0_50M/peripheral_reset]
   connect_bd_net -net rst_vid_clk_dyn_peripheral_aresetn [get_bd_pins rst_vid_clk_dyn/peripheral_aresetn] [get_bd_pins vtg/resetn]
   connect_bd_net -net rst_vid_clk_dyn_peripheral_reset [get_bd_pins rst_vid_clk_dyn/peripheral_reset] [get_bd_pins v_axi4s_vid_out_0/vid_io_out_reset]
-  connect_bd_net -net s_axil_clk_50 [get_bd_pins AXI_GammaCorrection_0/AxiLiteClk] [get_bd_pins MIPI_CSI_2_RX_0/s_axi_lite_aclk] [get_bd_pins MIPI_D_PHY_RX_0/s_axi_lite_aclk] [get_bd_pins axi_vdma_0/s_axi_lite_aclk] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/M03_ACLK] [get_bd_pins ps7_0_axi_periph/M04_ACLK] [get_bd_pins ps7_0_axi_periph/M05_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_clk_wiz_0_50M/slowest_sync_clk] [get_bd_pins video_dynclk/s_axi_lite_aclk] [get_bd_pins vtg/s_axi_aclk]
+  connect_bd_net -net s_axil_clk_50 [get_bd_ports clk_axi] [get_bd_pins AXI_GammaCorrection_0/AxiLiteClk] [get_bd_pins MIPI_CSI_2_RX_0/s_axi_lite_aclk] [get_bd_pins MIPI_D_PHY_RX_0/s_axi_lite_aclk] [get_bd_pins axi_apb_bridge_0/s_axi_aclk] [get_bd_pins axi_vdma_0/s_axi_lite_aclk] [get_bd_pins axi_vdma_1/s_axi_lite_aclk] [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/M03_ACLK] [get_bd_pins ps7_0_axi_periph/M04_ACLK] [get_bd_pins ps7_0_axi_periph/M05_ACLK] [get_bd_pins ps7_0_axi_periph/M06_ACLK] [get_bd_pins ps7_0_axi_periph/M07_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_clk_wiz_0_50M/slowest_sync_clk] [get_bd_pins video_dynclk/s_axi_lite_aclk] [get_bd_pins vtg/s_axi_aclk]
   connect_bd_net -net v_axi4s_vid_out_0_locked [get_bd_pins rgb2dvi_0/aRst_n] [get_bd_pins v_axi4s_vid_out_0/locked]
   connect_bd_net -net v_axi4s_vid_out_0_vtg_ce [get_bd_pins v_axi4s_vid_out_0/vtg_ce] [get_bd_pins vtg/gen_clken]
   connect_bd_net -net v_tc_0_irq [get_bd_pins vtg/irq] [get_bd_pins xlconcat_0/In0]
   connect_bd_net -net xlconcat_0_dout [get_bd_pins processing_system7_0/IRQ_F2P] [get_bd_pins xlconcat_0/dout]
+  connect_bd_net -net xlconstant_0_dout [get_bd_pins axi_vdma_1/s_axis_s2mm_tkeep] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
   create_bd_addr_seg -range 0x40000000 -offset 0x00000000 [get_bd_addr_spaces axi_vdma_0/Data_MM2S] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
   create_bd_addr_seg -range 0x40000000 -offset 0x00000000 [get_bd_addr_spaces axi_vdma_0/Data_S2MM] [get_bd_addr_segs processing_system7_0/S_AXI_HP2/HP2_DDR_LOWOCM] SEG_processing_system7_0_HP2_DDR_LOWOCM
+  create_bd_addr_seg -range 0x40000000 -offset 0x00000000 [get_bd_addr_spaces axi_vdma_1/Data_MM2S] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
+  create_bd_addr_seg -range 0x40000000 -offset 0x00000000 [get_bd_addr_spaces axi_vdma_1/Data_S2MM] [get_bd_addr_segs processing_system7_0/S_AXI_HP2/HP2_DDR_LOWOCM] SEG_processing_system7_0_HP2_DDR_LOWOCM
+  create_bd_addr_seg -range 0x00010000 -offset 0x43C50000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs APB_M/Reg] SEG_APB_M_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x43C40000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs AXI_GammaCorrection_0/AXI_Lite_Reg_Intf/Reg] SEG_AXI_GammaCorrection_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x43C30000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs MIPI_CSI_2_RX_0/S_AXI_LITE/S_AXI_LITE_reg] SEG_MIPI_CSI_2_RX_0_S_AXI_LITE_reg
   create_bd_addr_seg -range 0x00010000 -offset 0x43C20000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs MIPI_D_PHY_RX_0/S_AXI_LITE/S_AXI_LITE_reg] SEG_MIPI_D_PHY_RX_0_S_AXI_LITE_reg
   create_bd_addr_seg -range 0x00010000 -offset 0x43C00000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs video_dynclk/S_AXI_LITE/S_AXI_LITE_reg] SEG_axi_dynclk_0_S_AXI_LITE_reg
   create_bd_addr_seg -range 0x00010000 -offset 0x43000000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_vdma_0/S_AXI_LITE/Reg] SEG_axi_vdma_0_Reg
+  create_bd_addr_seg -range 0x00010000 -offset 0x43010000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_vdma_1/S_AXI_LITE/Reg] SEG_axi_vdma_1_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x43C10000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs vtg/ctrl/Reg] SEG_vtg_Reg
+  create_bd_addr_seg -range 0x40000000 -offset 0x00000000 [get_bd_addr_spaces S00_AXI] [get_bd_addr_segs processing_system7_0/S_AXI_HP3/HP3_DDR_LOWOCM] SEG_processing_system7_0_HP3_DDR_LOWOCM
+  create_bd_addr_seg -range 0x40000000 -offset 0x00000000 [get_bd_addr_spaces S01_AXI] [get_bd_addr_segs processing_system7_0/S_AXI_HP3/HP3_DDR_LOWOCM] SEG_processing_system7_0_HP3_DDR_LOWOCM
+  create_bd_addr_seg -range 0x40000000 -offset 0x00000000 [get_bd_addr_spaces S02_AXI] [get_bd_addr_segs processing_system7_0/S_AXI_HP3/HP3_DDR_LOWOCM] SEG_processing_system7_0_HP3_DDR_LOWOCM
 
   # Perform GUI Layout
   regenerate_bd_layout -layout_string {
    guistr: "# # String gsaved with Nlview 6.6.5b  2016-09-06 bk=1.3687 VDI=39 GEI=35 GUI=JA:1.6
 #  -string -flagsOSRD
-preplace port DDR -pg 1 -y 290 -defaultsOSRD
-preplace port dphy_hs_clock -pg 1 -y 1080 -defaultsOSRD
-preplace port dphy_clk_lp_n -pg 1 -y 890 -defaultsOSRD
-preplace port cam_gpio -pg 1 -y 270 -defaultsOSRD
-preplace port dphy_clk_lp_p -pg 1 -y 850 -defaultsOSRD
-preplace port S_AXIS_S2MM -pg 1 -y 350 -defaultsOSRD
-preplace port hdmi_tx -pg 1 -y 680 -defaultsOSRD
-preplace port FIXED_IO -pg 1 -y 310 -defaultsOSRD
-preplace port clk -pg 1 -y 760 -defaultsOSRD
-preplace port cam_iic -pg 1 -y 330 -defaultsOSRD
-preplace port AXI_Stream_Master -pg 1 -y 910 -defaultsOSRD
-preplace portBus dphy_data_hs_n -pg 1 -y 910 -defaultsOSRD
-preplace portBus dphy_data_hs_p -pg 1 -y 870 -defaultsOSRD
-preplace portBus dphy_data_lp_n -pg 1 -y 1240 -defaultsOSRD
-preplace portBus dphy_data_lp_p -pg 1 -y 1260 -defaultsOSRD
-preplace portBus rst_n -pg 1 -y 1010 -defaultsOSRD
-preplace inst v_axi4s_vid_out_0 -pg 1 -lvl 6 -y 730 -defaultsOSRD
-preplace inst vtg -pg 1 -lvl 5 -y 830 -defaultsOSRD
-preplace inst axi_vdma_0 -pg 1 -lvl 5 -y 460 -defaultsOSRD
-preplace inst MIPI_D_PHY_RX_0 -pg 1 -lvl 4 -y 1130 -defaultsOSRD
-preplace inst MIPI_CSI_2_RX_0 -pg 1 -lvl 5 -y 1120 -defaultsOSRD
-preplace inst axi_mem_intercon_1 -pg 1 -lvl 6 -y 100 -defaultsOSRD
-preplace inst AXI_GammaCorrection_0 -pg 1 -lvl 7 -y 910 -defaultsOSRD
-preplace inst xlconcat_0 -pg 1 -lvl 6 -y 510 -defaultsOSRD
-preplace inst rst_vid_clk_dyn -pg 1 -lvl 4 -y 440 -defaultsOSRD
-preplace inst rgb2dvi_0 -pg 1 -lvl 7 -y 680 -defaultsOSRD
-preplace inst ps7_0_axi_periph -pg 1 -lvl 3 -y 790 -defaultsOSRD
-preplace inst video_dynclk -pg 1 -lvl 4 -y 790 -defaultsOSRD
-preplace inst clk_wiz_0 -pg 1 -lvl 1 -y 1170 -defaultsOSRD
-preplace inst axi_mem_intercon -pg 1 -lvl 6 -y 320 -defaultsOSRD
-preplace inst AXI_BayerToRGB_1 -pg 1 -lvl 6 -y 960 -defaultsOSRD
-preplace inst rst_clk_wiz_0_50M -pg 1 -lvl 2 -y 990 -defaultsOSRD
-preplace inst processing_system7_0 -pg 1 -lvl 7 -y 350 -defaultsOSRD
-preplace netloc processing_system7_0_DDR 1 7 1 NJ
-preplace netloc ps7_0_axi_periph_M02_AXI 1 3 2 810J 710 1270J
-preplace netloc dphy_data_hs_p_1 1 0 4 -70J 1090 NJ 1090 NJ 1090 NJ
-preplace netloc s_axil_clk_50 1 1 6 120 1140 530 1140 840 700 1240 640 1720J 600 2210
-preplace netloc dphy_data_lp_n_1 1 0 4 -70J 1250 NJ 1250 NJ 1250 820J
-preplace netloc clk_wiz_0_locked 1 1 1 130
-preplace netloc axi_vdma_0_s2mm_introut 1 5 1 1780
-preplace netloc mm_clk_150 1 1 7 120J 1300 NJ 1300 NJ 1300 1260 1300 1790 1300 2220 1300 2690J
-preplace netloc dphy_hs_clock_1 1 0 4 NJ 1080 NJ 1080 NJ 1080 810J
-preplace netloc v_axi4s_vid_out_0_vid_io_out 1 6 1 2180
-preplace netloc processing_system7_0_M_AXI_GP0 1 2 6 540 270 NJ 270 NJ 270 1820J 590 NJ 590 2690
-preplace netloc axi_vdma_0_M_AXI_MM2S 1 5 1 1750
-preplace netloc axi_mem_intercon_1_M00_AXI 1 6 1 2210
-preplace netloc rst_vid_clk_dyn_peripheral_aresetn 1 4 1 1290
-preplace netloc dphy_clk_lp_p_1 1 0 4 NJ 850 NJ 850 500J 1050 NJ
-preplace netloc axi_dynclk_0_LOCKED_O 1 3 2 860 530 1220
-preplace netloc axi_vdma_0_M_AXIS_MM2S 1 5 1 1760
-preplace netloc v_tc_0_irq 1 5 1 1750
-preplace netloc rst_clk_wiz_0_50M_peripheral_reset 1 2 2 490 1190 NJ
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 7 150 260 NJ 260 840 260 NJ 260 1730J 580 NJ 580 2670
-preplace netloc dphy_clk_lp_n_1 1 0 4 NJ 890 NJ 890 520J 1070 NJ
-preplace netloc processing_system7_0_IIC_0 1 7 1 NJ
-preplace netloc ps7_0_axi_periph_M03_AXI 1 3 1 810
-preplace netloc axi_mem_intercon_M00_AXI 1 6 1 N
-preplace netloc dphy_data_hs_n_1 1 0 4 NJ 910 140J 1110 NJ 1110 NJ
-preplace netloc axi_dynclk_0_PXL_CLK_5X_O 1 4 3 1250J 700 1720J 870 2230
-preplace netloc rgb2dvi_0_TMDS 1 7 1 NJ
-preplace netloc ps7_0_axi_periph_M01_AXI 1 3 1 N
-preplace netloc v_axi4s_vid_out_0_locked 1 6 1 2190
-preplace netloc rst_clk_wiz_0_50M_peripheral_aresetn 1 2 6 540 1020 850 870 1280 1250 1800 1250 2260 1250 2700J
-preplace netloc S_AXIS_S2MM_1 1 0 5 NJ 350 NJ 350 NJ 350 NJ 350 NJ
-preplace netloc xlconcat_0_dout 1 6 1 2180
-preplace netloc v_axi4s_vid_out_0_vtg_ce 1 4 3 1300 1020 1740J 1040 2180
-preplace netloc ref_clk_200 1 1 3 NJ 1180 NJ 1180 870
-preplace netloc AXI_GammaCorrection_0_AXI_Stream_Master 1 7 1 NJ
-preplace netloc processing_system7_0_FIXED_IO 1 7 1 NJ
-preplace netloc rst_clk_wiz_0_50M_interconnect_aresetn 1 2 4 510 80 NJ 80 NJ 80 1830
-preplace netloc axi_vdma_0_mm2s_introut 1 5 1 1810
-preplace netloc MIPI_D_PHY_RX_0_RxByteClkHS 1 4 1 1300
-preplace netloc processing_system7_0_GPIO_0 1 7 1 NJ
-preplace netloc ps7_0_axi_periph_M05_AXI 1 3 4 800J 960 NJ 960 1740J 890 2260J
-preplace netloc ps7_0_axi_periph_M04_AXI 1 3 2 820J 880 1230J
-preplace netloc processing_system7_0_FCLK_CLK0 1 0 8 -60 410 NJ 410 NJ 410 830 950 1220J 970 1820J 880 2240J 810 2680
-preplace netloc v_tc_0_vtiming_out 1 5 1 1730
-preplace netloc ps7_0_axi_periph_M00_AXI 1 3 2 800 330 NJ
-preplace netloc axi_vdma_0_M_AXI_S2MM 1 5 1 1720
-preplace netloc MIPI_D_PHY_RX_0_D_PHY_PPI 1 4 1 1270
-preplace netloc AXI_BayerToRGB_1_AXI_Stream_Master 1 6 1 2250
-preplace netloc dphy_data_lp_p_1 1 0 4 NJ 1260 NJ 1260 NJ 1260 860J
-preplace netloc MIPI_CSI_2_RX_0_m_axis_video 1 5 1 1830
-preplace netloc rst_vid_clk_dyn_peripheral_reset 1 4 2 1220J 280 1770J
-preplace netloc PixelClk_Generator_clk_out1 1 3 4 850 690 1230 690 1740 860 2200J
-levelinfo -pg 1 -90 40 330 670 1060 1530 2020 2470 2740 -top -10 -bot 1310
+preplace port axi_rst_2 -pg 1 -y 380 -defaultsOSRD
+preplace port FIFO_WRITE_5 -pg 1 -y 180 -defaultsOSRD
+preplace port FIFO_READ_2 -pg 1 -y 760 -defaultsOSRD
+preplace port FIFO_WRITE -pg 1 -y 460 -defaultsOSRD
+preplace port DDR -pg 1 -y 1480 -defaultsOSRD
+preplace port FIFO_WRITE_6 -pg 1 -y 320 -defaultsOSRD
+preplace port FIFO_READ_3 -pg 1 -y 890 -defaultsOSRD
+preplace port dphy_hs_clock -pg 1 -y 1400 -defaultsOSRD
+preplace port axi_clk_0 -pg 1 -y 80 -defaultsOSRD
+preplace port dphy_clk_lp_n -pg 1 -y 1440 -defaultsOSRD
+preplace port FIFO_WRITE_7 -pg 1 -y 40 -defaultsOSRD
+preplace port FIFO_READ_4 -pg 1 -y 1310 -defaultsOSRD
+preplace port S02_AXI -pg 1 -y 1040 -defaultsOSRD
+preplace port S00_AXI -pg 1 -y 1000 -defaultsOSRD
+preplace port cam_gpio -pg 1 -y 1460 -defaultsOSRD
+preplace port axi_clk_1 -pg 1 -y 220 -defaultsOSRD
+preplace port rst_1 -pg 1 -y 520 -defaultsOSRD
+preplace port FIFO_READ_5 -pg 1 -y 200 -defaultsOSRD
+preplace port S01_AXI -pg 1 -y 1020 -defaultsOSRD
+preplace port axi_clk_2 -pg 1 -y 340 -defaultsOSRD
+preplace port rst_2 -pg 1 -y 800 -defaultsOSRD
+preplace port dphy_clk_lp_p -pg 1 -y 1420 -defaultsOSRD
+preplace port FIFO_READ_6 -pg 1 -y 300 -defaultsOSRD
+preplace port rst_3 -pg 1 -y 930 -defaultsOSRD
+preplace port FIFO_READ_7 -pg 1 -y 60 -defaultsOSRD
+preplace port rst_4 -pg 1 -y 1350 -defaultsOSRD
+preplace port rst -pg 1 -y 660 -defaultsOSRD
+preplace port clk_1 -pg 1 -y 640 -defaultsOSRD
+preplace port clk_2 -pg 1 -y 500 -defaultsOSRD
+preplace port M_AXIS_MM2S -pg 1 -y 2670 -defaultsOSRD
+preplace port FIFO_READ -pg 1 -y 480 -defaultsOSRD
+preplace port S_AXIS_S2MM -pg 1 -y 2650 -defaultsOSRD
+preplace port hdmi_tx -pg 1 -y 1800 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -y 1500 -defaultsOSRD
+preplace port clk_3 -pg 1 -y 780 -defaultsOSRD
+preplace port FIFO_WRITE_1 -pg 1 -y 600 -defaultsOSRD
+preplace port APB_M -pg 1 -y 1950 -defaultsOSRD
+preplace port clk_4 -pg 1 -y 910 -defaultsOSRD
+preplace port clk -pg 1 -y 1720 -defaultsOSRD
+preplace port FIFO_WRITE_2 -pg 1 -y 740 -defaultsOSRD
+preplace port cam_iic -pg 1 -y 1520 -defaultsOSRD
+preplace port axi_rst_0 -pg 1 -y 100 -defaultsOSRD
+preplace port clk_5 -pg 1 -y 1330 -defaultsOSRD
+preplace port FIFO_WRITE_3 -pg 1 -y 870 -defaultsOSRD
+preplace port axi_rst_1 -pg 1 -y 240 -defaultsOSRD
+preplace port clk_axi -pg 1 -y 1700 -defaultsOSRD
+preplace port FIFO_WRITE_4 -pg 1 -y 1290 -defaultsOSRD
+preplace port FIFO_READ_1 -pg 1 -y 620 -defaultsOSRD
+preplace portBus data_count_1 -pg 1 -y 630 -defaultsOSRD
+preplace portBus dphy_data_hs_n -pg 1 -y 1480 -defaultsOSRD
+preplace portBus data_count_2 -pg 1 -y 770 -defaultsOSRD
+preplace portBus data_count -pg 1 -y 490 -defaultsOSRD
+preplace portBus data_count_3 -pg 1 -y 910 -defaultsOSRD
+preplace portBus dphy_data_hs_p -pg 1 -y 1680 -defaultsOSRD
+preplace portBus data_count_4 -pg 1 -y 1330 -defaultsOSRD
+preplace portBus data_count_5 -pg 1 -y 210 -defaultsOSRD
+preplace portBus data_count_6 -pg 1 -y 350 -defaultsOSRD
+preplace portBus data_count_7 -pg 1 -y 70 -defaultsOSRD
+preplace portBus dphy_data_lp_n -pg 1 -y 1500 -defaultsOSRD
+preplace portBus dphy_data_lp_p -pg 1 -y 1460 -defaultsOSRD
+preplace portBus rst_n -pg 1 -y 1880 -defaultsOSRD
+preplace inst fifo_generator_3 -pg 1 -lvl 8 -y 910 -defaultsOSRD
+preplace inst v_axi4s_vid_out_0 -pg 1 -lvl 7 -y 2394 -defaultsOSRD
+preplace inst fifo_generator_4 -pg 1 -lvl 8 -y 1330 -defaultsOSRD
+preplace inst vtg -pg 1 -lvl 6 -y 2060 -defaultsOSRD
+preplace inst axi_vdma_0 -pg 1 -lvl 6 -y 2700 -defaultsOSRD
+preplace inst MIPI_D_PHY_RX_0 -pg 1 -lvl 2 -y 1520 -defaultsOSRD
+preplace inst MIPI_CSI_2_RX_0 -pg 1 -lvl 3 -y 2410 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 5 -y 2540 -defaultsOSRD
+preplace inst axi_vdma_1 -pg 1 -lvl 6 -y 2470 -defaultsOSRD
+preplace inst fifo_generator_5 -pg 1 -lvl 8 -y 210 -defaultsOSRD
+preplace inst axi_mem_intercon_1 -pg 1 -lvl 7 -y 3330 -defaultsOSRD
+preplace inst fifo_generator_6 -pg 1 -lvl 8 -y 350 -defaultsOSRD
+preplace inst fifo_generator_7 -pg 1 -lvl 8 -y 70 -defaultsOSRD
+preplace inst AXI_GammaCorrection_0 -pg 1 -lvl 5 -y 2410 -defaultsOSRD
+preplace inst rst_vid_clk_dyn -pg 1 -lvl 5 -y 1620 -defaultsOSRD
+preplace inst xlconcat_0 -pg 1 -lvl 7 -y 3090 -defaultsOSRD
+preplace inst rgb2dvi_0 -pg 1 -lvl 8 -y 1800 -defaultsOSRD
+preplace inst axi_interconnect_0 -pg 1 -lvl 7 -y 1122 -defaultsOSRD
+preplace inst axi_apb_bridge_0 -pg 1 -lvl 8 -y 1950 -defaultsOSRD
+preplace inst ps7_0_axi_periph -pg 1 -lvl 5 -y 2020 -defaultsOSRD
+preplace inst clk_wiz_0 -pg 1 -lvl 7 -y 2134 -defaultsOSRD
+preplace inst fifo_generator_0 -pg 1 -lvl 8 -y 490 -defaultsOSRD
+preplace inst video_dynclk -pg 1 -lvl 6 -y 1850 -defaultsOSRD
+preplace inst fifo_generator_1 -pg 1 -lvl 8 -y 630 -defaultsOSRD
+preplace inst axi_mem_intercon -pg 1 -lvl 7 -y 2696 -defaultsOSRD
+preplace inst AXI_BayerToRGB_1 -pg 1 -lvl 4 -y 2430 -defaultsOSRD
+preplace inst rst_clk_wiz_0_50M -pg 1 -lvl 1 -y 1590 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 8 -y 1540 -defaultsOSRD
+preplace inst fifo_generator_2 -pg 1 -lvl 8 -y 770 -defaultsOSRD
+preplace netloc axi_vdma_0_M_AXI_MM2S 1 6 1 2320
+preplace netloc axi_vdma_1_M_AXI_S2MM 1 6 1 2300
+preplace netloc mm_clk_100 1 2 7 730 1062 1030 1062 1380 1062 1820 1062 2340 1580 2820 1710 4560J
+preplace netloc dphy_hs_clock_1 1 0 2 NJ 1400 420J
+preplace netloc FIFO_READ_5_1 1 0 8 NJ 200 NJ 200 NJ 200 NJ 200 NJ 200 NJ 200 NJ 200 NJ
+preplace netloc processing_system7_0_FIXED_IO 1 8 1 NJ
+preplace netloc FIFO_WRITE_4_1 1 0 8 0J 1300 NJ 1300 NJ 1300 NJ 1300 NJ 1300 NJ 1300 NJ 1300 NJ
+preplace netloc axi_vdma_0_M_AXI_S2MM 1 6 1 2260
+preplace netloc dphy_clk_lp_p_1 1 0 2 NJ 1420 410J
+preplace netloc axi_vdma_1_s2mm_introut 1 6 1 2280
+preplace netloc axi_vdma_0_s2mm_introut 1 6 1 2270
+preplace netloc FIFO_READ_7_1 1 0 8 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ
+preplace netloc fifo_generator_1_data_count 1 8 1 NJ
+preplace netloc rst_1 1 0 8 NJ 660 NJ 660 NJ 660 NJ 660 NJ 660 NJ 660 NJ 660 NJ
+preplace netloc ps7_0_axi_periph_M02_AXI 1 5 1 1760
+preplace netloc dphy_data_hs_p_1 1 0 2 NJ 1680 400J
+preplace netloc axi_vdma_0_M_AXIS_MM2S 1 6 1 2270
+preplace netloc fifo_generator_0_data_count 1 8 1 NJ
+preplace netloc ps7_0_axi_periph_M04_AXI 1 2 4 740 2300 NJ 2300 NJ 2300 1770
+preplace netloc FIFO_WRITE_5_1 1 0 8 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ
+preplace netloc xlconcat_0_dout 1 7 1 2880
+preplace netloc rst_clk_wiz_0_50M_peripheral_aresetn 1 1 8 370 3300 740 3300 1030 3300 1410 3300 1850 3300 2370 1970 2910 1880 NJ
+preplace netloc processing_system7_0_GPIO_0 1 8 1 NJ
+preplace netloc v_tc_0_vtiming_out 1 6 1 2400
+preplace netloc clk_2_1 1 0 8 NJ 500 NJ 500 NJ 500 NJ 500 NJ 500 NJ 500 NJ 500 NJ
+preplace netloc rst_3_1 1 0 8 0J 940 NJ 940 NJ 940 NJ 940 NJ 940 NJ 940 NJ 940 NJ
+preplace netloc FIFO_WRITE_2_2 1 0 8 NJ 740 NJ 740 NJ 740 NJ 740 NJ 740 NJ 740 NJ 740 NJ
+preplace netloc ps7_0_axi_periph_M03_AXI 1 1 5 430 2280 NJ 2280 NJ 2280 NJ 2280 1780
+preplace netloc MIPI_D_PHY_RX_0_RxByteClkHS 1 2 1 710
+preplace netloc rst_5_1 1 0 8 NJ 380 NJ 380 NJ 380 NJ 380 NJ 380 NJ 380 NJ 380 NJ
+preplace netloc processing_system7_0_DDR 1 8 1 NJ
+preplace netloc PixelClk_Generator_clk_out1 1 4 4 1420 2590 1840 2210 2410 2210 2890
+preplace netloc S01_AXI_1 1 0 7 0J 1022 NJ 1022 NJ 1022 NJ 1022 NJ 1022 NJ 1022 NJ
+preplace netloc FIFO_READ_2_2 1 0 8 NJ 760 NJ 760 NJ 760 NJ 760 NJ 760 NJ 760 NJ 760 NJ
+preplace netloc FIFO_READ_1_1 1 0 8 NJ 620 NJ 620 NJ 620 NJ 620 NJ 620 NJ 620 NJ 620 NJ
+preplace netloc FIFO_READ_4_1 1 0 8 NJ 1310 NJ 1310 NJ 1310 NJ 1310 NJ 1310 NJ 1310 NJ 1310 2840J
+preplace netloc clk_3_1 1 0 8 NJ 780 NJ 780 NJ 780 NJ 780 NJ 780 NJ 780 NJ 780 NJ
+preplace netloc rst_1_1 1 0 8 NJ 520 NJ 520 NJ 520 NJ 520 NJ 520 NJ 520 NJ 520 NJ
+preplace netloc ref_clk_200 1 1 7 440 2610 NJ 2610 NJ 2610 NJ 2610 1880J 2340 2380J 2520 2830
+preplace netloc dphy_data_lp_n_1 1 0 2 NJ 1500 360J
+preplace netloc axi_vdma_1_M_AXIS_MM2S 1 6 3 2320J 2540 NJ 2540 4550J
+preplace netloc S_AXIS_S2MM_1 1 0 6 NJ 2650 NJ 2650 NJ 2650 NJ 2650 NJ 2650 NJ
+preplace netloc ps7_0_axi_periph_M00_AXI 1 5 1 1800
+preplace netloc clk_8_1 1 0 8 NJ 220 NJ 220 NJ 220 NJ 220 NJ 220 NJ 220 NJ 220 NJ
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 9 10 1710 NJ 1710 NJ 1710 NJ 1710 1360 1710 NJ 1710 NJ 1710 2810J 1690 4530
+preplace netloc dphy_clk_lp_n_1 1 0 2 NJ 1440 400J
+preplace netloc clk_1_1 1 0 8 NJ 640 NJ 640 NJ 640 NJ 640 NJ 640 NJ 640 NJ 640 NJ
+preplace netloc S02_AXI_1 1 0 7 0J 1042 NJ 1042 NJ 1042 NJ 1042 NJ 1042 NJ 1042 NJ
+preplace netloc rst_4_1 1 0 8 NJ 1350 NJ 1350 NJ 1350 NJ 1350 NJ 1350 NJ 1350 NJ 1350 2810J
+preplace netloc AXI_GammaCorrection_0_AXI_Stream_Master 1 5 1 N
+preplace netloc ps7_0_axi_periph_M01_AXI 1 5 1 1760
+preplace netloc clk_7_1 1 0 8 NJ 80 NJ 80 NJ 80 NJ 80 NJ 80 NJ 80 NJ 80 NJ
+preplace netloc clk_6_1 1 0 8 0J 360 NJ 360 NJ 360 NJ 360 NJ 360 NJ 360 NJ 360 NJ
+preplace netloc axi_apb_bridge_0_APB_M 1 8 1 NJ
+preplace netloc ps7_0_axi_periph_M07_AXI 1 5 1 1790
+preplace netloc dphy_data_lp_p_1 1 0 2 NJ 1460 390J
+preplace netloc fifo_generator_3_data_count 1 8 1 NJ
+preplace netloc axi_vdma_1_M_AXI_MM2S 1 6 1 2330
+preplace netloc axi_vdma_0_mm2s_introut 1 6 1 2290
+preplace netloc processing_system7_0_IIC_0 1 8 1 NJ
+preplace netloc rst_6_1 1 0 8 NJ 100 NJ 100 NJ 100 NJ 100 NJ 100 NJ 100 NJ 100 NJ
+preplace netloc FIFO_WRITE_7_1 1 0 8 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ
+preplace netloc fifo_generator_6_data_count 1 8 1 NJ
+preplace netloc FIFO_READ_5 1 0 8 NJ 480 NJ 480 NJ 480 NJ 480 NJ 480 NJ 480 NJ 480 NJ
+preplace netloc rst_clk_wiz_0_50M_interconnect_aresetn 1 1 6 370J 1082 NJ 1082 NJ 1082 1370 1082 NJ 1082 2420
+preplace netloc processing_system7_0_FCLK_CLK0 1 5 4 1870 2200 2350 2050 NJ 2050 4540
+preplace netloc FIFO_WRITE_3_2 1 0 8 NJ 870 NJ 870 NJ 870 NJ 870 NJ 870 NJ 870 NJ 870 2820J
+preplace netloc clk_4_1 1 0 8 NJ 910 NJ 910 NJ 910 NJ 910 NJ 910 NJ 910 NJ 910 2820J
+preplace netloc dphy_data_hs_n_1 1 0 2 NJ 1480 380J
+preplace netloc fifo_generator_4_data_count 1 8 1 NJ
+preplace netloc clk_5_1 1 0 8 NJ 1330 NJ 1330 NJ 1330 NJ 1330 NJ 1330 NJ 1330 NJ 1330 2810J
+preplace netloc clk_wiz_0_locked 1 0 8 20 2600 NJ 2600 NJ 2600 NJ 2600 NJ 2600 1860J 2330 2390J 2530 2820
+preplace netloc ps7_0_axi_periph_M06_AXI 1 5 3 1810 2190 2300J 1930 NJ
+preplace netloc MIPI_CSI_2_RX_0_m_axis_video 1 3 1 N
+preplace netloc v_tc_0_irq 1 6 1 2360
+preplace netloc v_axi4s_vid_out_0_locked 1 7 1 2900
+preplace netloc axi_dynclk_0_LOCKED_O 1 4 3 1430 2290 NJ 2290 2270
+preplace netloc FIFO_WRITE_5 1 0 8 NJ 460 NJ 460 NJ 460 NJ 460 NJ 460 NJ 460 NJ 460 NJ
+preplace netloc ps7_0_axi_periph_M05_AXI 1 4 2 1440 2310 1760
+preplace netloc MIPI_D_PHY_RX_0_D_PHY_PPI 1 2 1 720
+preplace netloc fifo_generator_2_data_count 1 8 1 NJ
+preplace netloc fifo_generator_7_data_count 1 8 1 NJ
+preplace netloc v_axi4s_vid_out_0_vtg_ce 1 5 3 1880 2230 NJ 2230 2810
+preplace netloc axi_mem_intercon_1_M00_AXI 1 7 1 2860
+preplace netloc FIFO_READ_3_2 1 0 8 NJ 890 NJ 890 NJ 890 NJ 890 NJ 890 NJ 890 NJ 890 2820J
+preplace netloc rst_vid_clk_dyn_peripheral_aresetn 1 5 1 1860
+preplace netloc rst_vid_clk_dyn_peripheral_reset 1 5 2 NJ 1620 2420
+preplace netloc rst_clk_wiz_0_50M_peripheral_reset 1 1 1 380
+preplace netloc processing_system7_0_M_AXI_GP0 1 4 5 1440 1720 NJ 1720 NJ 1720 NJ 1720 4550
+preplace netloc FIFO_READ_6_1 1 0 8 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 2820J
+preplace netloc FIFO_WRITE_1_1 1 0 8 NJ 600 NJ 600 NJ 600 NJ 600 NJ 600 NJ 600 NJ 600 NJ
+preplace netloc xlconstant_0_dout 1 5 1 1870J
+preplace netloc rst_7_1 1 0 8 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ
+preplace netloc rst_2_1 1 0 8 NJ 800 NJ 800 NJ 800 NJ 800 NJ 800 NJ 800 NJ 800 NJ
+preplace netloc FIFO_WRITE_6_1 1 0 8 NJ 320 NJ 320 NJ 320 NJ 320 NJ 320 NJ 320 NJ 320 NJ
+preplace netloc rgb2dvi_0_TMDS 1 8 1 NJ
+preplace netloc axi_mem_intercon_M00_AXI 1 7 1 2840
+preplace netloc AXI_BayerToRGB_1_AXI_Stream_Master 1 4 1 1400
+preplace netloc fifo_generator_5_data_count 1 8 1 NJ
+preplace netloc axi_vdma_1_mm2s_introut 1 6 1 2310
+preplace netloc s_axil_clk_50 1 0 9 0 2670 420 2670 720 2670 NJ 2670 1390 2670 1830 1930 2280J 1920 2830 1700 NJ
+preplace netloc S00_AXI_1 1 0 7 0J 1002 NJ 1002 NJ 1002 NJ 1002 NJ 1002 NJ 1002 NJ
+preplace netloc axi_interconnect_0_M00_AXI 1 7 1 2820
+preplace netloc v_axi4s_vid_out_0_vid_io_out 1 7 1 2870
+preplace netloc axi_dynclk_0_PXL_CLK_5X_O 1 6 2 NJ 1850 2850
+levelinfo -pg 1 -20 200 580 900 1200 1600 2070 2680 4330 4580 -top 0 -bot 3650
 ",
 }
 
