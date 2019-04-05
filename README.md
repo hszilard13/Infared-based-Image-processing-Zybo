@@ -8,4 +8,8 @@ Used hardware resources:<br> 1) Zybo Z7-20<br>
 
 1. Interface the camera with the Zybo Z7-20 using Digilent Pcam-5c demo (https://github.com/Digilent/Zybo-Z7-20-pcam-5c)
 2. Create a inamge processing modules in Verilog that will be included in the reference design
-3. Create sam image processing module in HLS and compare the performace of the two.
+Using 5 image processing algorithms all based on 3x3 kernels: Dead pixel correction, Smoothing, Shaprening, Median filtering, Edge detection
+
+For details please visit: https://projects.digilentinc.com/hszilard13/infrared-specific-image-processing-0c4d16
+
+To clone the project please follow this guide https://reference.digilentinc.com/learn/programmable-logic/tutorials/github-demos/start
