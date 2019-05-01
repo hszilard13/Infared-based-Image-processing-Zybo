@@ -18,8 +18,7 @@ src/ov5647/i2c.o src/ov5647/i2c.o: ../src/ov5647/i2c.c \
  ../../standalone_bsp_0/ps7_cortexa9_0/include/xscugic.h \
  ../../standalone_bsp_0/ps7_cortexa9_0/include/xscugic_hw.h \
  ../../standalone_bsp_0/ps7_cortexa9_0/include/xil_exception.h \
- ../src/ov5647/../ov5647/delay.h \
- ../../standalone_bsp_0/ps7_cortexa9_0/include/xbasic_types.h
+ ../src/ov5647/../tools.h
 
 ../../standalone_bsp_0/ps7_cortexa9_0/include/xparameters.h:
 
@@ -59,6 +58,4 @@ src/ov5647/i2c.o src/ov5647/i2c.o: ../src/ov5647/i2c.c \
 
 ../../standalone_bsp_0/ps7_cortexa9_0/include/xil_exception.h:
 
-../src/ov5647/../ov5647/delay.h:
-
-../../standalone_bsp_0/ps7_cortexa9_0/include/xbasic_types.h:
+../src/ov5647/../tools.h:

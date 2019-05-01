@@ -7,7 +7,9 @@
 #include "xparameters.h"
 #include "xil_io.h"
 #include "../ov5647/defines.h"
-#include "../ov5647/delay.h"
+#include "../tools.h"
+
+
 
 u8 WriteBuffer[sizeof(AddressType) + CHUNK_SIZE];
 #define PAGE_SIZE             4096

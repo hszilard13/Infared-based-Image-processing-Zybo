@@ -13,6 +13,9 @@
 
 #include "xaxivdma.h"
 
+#include "defines.h"
+#include "../tools.h"
+
 #define STRINGIZE(x) STRINGIZE2(x)
 #define STRINGIZE2(x) #x
 #define LINE_STRING STRINGIZE(__LINE__)
@@ -139,7 +142,7 @@ public:
 		context_.ReadCfg.HoriSizeInput = h_res * drv_inst_.ReadChannel.StreamWidth;
 		context_.ReadCfg.VertSizeInput = v_res;
 		context_.ReadCfg.Stride = context_.ReadCfg.HoriSizeInput;
-		context_.ReadCfg.FrameDelay = 1;
+		context_.ReadCfg.FrameDelay = 4;
 		context_.ReadCfg.EnableCircularBuf = 1;
 		context_.ReadCfg.EnableSync = 1;
 		context_.ReadCfg.PointNum = 0;
@@ -225,6 +228,12 @@ public:
 			throw std::runtime_error(__FILE__ ":" LINE_STRING);
 		}
 	}
+
+	XAxiVdma get_drv_inst()
+	{
+		return drv_inst_;
+	}
+
 	void readHandler(uint32_t irq_types)
 	{
 		xil_printf("VDMA:read complete");
