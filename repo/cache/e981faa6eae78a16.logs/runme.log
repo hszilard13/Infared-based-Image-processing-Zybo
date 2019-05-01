@@ -1,0 +1,97 @@
+
+*** Running vivado
+    with args -log system_auto_us_2.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_auto_us_2.tcl
+
+
+****** Vivado v2016.4 (64-bit)
+  **** SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+  **** IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source system_auto_us_2.tcl -notrace
+Starting RTL Elaboration : Time (s): cpu = 00:00:20 ; elapsed = 00:00:27 . Memory (MB): peak = 423.742 ; gain = 213.957
+INFO: [Synth 8-638] synthesizing module 'system_auto_us_2' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_auto_us_2/synth/system_auto_us_2.v:58]
+INFO: [Synth 8-638] synthesizing module 'axi_dwidth_converter_v2_1_11_top' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:14452]
+INFO: [Synth 8-638] synthesizing module 'axi_dwidth_converter_v2_1_11_axi_upsizer' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:7037]
+INFO: [Synth 8-638] synthesizing module 'axi_dwidth_converter_v2_1_11_w_upsizer' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:5562]
+INFO: [Synth 8-256] done synthesizing module 'axi_dwidth_converter_v2_1_11_w_upsizer' (1#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:5562]
+INFO: [Synth 8-638] synthesizing module 'axi_dwidth_converter_v2_1_11_a_upsizer' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:3603]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_command_fifo' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:655]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_command_fifo' (2#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:655]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_command_fifo__parameterized0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:655]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_command_fifo__parameterized0' (2#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:655]
+INFO: [Synth 8-256] done synthesizing module 'axi_dwidth_converter_v2_1_11_a_upsizer' (3#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:3603]
+INFO: [Synth 8-638] synthesizing module 'axi_dwidth_converter_v2_1_11_r_upsizer' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:4652]
+INFO: [Synth 8-256] done synthesizing module 'axi_dwidth_converter_v2_1_11_r_upsizer' (4#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:4652]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axi_register_slice' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:791]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:60]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' (5#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:60]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice' (6#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized0' (6#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized1' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized1' (6#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized2' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized2' (6#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:474]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' (7#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:474]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axi_register_slice' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:791]
+INFO: [Synth 8-638] synthesizing module 'axi_dwidth_converter_v2_1_11_a_upsizer__parameterized0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:3603]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_command_fifo__parameterized1' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:655]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_command_fifo__parameterized1' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7ee0/hdl/generic_baseblocks_v2_1_vl_rfs.v:655]
+INFO: [Synth 8-256] done synthesizing module 'axi_dwidth_converter_v2_1_11_a_upsizer__parameterized0' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:3603]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axi_register_slice__parameterized0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:791]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector__parameterized0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:60]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_axi2vector__parameterized0' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:60]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized3' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized3' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized4' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized4' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized5' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized5' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized6' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized6' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized7' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axic_register_slice__parameterized7' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:85]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi__parameterized0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:474]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_vector2axi__parameterized0' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/7e3a/hdl/axi_infrastructure_v1_1_vl_rfs.v:474]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_11_axi_register_slice__parameterized0' (8#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/0b6b/hdl/axi_register_slice_v2_1_vl_rfs.v:791]
+INFO: [Synth 8-256] done synthesizing module 'axi_dwidth_converter_v2_1_11_axi_upsizer' (9#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:7037]
+INFO: [Synth 8-256] done synthesizing module 'axi_dwidth_converter_v2_1_11_top' (10#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/a4c8/hdl/axi_dwidth_converter_v2_1_vlsyn_rfs.v:14452]
+INFO: [Synth 8-256] done synthesizing module 'system_auto_us_2' (11#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_auto_us_2/synth/system_auto_us_2.v:58]
+Finished RTL Elaboration : Time (s): cpu = 00:01:47 ; elapsed = 00:01:56 . Memory (MB): peak = 546.496 ; gain = 336.711
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:01:48 ; elapsed = 00:01:56 . Memory (MB): peak = 546.496 ; gain = 336.711
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.078 . Memory (MB): peak = 799.430 ; gain = 0.098
+Finished Constraint Validation : Time (s): cpu = 00:02:01 ; elapsed = 00:02:15 . Memory (MB): peak = 799.430 ; gain = 589.645
+Finished Loading Part and Timing Information : Time (s): cpu = 00:02:01 ; elapsed = 00:02:15 . Memory (MB): peak = 799.430 ; gain = 589.645
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:02:01 ; elapsed = 00:02:15 . Memory (MB): peak = 799.430 ; gain = 589.645
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:02:02 ; elapsed = 00:02:16 . Memory (MB): peak = 799.430 ; gain = 589.645
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:02:09 ; elapsed = 00:02:24 . Memory (MB): peak = 799.430 ; gain = 589.645
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:18 ; elapsed = 00:02:33 . Memory (MB): peak = 799.430 ; gain = 589.645
+Finished Timing Optimization : Time (s): cpu = 00:02:19 ; elapsed = 00:02:34 . Memory (MB): peak = 799.430 ; gain = 589.645
+Finished Technology Mapping : Time (s): cpu = 00:02:19 ; elapsed = 00:02:34 . Memory (MB): peak = 812.109 ; gain = 602.324
+Finished IO Insertion : Time (s): cpu = 00:02:20 ; elapsed = 00:02:35 . Memory (MB): peak = 812.109 ; gain = 602.324
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:20 ; elapsed = 00:02:35 . Memory (MB): peak = 812.109 ; gain = 602.324
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:20 ; elapsed = 00:02:35 . Memory (MB): peak = 812.109 ; gain = 602.324
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:20 ; elapsed = 00:02:35 . Memory (MB): peak = 812.109 ; gain = 602.324
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:20 ; elapsed = 00:02:35 . Memory (MB): peak = 812.109 ; gain = 602.324
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:20 ; elapsed = 00:02:35 . Memory (MB): peak = 812.109 ; gain = 602.324
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |LUT1    |     8|
+|2     |LUT2    |    34|
+|3     |LUT3    |   115|
+|4     |LUT4    |    61|
+|5     |LUT5    |   137|
+|6     |LUT6    |   207|
+|7     |SRLC32E |    60|
+|8     |FDRE    |   605|
+|9     |FDSE    |     4|
++------+--------+------+
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:20 ; elapsed = 00:02:35 . Memory (MB): peak = 812.109 ; gain = 602.324
+synth_design: Time (s): cpu = 00:02:09 ; elapsed = 00:02:19 . Memory (MB): peak = 815.992 ; gain = 481.207

@@ -1,0 +1,71 @@
+
+*** Running vivado
+    with args -log system_system_ila_1.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_system_ila_1.tcl
+
+
+****** Vivado v2016.4 (64-bit)
+  **** SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+  **** IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source system_system_ila_1.tcl -notrace
+Starting RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:17 . Memory (MB): peak = 473.137 ; gain = 263.113
+INFO: [Synth 8-638] synthesizing module 'system_system_ila_1' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_1/synth/system_system_ila_1.v:203]
+INFO: [Synth 8-638] synthesizing module 'bd_c2c2' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_1/bd_0/hdl/bd_c2c2.v:13]
+INFO: [Synth 8-638] synthesizing module 'bd_c2c2_ila_lib_0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_1/bd_0/ip/ip_0/synth/bd_c2c2_ila_lib_0.v:84]
+INFO: [Synth 8-638] synthesizing module 'CFGLUT5' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:998]
+INFO: [Synth 8-256] done synthesizing module 'CFGLUT5' (8#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:998]
+INFO: [Synth 8-638] synthesizing module 'CARRY4' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:961]
+INFO: [Synth 8-256] done synthesizing module 'CARRY4' (9#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:961]
+INFO: [Synth 8-638] synthesizing module 'SRLC32E' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43478]
+INFO: [Synth 8-256] done synthesizing module 'SRLC32E' (19#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43478]
+INFO: [Synth 8-638] synthesizing module 'SRL16E' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43328]
+INFO: [Synth 8-256] done synthesizing module 'SRL16E' (21#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43328]
+INFO: [Synth 8-638] synthesizing module 'SRLC16E' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43417]
+INFO: [Synth 8-256] done synthesizing module 'SRLC16E' (23#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43417]
+INFO: [Synth 8-638] synthesizing module 'FDRE' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:3964]
+INFO: [Synth 8-256] done synthesizing module 'FDRE' (28#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:3964]
+INFO: [Synth 8-256] done synthesizing module 'bd_c2c2_ila_lib_0' (46#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_1/bd_0/ip/ip_0/synth/bd_c2c2_ila_lib_0.v:84]
+INFO: [Synth 8-256] done synthesizing module 'bd_c2c2' (47#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_1/bd_0/hdl/bd_c2c2.v:13]
+INFO: [Synth 8-256] done synthesizing module 'system_system_ila_1' (48#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_1/synth/system_system_ila_1.v:203]
+Finished RTL Elaboration : Time (s): cpu = 00:00:55 ; elapsed = 00:01:01 . Memory (MB): peak = 776.699 ; gain = 566.676
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:55 ; elapsed = 00:01:02 . Memory (MB): peak = 776.699 ; gain = 566.676
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.100 . Memory (MB): peak = 874.434 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:01:06 ; elapsed = 00:01:18 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:06 ; elapsed = 00:01:18 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:07 ; elapsed = 00:01:19 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:09 ; elapsed = 00:01:21 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:14 ; elapsed = 00:01:27 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:25 ; elapsed = 00:01:38 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished Timing Optimization : Time (s): cpu = 00:01:25 ; elapsed = 00:01:39 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished Technology Mapping : Time (s): cpu = 00:01:26 ; elapsed = 00:01:39 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished IO Insertion : Time (s): cpu = 00:01:27 ; elapsed = 00:01:40 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:27 ; elapsed = 00:01:40 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:27 ; elapsed = 00:01:40 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:27 ; elapsed = 00:01:40 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:27 ; elapsed = 00:01:40 . Memory (MB): peak = 874.434 ; gain = 664.410
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:27 ; elapsed = 00:01:40 . Memory (MB): peak = 874.434 ; gain = 664.410
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |    26|
+|2     |CFGLUT5  |    71|
+|3     |LUT1     |    17|
+|4     |LUT2     |    62|
+|5     |LUT3     |    90|
+|6     |LUT4     |   120|
+|7     |LUT5     |   100|
+|8     |LUT6     |   383|
+|9     |MUXF7    |    11|
+|10    |RAMB18E1 |     1|
+|11    |SRL16E   |    22|
+|12    |SRLC16E  |     2|
+|13    |SRLC32E  |    17|
+|14    |FDRE     |  1141|
+|15    |FDSE     |     9|
++------+---------+------+
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:27 ; elapsed = 00:01:40 . Memory (MB): peak = 874.434 ; gain = 664.410
+synth_design: Time (s): cpu = 00:01:20 ; elapsed = 00:01:30 . Memory (MB): peak = 874.434 ; gain = 492.180

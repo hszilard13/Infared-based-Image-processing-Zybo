@@ -1,0 +1,79 @@
+
+*** Running vivado
+    with args -log system_auto_pc_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_auto_pc_0.tcl
+
+
+****** Vivado v2016.4 (64-bit)
+  **** SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+  **** IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source system_auto_pc_0.tcl -notrace
+Starting RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:19 . Memory (MB): peak = 368.805 ; gain = 159.160
+INFO: [Synth 8-638] synthesizing module 'system_auto_pc_0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_auto_pc_0/synth/system_auto_pc_0.v:58]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_11_axi_protocol_converter' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/df1b/hdl/axi_protocol_converter_v2_1_vl_rfs.v:4806]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_11_axi3_conv' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/df1b/hdl/axi_protocol_converter_v2_1_vl_rfs.v:954]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_11_a_axi3_conv' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/df1b/hdl/axi_protocol_converter_v2_1_vl_rfs.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_data_fifo_v2_1_10_axic_fifo' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/39ba/hdl/axi_data_fifo_v2_1_vl_rfs.v:64]
+INFO: [Synth 8-638] synthesizing module 'axi_data_fifo_v2_1_10_fifo_gen' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/39ba/hdl/axi_data_fifo_v2_1_vl_rfs.v:168]
+INFO: [Synth 8-256] done synthesizing module 'axi_data_fifo_v2_1_10_fifo_gen' (19#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/39ba/hdl/axi_data_fifo_v2_1_vl_rfs.v:168]
+INFO: [Synth 8-256] done synthesizing module 'axi_data_fifo_v2_1_10_axic_fifo' (20#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/39ba/hdl/axi_data_fifo_v2_1_vl_rfs.v:64]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_11_a_axi3_conv' (21#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/df1b/hdl/axi_protocol_converter_v2_1_vl_rfs.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_11_r_axi3_conv' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/df1b/hdl/axi_protocol_converter_v2_1_vl_rfs.v:1789]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_11_r_axi3_conv' (22#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/df1b/hdl/axi_protocol_converter_v2_1_vl_rfs.v:1789]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_11_axi3_conv' (23#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/df1b/hdl/axi_protocol_converter_v2_1_vl_rfs.v:954]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_11_axi_protocol_converter' (24#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/df1b/hdl/axi_protocol_converter_v2_1_vl_rfs.v:4806]
+INFO: [Synth 8-256] done synthesizing module 'system_auto_pc_0' (25#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_auto_pc_0/synth/system_auto_pc_0.v:58]
+Finished RTL Elaboration : Time (s): cpu = 00:00:43 ; elapsed = 00:00:48 . Memory (MB): peak = 484.957 ; gain = 275.313
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:43 ; elapsed = 00:00:49 . Memory (MB): peak = 484.957 ; gain = 275.313
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.031 . Memory (MB): peak = 738.254 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:00:54 ; elapsed = 00:01:05 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:54 ; elapsed = 00:01:05 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:54 ; elapsed = 00:01:05 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:55 ; elapsed = 00:01:06 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:56 ; elapsed = 00:01:07 . Memory (MB): peak = 738.254 ; gain = 528.609
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Preliminary Mapping  Report (see note below)
++-----------------------+-------------------------------------------------------------------------------+----------------+----------------------+----------------+
+|Module Name            | RTL Object                                                                    | Inference      | Size (Depth x Width) | Primitives     | 
++-----------------------+-------------------------------------------------------------------------------+----------------+----------------------+----------------+
+|fifo_generator_v13_1_3 | inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gdm.dm_gen.dm/RAM_reg | User Attribute | 32 x 1               | RAM32X1D x 1   | 
++-----------------------+-------------------------------------------------------------------------------+----------------+----------------------+----------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:06 ; elapsed = 00:01:17 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished Timing Optimization : Time (s): cpu = 00:01:07 ; elapsed = 00:01:18 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished Technology Mapping : Time (s): cpu = 00:01:07 ; elapsed = 00:01:18 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished IO Insertion : Time (s): cpu = 00:01:07 ; elapsed = 00:01:19 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:07 ; elapsed = 00:01:19 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:07 ; elapsed = 00:01:19 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:07 ; elapsed = 00:01:19 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:07 ; elapsed = 00:01:19 . Memory (MB): peak = 738.254 ; gain = 528.609
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:07 ; elapsed = 00:01:19 . Memory (MB): peak = 738.254 ; gain = 528.609
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |     8|
+|2     |LUT1     |     8|
+|3     |LUT2     |    21|
+|4     |LUT3     |    25|
+|5     |LUT4     |    26|
+|6     |LUT5     |    71|
+|7     |LUT6     |    31|
+|8     |RAM32X1D |     1|
+|9     |FDCE     |    23|
+|10    |FDPE     |    21|
+|11    |FDRE     |   146|
+|12    |FDSE     |     1|
++------+---------+------+
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:07 ; elapsed = 00:01:19 . Memory (MB): peak = 738.254 ; gain = 528.609
+synth_design: Time (s): cpu = 00:01:01 ; elapsed = 00:01:09 . Memory (MB): peak = 738.254 ; gain = 455.703

@@ -1,0 +1,87 @@
+
+*** Running vivado
+    with args -log system_system_ila1_1.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_system_ila1_1.tcl
+
+
+****** Vivado v2016.4 (64-bit)
+  **** SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+  **** IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source system_system_ila1_1.tcl -notrace
+Starting RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 490.645 ; gain = 280.211
+INFO: [Synth 8-638] synthesizing module 'system_system_ila1_1' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/synth/system_system_ila1_1.v:203]
+INFO: [Synth 8-638] synthesizing module 'bd_f8cf' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/hdl/bd_f8cf.v:13]
+INFO: [Synth 8-638] synthesizing module 'bd_f8cf_g_inst_0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/ip/ip_1/synth/bd_f8cf_g_inst_0.v:113]
+INFO: [Synth 8-638] synthesizing module 'bd_f8cf_g_inst_0_gigantic_mux' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/ip/ip_1/bd_f8cf_g_inst_0_gigantic_mux.v:63]
+INFO: [Synth 8-256] done synthesizing module 'bd_f8cf_g_inst_0_gigantic_mux' (1#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/ip/ip_1/bd_f8cf_g_inst_0_gigantic_mux.v:63]
+INFO: [Synth 8-256] done synthesizing module 'bd_f8cf_g_inst_0' (2#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/ip/ip_1/synth/bd_f8cf_g_inst_0.v:113]
+INFO: [Synth 8-638] synthesizing module 'bd_f8cf_ila_lib_0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/ip/ip_0/synth/bd_f8cf_ila_lib_0.v:84]
+INFO: [Synth 8-638] synthesizing module 'CFGLUT5' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:998]
+INFO: [Synth 8-256] done synthesizing module 'CFGLUT5' (10#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:998]
+INFO: [Synth 8-638] synthesizing module 'CARRY4' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:961]
+INFO: [Synth 8-256] done synthesizing module 'CARRY4' (11#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:961]
+INFO: [Synth 8-638] synthesizing module 'SRLC32E' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43478]
+INFO: [Synth 8-256] done synthesizing module 'SRLC32E' (21#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43478]
+INFO: [Synth 8-638] synthesizing module 'SRL16E' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43328]
+INFO: [Synth 8-256] done synthesizing module 'SRL16E' (23#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43328]
+INFO: [Synth 8-638] synthesizing module 'SRLC16E' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43417]
+INFO: [Synth 8-256] done synthesizing module 'SRLC16E' (25#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43417]
+INFO: [Synth 8-638] synthesizing module 'FDRE' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:3964]
+INFO: [Synth 8-256] done synthesizing module 'FDRE' (30#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:3964]
+INFO: [Synth 8-256] done synthesizing module 'bd_f8cf_ila_lib_0' (48#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/ip/ip_0/synth/bd_f8cf_ila_lib_0.v:84]
+INFO: [Synth 8-638] synthesizing module 'bd_f8cf_slot_0_apcs_0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/ip/ip_2/synth/bd_f8cf_slot_0_apcs_0.v:57]
+INFO: [Synth 8-638] synthesizing module 'axis_protocol_checker_v1_1_11_top' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/6c72/hdl/axis_protocol_checker_v1_1_vl_rfs.v:657]
+INFO: [Synth 8-638] synthesizing module 'axis_protocol_checker_v1_1_11_asr_inline' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/6c72/hdl/axis_protocol_checker_v1_1_vl_rfs.v:55]
+INFO: [Synth 8-256] done synthesizing module 'axis_protocol_checker_v1_1_11_asr_inline' (49#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/6c72/hdl/axis_protocol_checker_v1_1_vl_rfs.v:55]
+INFO: [Synth 8-638] synthesizing module 'axis_protocol_checker_v1_1_11_reporter' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/6c72/hdl/axis_protocol_checker_v1_1_vl_rfs.v:536]
+INFO: [Synth 8-256] done synthesizing module 'axis_protocol_checker_v1_1_11_reporter' (50#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/6c72/hdl/axis_protocol_checker_v1_1_vl_rfs.v:536]
+INFO: [Synth 8-256] done synthesizing module 'axis_protocol_checker_v1_1_11_top' (51#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/6c72/hdl/axis_protocol_checker_v1_1_vl_rfs.v:657]
+INFO: [Synth 8-256] done synthesizing module 'bd_f8cf_slot_0_apcs_0' (52#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/ip/ip_2/synth/bd_f8cf_slot_0_apcs_0.v:57]
+INFO: [Synth 8-638] synthesizing module 'bd_f8cf_slot_1_apcs_0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/ip/ip_3/synth/bd_f8cf_slot_1_apcs_0.v:57]
+INFO: [Synth 8-638] synthesizing module 'axis_protocol_checker_v1_1_11_top__parameterized0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/6c72/hdl/axis_protocol_checker_v1_1_vl_rfs.v:657]
+INFO: [Synth 8-256] done synthesizing module 'axis_protocol_checker_v1_1_11_top__parameterized0' (52#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/6c72/hdl/axis_protocol_checker_v1_1_vl_rfs.v:657]
+INFO: [Synth 8-256] done synthesizing module 'bd_f8cf_slot_1_apcs_0' (53#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/ip/ip_3/synth/bd_f8cf_slot_1_apcs_0.v:57]
+INFO: [Synth 8-256] done synthesizing module 'bd_f8cf' (54#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/bd_0/hdl/bd_f8cf.v:13]
+INFO: [Synth 8-256] done synthesizing module 'system_system_ila1_1' (55#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila1_1/synth/system_system_ila1_1.v:203]
+Finished RTL Elaboration : Time (s): cpu = 00:00:57 ; elapsed = 00:01:04 . Memory (MB): peak = 807.234 ; gain = 596.801
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:58 ; elapsed = 00:01:04 . Memory (MB): peak = 807.234 ; gain = 596.801
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.118 . Memory (MB): peak = 912.898 ; gain = 0.594
+Finished Constraint Validation : Time (s): cpu = 00:01:10 ; elapsed = 00:01:22 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:10 ; elapsed = 00:01:22 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:11 ; elapsed = 00:01:23 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:14 ; elapsed = 00:01:26 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:20 ; elapsed = 00:01:34 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:33 ; elapsed = 00:01:47 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished Timing Optimization : Time (s): cpu = 00:01:33 ; elapsed = 00:01:47 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished Technology Mapping : Time (s): cpu = 00:01:34 ; elapsed = 00:01:48 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished IO Insertion : Time (s): cpu = 00:01:35 ; elapsed = 00:01:49 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:35 ; elapsed = 00:01:49 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:35 ; elapsed = 00:01:49 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:35 ; elapsed = 00:01:49 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:35 ; elapsed = 00:01:49 . Memory (MB): peak = 912.898 ; gain = 702.465
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:35 ; elapsed = 00:01:49 . Memory (MB): peak = 912.898 ; gain = 702.465
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |    42|
+|2     |CFGLUT5  |   117|
+|3     |LUT1     |    27|
+|4     |LUT2     |    86|
+|5     |LUT3     |   125|
+|6     |LUT4     |   183|
+|7     |LUT5     |   126|
+|8     |LUT6     |   562|
+|9     |MUXF7    |    21|
+|10    |RAMB36E1 |     2|
+|11    |SRL16E   |    68|
+|12    |SRLC16E  |     2|
+|13    |SRLC32E  |    17|
+|14    |FDRE     |  1785|
+|15    |FDSE     |     9|
++------+---------+------+
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:35 ; elapsed = 00:01:49 . Memory (MB): peak = 912.898 ; gain = 702.465
+synth_design: Time (s): cpu = 00:01:28 ; elapsed = 00:01:39 . Memory (MB): peak = 912.898 ; gain = 511.664

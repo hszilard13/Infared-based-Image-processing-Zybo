@@ -142,11 +142,3 @@
 #define CFG_BKG_RST        0x00000000
 #define CFG_BKG_FIELD_MASK  0x00ffffff
 #define CFG_BKG_FIELD_SHIFT 0
-
-/* Register: cfg_sw_rst */
-#define CFG_SW_RST_ADDR       0x005C
-#define CFG_SW_RST_RST        0x00000000
-#define CFG_SW_RST_FIELD_MASK  0x00000001
-#define CFG_SW_RST_FIELD_SHIFT 0
-
-

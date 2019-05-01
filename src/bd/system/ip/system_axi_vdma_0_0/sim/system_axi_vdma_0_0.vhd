@@ -109,8 +109,8 @@ ENTITY system_axi_vdma_0_0 IS
     m_axi_s2mm_awcache : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
     m_axi_s2mm_awvalid : OUT STD_LOGIC;
     m_axi_s2mm_awready : IN STD_LOGIC;
-    m_axi_s2mm_wdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
-    m_axi_s2mm_wstrb : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+    m_axi_s2mm_wdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+    m_axi_s2mm_wstrb : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
     m_axi_s2mm_wlast : OUT STD_LOGIC;
     m_axi_s2mm_wvalid : OUT STD_LOGIC;
     m_axi_s2mm_wready : IN STD_LOGIC;
@@ -276,8 +276,8 @@ ARCHITECTURE system_axi_vdma_0_0_arch OF system_axi_vdma_0_0 IS
       m_axi_s2mm_awcache : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
       m_axi_s2mm_awvalid : OUT STD_LOGIC;
       m_axi_s2mm_awready : IN STD_LOGIC;
-      m_axi_s2mm_wdata : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
-      m_axi_s2mm_wstrb : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+      m_axi_s2mm_wdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+      m_axi_s2mm_wstrb : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
       m_axi_s2mm_wlast : OUT STD_LOGIC;
       m_axi_s2mm_wvalid : OUT STD_LOGIC;
       m_axi_s2mm_wready : IN STD_LOGIC;
@@ -373,7 +373,7 @@ BEGIN
       C_PRMRY_IS_ACLK_ASYNC => 1,
       C_ENABLE_VIDPRMTR_READS => 1,
       C_DYNAMIC_RESOLUTION => 1,
-      C_NUM_FSTORES => 3,
+      C_NUM_FSTORES => 5,
       C_USE_FSYNC => 1,
       C_USE_MM2S_FSYNC => 0,
       C_USE_S2MM_FSYNC => 2,
@@ -407,7 +407,7 @@ BEGIN
       C_S2MM_LINEBUFFER_THRESH => 4,
       C_S2MM_MAX_BURST_LENGTH => 8,
       C_M_AXI_S2MM_ADDR_WIDTH => 32,
-      C_M_AXI_S2MM_DATA_WIDTH => 64,
+      C_M_AXI_S2MM_DATA_WIDTH => 32,
       C_S_AXIS_S2MM_TDATA_WIDTH => 24,
       C_S_AXIS_S2MM_TUSER_BITS => 1,
       C_ENABLE_DEBUG_ALL => 0,

@@ -455,7 +455,7 @@ input [5 : 0] S_AXI_HP3_AWID;
 input [5 : 0] S_AXI_HP3_WID;
 input [63 : 0] S_AXI_HP3_WDATA;
 input [7 : 0] S_AXI_HP3_WSTRB;
-input [4 : 0] IRQ_F2P;
+input [7 : 0] IRQ_F2P;
 output FCLK_CLK0;
 output FCLK_RESET0_N;
 input [53 : 0] MIO;

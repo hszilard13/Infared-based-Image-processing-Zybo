@@ -56,13 +56,13 @@ assign invalrdy = win_val & win_rdy;
 
 // Assign maximum and minimum values
 assign {comp0_max, comp0_min} = (pix0      > pix1     ) ? {pix0     , pix1     } : {pix1     , pix0      };
-assign {comp1_max, comp1_min} = (comp0_max > pix2     ) ? {comp0_max, pix2     } : {pix2     , comp0_max };
-assign {comp2_max, comp2_min} = (comp0_min > comp1_max) ? {comp0_min, comp1_max} : {comp0_min, comp1_max };
+assign {comp1_max, comp1_min} = (comp0_min > pix2     ) ? {comp0_min, pix2     } : {pix2     , comp0_min };
+assign {comp2_max, comp2_min} = (comp0_max > comp1_max) ? {comp0_max, comp1_max} : {comp0_max, comp1_max };
 
 //Create data
 always@(posedge clk or negedge rst_n)
-  if(~rst_n  ) sort_data <= {DATA_WIDTH{1'b0}}               ; else
-  if(invalrdy) sort_data <= {comp2_max, comp2_min, comp1_min};
+if(~rst_n  ) sort_data <= {DATA_WIDTH{1'b0}}               ; else
+if(invalrdy) sort_data <= {comp2_max, comp2_min, comp1_min};
   
 //Control signals
 always@(posedge clk or negedge rst_n)

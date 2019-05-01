@@ -102,8 +102,7 @@ output                      frm_sof               , // Frame start of frame
 output                      frm_eof               , // Frame end of frame
 output                      frm_sol               , // Frame start of line
 output                      frm_eol               , // Frame end of line
-input                       frm_rdy               ,
-input                       vga_rst_rd            
+input                       frm_rdy                                                
  );
  
 wire                  sts_done0         ;
@@ -112,7 +111,10 @@ wire                  sts_done2         ;
 
 wire start;
 reg cfg_blk_en_d;
+wire vga_rst_rd;
+reg frm_eof_d;
 
+assign vga_rst_rd = frm_eof_d & (~frm_eof); // Self-reset on negedge eof
 
  assign sts_axi_error = (cfg_map0_en&(axi0_rresp!=0))|(cfg_map1_en&(axi1_rresp!=0))|(cfg_map2_en&(axi2_rresp!=0)); // Error if response not 0
  assign sts_read_done = (sts_done0|(~cfg_map0_en))&(sts_done1|(~cfg_map1_en))&(sts_done2|(~cfg_map2_en))         ; // Read done when all sts_done is 1
@@ -134,6 +136,10 @@ reg cfg_blk_en_d;
  always@(posedge clk or negedge rst_n)
    if(~rst_n) cfg_blk_en_d <= 1'b0      ;else
               cfg_blk_en_d <= cfg_blk_en;
+              
+always@(posedge clk or negedge rst_n)
+    if(~rst_n) frm_eof_d <= 1'b0   ;else
+               frm_eof_d <= frm_eof;
 
  axi2fifo#(
   .ADDR_WIDTH  (ADDR_WIDTH  )

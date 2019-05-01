@@ -1,7 +1,7 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-// Date        : Fri Mar 29 15:48:05 2019
+// Date        : Tue Apr 30 13:30:13 2019
 // Host        : shegedus running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub -rename_top system_auto_pc_3 -prefix
 //               system_auto_pc_3_ system_auto_pc_3_stub.v
@@ -27,10 +27,10 @@ module system_auto_pc_3(aclk, aresetn, s_axi_awid, s_axi_awaddr,
   m_axi_arid, m_axi_araddr, m_axi_arlen, m_axi_arsize, m_axi_arburst, m_axi_arlock, 
   m_axi_arcache, m_axi_arprot, m_axi_arqos, m_axi_arvalid, m_axi_arready, m_axi_rid, 
   m_axi_rdata, m_axi_rresp, m_axi_rlast, m_axi_rvalid, m_axi_rready)
-/* synthesis syn_black_box black_box_pad_pin="aclk,aresetn,s_axi_awid[1:0],s_axi_awaddr[31:0],s_axi_awlen[7:0],s_axi_awsize[2:0],s_axi_awburst[1:0],s_axi_awlock[0:0],s_axi_awcache[3:0],s_axi_awprot[2:0],s_axi_awregion[3:0],s_axi_awqos[3:0],s_axi_awvalid,s_axi_awready,s_axi_wdata[63:0],s_axi_wstrb[7:0],s_axi_wlast,s_axi_wvalid,s_axi_wready,s_axi_bid[1:0],s_axi_bresp[1:0],s_axi_bvalid,s_axi_bready,s_axi_arid[1:0],s_axi_araddr[31:0],s_axi_arlen[7:0],s_axi_arsize[2:0],s_axi_arburst[1:0],s_axi_arlock[0:0],s_axi_arcache[3:0],s_axi_arprot[2:0],s_axi_arregion[3:0],s_axi_arqos[3:0],s_axi_arvalid,s_axi_arready,s_axi_rid[1:0],s_axi_rdata[63:0],s_axi_rresp[1:0],s_axi_rlast,s_axi_rvalid,s_axi_rready,m_axi_awid[1:0],m_axi_awaddr[31:0],m_axi_awlen[3:0],m_axi_awsize[2:0],m_axi_awburst[1:0],m_axi_awlock[1:0],m_axi_awcache[3:0],m_axi_awprot[2:0],m_axi_awqos[3:0],m_axi_awvalid,m_axi_awready,m_axi_wid[1:0],m_axi_wdata[63:0],m_axi_wstrb[7:0],m_axi_wlast,m_axi_wvalid,m_axi_wready,m_axi_bid[1:0],m_axi_bresp[1:0],m_axi_bvalid,m_axi_bready,m_axi_arid[1:0],m_axi_araddr[31:0],m_axi_arlen[3:0],m_axi_arsize[2:0],m_axi_arburst[1:0],m_axi_arlock[1:0],m_axi_arcache[3:0],m_axi_arprot[2:0],m_axi_arqos[3:0],m_axi_arvalid,m_axi_arready,m_axi_rid[1:0],m_axi_rdata[63:0],m_axi_rresp[1:0],m_axi_rlast,m_axi_rvalid,m_axi_rready" */;
+/* synthesis syn_black_box black_box_pad_pin="aclk,aresetn,s_axi_awid[3:0],s_axi_awaddr[31:0],s_axi_awlen[7:0],s_axi_awsize[2:0],s_axi_awburst[1:0],s_axi_awlock[0:0],s_axi_awcache[3:0],s_axi_awprot[2:0],s_axi_awregion[3:0],s_axi_awqos[3:0],s_axi_awvalid,s_axi_awready,s_axi_wdata[63:0],s_axi_wstrb[7:0],s_axi_wlast,s_axi_wvalid,s_axi_wready,s_axi_bid[3:0],s_axi_bresp[1:0],s_axi_bvalid,s_axi_bready,s_axi_arid[3:0],s_axi_araddr[31:0],s_axi_arlen[7:0],s_axi_arsize[2:0],s_axi_arburst[1:0],s_axi_arlock[0:0],s_axi_arcache[3:0],s_axi_arprot[2:0],s_axi_arregion[3:0],s_axi_arqos[3:0],s_axi_arvalid,s_axi_arready,s_axi_rid[3:0],s_axi_rdata[63:0],s_axi_rresp[1:0],s_axi_rlast,s_axi_rvalid,s_axi_rready,m_axi_awid[3:0],m_axi_awaddr[31:0],m_axi_awlen[3:0],m_axi_awsize[2:0],m_axi_awburst[1:0],m_axi_awlock[1:0],m_axi_awcache[3:0],m_axi_awprot[2:0],m_axi_awqos[3:0],m_axi_awvalid,m_axi_awready,m_axi_wid[3:0],m_axi_wdata[63:0],m_axi_wstrb[7:0],m_axi_wlast,m_axi_wvalid,m_axi_wready,m_axi_bid[3:0],m_axi_bresp[1:0],m_axi_bvalid,m_axi_bready,m_axi_arid[3:0],m_axi_araddr[31:0],m_axi_arlen[3:0],m_axi_arsize[2:0],m_axi_arburst[1:0],m_axi_arlock[1:0],m_axi_arcache[3:0],m_axi_arprot[2:0],m_axi_arqos[3:0],m_axi_arvalid,m_axi_arready,m_axi_rid[3:0],m_axi_rdata[63:0],m_axi_rresp[1:0],m_axi_rlast,m_axi_rvalid,m_axi_rready" */;
   input aclk;
   input aresetn;
-  input [1:0]s_axi_awid;
+  input [3:0]s_axi_awid;
   input [31:0]s_axi_awaddr;
   input [7:0]s_axi_awlen;
   input [2:0]s_axi_awsize;
@@ -47,11 +47,11 @@ module system_auto_pc_3(aclk, aresetn, s_axi_awid, s_axi_awaddr,
   input s_axi_wlast;
   input s_axi_wvalid;
   output s_axi_wready;
-  output [1:0]s_axi_bid;
+  output [3:0]s_axi_bid;
   output [1:0]s_axi_bresp;
   output s_axi_bvalid;
   input s_axi_bready;
-  input [1:0]s_axi_arid;
+  input [3:0]s_axi_arid;
   input [31:0]s_axi_araddr;
   input [7:0]s_axi_arlen;
   input [2:0]s_axi_arsize;
@@ -63,13 +63,13 @@ module system_auto_pc_3(aclk, aresetn, s_axi_awid, s_axi_awaddr,
   input [3:0]s_axi_arqos;
   input s_axi_arvalid;
   output s_axi_arready;
-  output [1:0]s_axi_rid;
+  output [3:0]s_axi_rid;
   output [63:0]s_axi_rdata;
   output [1:0]s_axi_rresp;
   output s_axi_rlast;
   output s_axi_rvalid;
   input s_axi_rready;
-  output [1:0]m_axi_awid;
+  output [3:0]m_axi_awid;
   output [31:0]m_axi_awaddr;
   output [3:0]m_axi_awlen;
   output [2:0]m_axi_awsize;
@@ -80,17 +80,17 @@ module system_auto_pc_3(aclk, aresetn, s_axi_awid, s_axi_awaddr,
   output [3:0]m_axi_awqos;
   output m_axi_awvalid;
   input m_axi_awready;
-  output [1:0]m_axi_wid;
+  output [3:0]m_axi_wid;
   output [63:0]m_axi_wdata;
   output [7:0]m_axi_wstrb;
   output m_axi_wlast;
   output m_axi_wvalid;
   input m_axi_wready;
-  input [1:0]m_axi_bid;
+  input [3:0]m_axi_bid;
   input [1:0]m_axi_bresp;
   input m_axi_bvalid;
   output m_axi_bready;
-  output [1:0]m_axi_arid;
+  output [3:0]m_axi_arid;
   output [31:0]m_axi_araddr;
   output [3:0]m_axi_arlen;
   output [2:0]m_axi_arsize;
@@ -101,7 +101,7 @@ module system_auto_pc_3(aclk, aresetn, s_axi_awid, s_axi_awaddr,
   output [3:0]m_axi_arqos;
   output m_axi_arvalid;
   input m_axi_arready;
-  input [1:0]m_axi_rid;
+  input [3:0]m_axi_rid;
   input [63:0]m_axi_rdata;
   input [1:0]m_axi_rresp;
   input m_axi_rlast;

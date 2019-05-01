@@ -35,8 +35,7 @@ output                          out_eol     // End of Line
 
 //-----------------------------Internal signals----------------------------------------------
 
-wire hor_rdy ;
-wire vert_rdy;
+
 wire hor_val ;
 wire vert_val;
 
@@ -50,17 +49,11 @@ wire [3*DATA_WIDTH-1 : 0]hor02_data;
      
     
 wire [3*DATA_WIDTH-1 : 0]diag0_data;
-reg [1:0]in3x3_sol_d;
-reg [1:0]in3x3_sof_d;
-reg [1:0]in3x3_eol_d;
-reg [1:0]in3x3_eof_d;
 
 wire vert0_rdy;
 wire vert1_rdy;
 wire vert2_rdy;
 wire hor0_rdy;
-wire hor1_rdy;
-wire hor2_rdy;
 
 wire win1_sol;
 wire win1_eol;
@@ -90,8 +83,8 @@ median_line_sort#(
   .win_sof  (in3x3_sof                               ),
   .win_eof  (in3x3_eof                               ),
   .sort_val (vert_val                                ),      
-  .sort_rdy (vert0_rdy                               ),      
-  .sort_data(vert0_data                              ),
+  .sort_rdy (vert2_rdy                               ),      
+  .sort_data(vert2_data                              ),
   .sort_sol (win0_sol                                ),
   .sort_eol (win0_eol                                ),
   .sort_sof (win0_sof                                ),
@@ -136,8 +129,8 @@ median_line_sort#(
   .win_sof  (in3x3_sof                               ),
   .win_eof  (in3x3_eof                               ),
   .sort_val (                                        ),      
-  .sort_rdy (vert2_rdy                               ),      
-  .sort_data(vert2_data                              ),
+  .sort_rdy (vert0_rdy                               ),      
+  .sort_data(vert0_data                              ),
   .sort_sol (                                        ),
   .sort_eol (                                        ),
   .sort_sof (                                        ),
@@ -220,9 +213,9 @@ median_line_sort#(
 )diag0(
   .clk      (clk                                    ),
   .rst_n    (rst_n                                  ), 
-  .pix2     (hor02_data[  DATA_WIDTH-1:           0]),
+  .pix2     (hor00_data[  DATA_WIDTH-1:           0]),
   .pix1     (hor01_data[2*DATA_WIDTH-1:  DATA_WIDTH]),
-  .pix0     (hor00_data[3*DATA_WIDTH-1:2*DATA_WIDTH]),
+  .pix0     (hor02_data[3*DATA_WIDTH-1:2*DATA_WIDTH]),
   .win_val  (hor_val                                ),
   .win_rdy  (hor0_rdy                               ),
   .win_sol  (win1_sol                               ),

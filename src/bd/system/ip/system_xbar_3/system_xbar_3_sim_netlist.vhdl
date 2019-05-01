@@ -1,7 +1,7 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
--- Date        : Fri Mar 29 15:47:37 2019
+-- Date        : Tue Apr 30 13:29:43 2019
 -- Host        : shegedus running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim -rename_top system_xbar_3 -prefix
 --               system_xbar_3_ system_xbar_3_sim_netlist.vhdl
@@ -6843,7 +6843,7 @@ entity system_xbar_3_axi_crossbar_v2_1_12_axi_crossbar is
   attribute C_S_AXI_BASE_ID : string;
   attribute C_S_AXI_BASE_ID of system_xbar_3_axi_crossbar_v2_1_12_axi_crossbar : entity is "64'b0000000000000000000000000000000100000000000000000000000000000000";
   attribute C_S_AXI_READ_ACCEPTANCE : string;
-  attribute C_S_AXI_READ_ACCEPTANCE of system_xbar_3_axi_crossbar_v2_1_12_axi_crossbar : entity is "64'b0000000000000000000000000000001000000000000000000000000000000010";
+  attribute C_S_AXI_READ_ACCEPTANCE of system_xbar_3_axi_crossbar_v2_1_12_axi_crossbar : entity is "64'b0000000000000000000000000000100000000000000000000000000000001000";
   attribute C_S_AXI_SINGLE_THREAD : string;
   attribute C_S_AXI_SINGLE_THREAD of system_xbar_3_axi_crossbar_v2_1_12_axi_crossbar : entity is "64'b0000000000000000000000000000000000000000000000000000000000000000";
   attribute C_S_AXI_THREAD_ID_WIDTH : string;
@@ -7316,7 +7316,7 @@ architecture STRUCTURE of system_xbar_3 is
   attribute C_S_AXI_BASE_ID : string;
   attribute C_S_AXI_BASE_ID of inst : label is "64'b0000000000000000000000000000000100000000000000000000000000000000";
   attribute C_S_AXI_READ_ACCEPTANCE : string;
-  attribute C_S_AXI_READ_ACCEPTANCE of inst : label is "64'b0000000000000000000000000000001000000000000000000000000000000010";
+  attribute C_S_AXI_READ_ACCEPTANCE of inst : label is "64'b0000000000000000000000000000100000000000000000000000000000001000";
   attribute C_S_AXI_SINGLE_THREAD : string;
   attribute C_S_AXI_SINGLE_THREAD of inst : label is "64'b0000000000000000000000000000000000000000000000000000000000000000";
   attribute C_S_AXI_THREAD_ID_WIDTH : string;

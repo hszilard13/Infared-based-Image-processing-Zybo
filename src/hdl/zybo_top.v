@@ -39,7 +39,9 @@ input         dphy_hs_clock_clk_p ,
 output        hdmi_tx_clk_n       ,
 output        hdmi_tx_clk_p       ,
 output [2:0]  hdmi_tx_data_n      ,
-output [2:0]  hdmi_tx_data_p      
+output [2:0]  hdmi_tx_data_p      ,
+input  [3:0]  gpio_sw             ,
+input  [3:0]  gpio_btn   
 );
 
  
@@ -273,37 +275,28 @@ wire       S02_AXI_wready;
 wire [3:0] S02_AXI_wstrb;
 wire       S02_AXI_wvalid; 
 
-wire         fifo_ch0_empty  ;
-wire         fifo_ch1_empty  ;
-wire         fifo_ch2_empty  ;
-wire [63:0]  fifo_data0      ;
-wire [63:0]  fifo_data1      ;
-wire [63:0]  fifo_data2      ;
-wire         fifo_ch0_pop    ;
-wire         fifo_ch1_pop    ;
-wire         fifo_ch2_pop    ;
-wire [63:0]  fifo_ch0_data   ;
-wire [63:0]  fifo_ch1_data   ;
-wire [63:0]  fifo_ch2_data   ;
-wire [10:0]  fifo_words_used0;
-wire [10:0]  fifo_words_used1;
-wire [10:0]  fifo_words_used2;
-wire         fifo_push0      ;
-wire         fifo_push1      ;
-wire         fifo_push2      ;
-wire         fifo_full0      ;
-wire         fifo_full1      ;
-wire         fifo_full2      ;
+wire         fifo_ch0_empty    ;
+wire         fifo_ch1_empty    ;
+wire         fifo_ch2_empty    ;
+wire [63:0]  fifo_ch0_popdata  ;
+wire [63:0]  fifo_ch1_popdata  ;
+wire [63:0]  fifo_ch2_popdata  ;
+wire         fifo_ch0_pop      ;
+wire         fifo_ch1_pop      ;
+wire         fifo_ch2_pop      ;
+wire [63:0]  fifo_ch0_pushdata ;
+wire [63:0]  fifo_ch1_pushdata ;
+wire [63:0]  fifo_ch2_pushdata ;
+wire [10:0]  fifo_ch0_usedwords;
+wire [10:0]  fifo_ch1_usedwords;
+wire [10:0]  fifo_ch2_usedwords;
+wire         fifo_ch0_push     ;
+wire         fifo_ch1_push     ;
+wire         fifo_ch2_push     ;
+wire         fifo_ch0_full     ;
+wire         fifo_ch1_full     ;
+wire         fifo_ch2_full     ;
  
-wire                   int_fifo_push        ; // Master pushes data into FIFO
-wire [3*DATA_WIDTH-1:0]int_fifo_pushdata    ; // Data stored into FIFO
-wire                   int_fifo_full        ; // FIFO full
-wire                   int_fifo_almost_full ; // FIFO full
-wire                   int_fifo_pop         ; // Master pops data from FIFO
-wire [3*DATA_WIDTH-1:0]int_fifo_popdata     ; // Data retrived from FIFO
-wire                   int_fifo_empty       ; // FIFO empty
-wire                   int_fifo_almost_empty; // FIFO empty
-
 wire        filt_val ; // Master has valid data to be transferred      
 wire        filt_rdy ; // Slave is ready to receive the data           
 wire [23:0] filt_data; // Data transferred from master to slave        
@@ -317,6 +310,9 @@ wire sharp_lb_fifo_clr   ;
 wire smooth_lb_fifo_clr  ;
 wire median_lb_fifo_clr  ;
 wire pix_corr_lb_fifo_clr;
+
+wire wr_eof_intr;
+wire rd_eof_intr;
 
                
 assign S00_AXI_arcache = 4'd0;
@@ -484,7 +480,6 @@ system_wrapper i_system_wrapper
   .clk_3                    (clk                      ),
   .clk_4                    (clk                      ),
   .clk_5                    (clk                      ),
-  .clk_axi                  (clk_axi                  ),
   .data_count               (laplace_lb_fifo_usedwords),
   .data_count_1             (sharp_lb_fifo_usedwords  ),
   .data_count_2             (smooth_lb_fifo_usedwords ),
@@ -617,7 +612,10 @@ system_wrapper i_system_wrapper
   .S02_AXI_wlast            (S02_AXI_wlast            ),
   .S02_AXI_wready           (S02_AXI_wready           ),
   .S02_AXI_wstrb            (S02_AXI_wstrb            ),
-  .S02_AXI_wvalid           (S02_AXI_wvalid           )
+  .S02_AXI_wvalid           (S02_AXI_wvalid           ),
+  .wr_eof_intr              (wr_eof_intr              ),
+  .rd_eof_intr              (rd_eof_intr              ),
+  .gpio_tri_i               ({gpio_btn,gpio_sw}       )
   );
     
 IR_FILTERS_regs regs(
@@ -645,6 +643,7 @@ IR_FILTERS_regs regs(
     .cfg_sharp_coef      (cfg_sharp_coef      ),
 	.cfg_test_mode_en    (cfg_test_mode_en    ),
 	.cfg_bkg             (cfg_bkg             ),
+	.cfg_eof_intr_ack    (cfg_eof_intr_ack    ),
     .PCLK                (clk_axi             ),
     .PRESETn             (rst_n               ), 
     .PADDR               (APB_M_paddr[15:0]   ),  
@@ -708,7 +707,7 @@ ir_filters_top_1px#(
   .filt_rdy                  (S_AXIS_S2MM_tready        ), // Slave is ready to receive the data           
   .filt_data                 (S_AXIS_S2MM_tdata         ), // Data transferred from master to slave        
   .filt_sof                  (S_AXIS_S2MM_tuser         ), // Start of Frame                               
-  .filt_eof                  (                          ), // End of Frame                                 
+  .filt_eof                  (filt_eof                  ), // End of Frame                                 
   .filt_sol                  (                          ), // Start of Line                                
   .filt_eol                  (S_AXIS_S2MM_tlast         ), // End of Line                            
   .laplace_lb_fifo_push      (laplace_lb_fifo_push      ), // Master pushes data into FIFO
@@ -752,6 +751,23 @@ ir_filters_top_1px#(
   .median_lb_fifo_clr        (median_lb_fifo_clr        ),
   .pix_corr_lb_fifo_clr      (pix_corr_lb_fifo_clr      )
   
+);
+
+intr_gen i_wr_eof_intr(
+  .clk     (clk             ), // System clock
+  .rst_n   (rst_n           ), // Reset active low
+  .stimulus(filt_eof        ), // Input stimulus
+  .intr_ack(cfg_eof_intr_ack), // Interrupt acknowledge
+  .intr    (wr_eof_intr      )  // Interrupt
+);
+
+
+intr_gen i_rd_eof_intr(
+  .clk     (clk             ), // System clock
+  .rst_n   (rst_n           ), // Reset active low
+  .stimulus(s_frm_eof       ), // Input stimulus
+  .intr_ack(cfg_sof_intr_ack), // Interrupt acknowledge
+  .intr    (rd_eof_intr     )  // Interrupt
 );
 
 axi2frame#(
@@ -837,8 +853,7 @@ axi2frame#(
   .frm_eof             (test_frm_eof        ), // Frame end of frame
   .frm_sol             (test_frm_sol        ), // Frame start of line
   .frm_eol             (test_frm_eol        ), // Frame end of line
-  .frm_rdy             (test_frm_rdy        ),
-  .vga_rst_rd          ()
+  .frm_rdy             (test_frm_rdy        )
  );
  
 selector_2i#(

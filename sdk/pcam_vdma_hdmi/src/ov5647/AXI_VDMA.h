@@ -13,9 +13,6 @@
 
 #include "xaxivdma.h"
 
-#include "defines.h"
-#include "../tools.h"
-
 #define STRINGIZE(x) STRINGIZE2(x)
 #define STRINGIZE2(x) #x
 #define LINE_STRING STRINGIZE(__LINE__)
@@ -228,12 +225,6 @@ public:
 			throw std::runtime_error(__FILE__ ":" LINE_STRING);
 		}
 	}
-
-	vdma_context_t get_context_()
-	{
-		return context_;
-	}
-
 	void readHandler(uint32_t irq_types)
 	{
 		xil_printf("VDMA:read complete");

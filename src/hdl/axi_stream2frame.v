@@ -40,49 +40,48 @@ reg [11:0] line_cnt;
 wire invalrdy;
 wire outvalrdy;
 
-wire set_eof;
-
 assign invalrdy = m_axi_stream_tvalid & m_axi_stream_tready;
 assign outvalrdy = s_frm_rdy & s_frm_val;
+
 assign m_axi_stream_tready = s_frm_rdy;
-assign set_eof = (line_cnt == (cfg_img_h - 1'd1)) & m_axi_stream_tlast & invalrdy;
 
 always@(posedge clk or negedge rst_n)
 if(~rst_n                        ) pix_cnt <= 11'd0         ; else
-if(m_axi_stream_tuser & invalrdy ) pix_cnt <= 11'd0         ; else // Reset at start of frame
-if(m_axi_stream_tlast & invalrdy ) pix_cnt <= 11'd0         ; else // Reset at end of frame
-if(invalrdy                      ) pix_cnt <= pix_cnt + 1'd1;      // Increment at each pixel
+if(m_axi_stream_tuser & invalrdy ) pix_cnt <= 11'd0         ; else
+if(m_axi_stream_tlast & invalrdy ) pix_cnt <= 11'd0         ; else
+if(invalrdy                      ) pix_cnt <= pix_cnt + 1'd1;
   
 always@(posedge clk or negedge rst_n)
 if(~rst_n                       ) line_cnt <= 11'd0          ; else
-if(m_axi_stream_tuser & invalrdy) line_cnt <= 11'd0          ; else // Reset at start of frame
-if(m_axi_stream_tlast & invalrdy) line_cnt <= line_cnt + 1'd1;      // Increment at each pixel
+if(m_axi_stream_tuser & invalrdy) line_cnt <= 11'd0          ; else
+if(m_axi_stream_tlast & invalrdy) line_cnt <= line_cnt + 1'd1;  
+  
 
 always@(posedge clk or negedge rst_n)
 if(~rst_n                              ) s_frm_sol <= 1'b0; else
-if(outvalrdy & s_frm_sol               ) s_frm_sol <= 1'b0; else // Reset start of line after it is transmitted
-if(m_axi_stream_tuser & invalrdy       ) s_frm_sol <= 1'b1; else // Set start of line after last pixel of line is transmitted
-if(outvalrdy & s_frm_eol & (~s_frm_eof)) s_frm_sol <= 1'b1;      // Set at start of frame
+if(outvalrdy & s_frm_sol               ) s_frm_sol <= 1'b0; else
+if(m_axi_stream_tuser & invalrdy       ) s_frm_sol <= 1'b1; else
+if(outvalrdy & s_frm_eol & (~s_frm_eof)) s_frm_sol <= 1'b1; 
 				
 always@(posedge clk or negedge rst_n)
-if(~rst_n               ) s_frm_eof <= 1'b0; else
-if(outvalrdy & s_frm_eof) s_frm_eof <= 1'b0; else // Reset after end of frame is transmitted
-if(set_eof              ) s_frm_eof <= 1'b1;      // Set when last pixel is received
+if(~rst_n                                                           ) s_frm_eof <= 1'b0; else
+if(outvalrdy & s_frm_eof                                            ) s_frm_eof <= 1'b0; else
+if((line_cnt == (cfg_img_h - 1'd1))  & m_axi_stream_tlast & invalrdy) s_frm_eof <= 1'b1; 
   
 always@(posedge clk or negedge rst_n)
 if(~rst_n                            ) s_frm_val <= 1'b0; else
-if(s_frm_rdy & (~m_axi_stream_tvalid)) s_frm_val <= 1'b0; else // Reset when ready and no valid data at the input
-if(invalrdy                          ) s_frm_val <= 1'b1;      // Set if data is received
+if(s_frm_rdy & (~m_axi_stream_tvalid)) s_frm_val <= 1'b0; else
+if(invalrdy                          ) s_frm_val <= 1'b1; 
 			 
 always@(posedge clk or negedge rst_n)
 if(~rst_n                       ) s_frm_eol <= 1'b0; else
-if(outvalrdy & s_frm_eol        ) s_frm_eol <= 1'b0; else // Reset after end of line is transmitted
-if(m_axi_stream_tlast & invalrdy) s_frm_eol <= 1'b1;      // Set when last pixel in a row is received
+if(outvalrdy & s_frm_eol        ) s_frm_eol <= 1'b0; else
+if(m_axi_stream_tlast & invalrdy) s_frm_eol <= 1'b1;
 			 
 always@(posedge clk or negedge rst_n)
 if(~rst_n                        ) s_frm_sof <= 1'b0; else
-if(outvalrdy & s_frm_sof         ) s_frm_sof <= 1'b0; else // Reset after start of frame is transmitted
-if(m_axi_stream_tuser  & invalrdy) s_frm_sof <= 1'b1;      // Set when first pixel is received
+if(outvalrdy & s_frm_sof         ) s_frm_sof <= 1'b0; else
+if(m_axi_stream_tuser  & invalrdy) s_frm_sof <= 1'b1;
 			 			 
 always@(posedge clk or negedge rst_n)
 if(~rst_n  ) s_frm_data <= {(DATA_WIDTH){1'b0}}; else

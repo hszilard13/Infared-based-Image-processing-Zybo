@@ -1,0 +1,61 @@
+
+*** Running vivado
+    with args -log system_v_axi4s_vid_out_0_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_v_axi4s_vid_out_0_0.tcl
+
+
+****** Vivado v2016.4 (64-bit)
+  **** SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+  **** IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source system_v_axi4s_vid_out_0_0.tcl -notrace
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:12 . Memory (MB): peak = 404.660 ; gain = 194.781
+INFO: [Synth 8-638] synthesizing module 'system_v_axi4s_vid_out_0_0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_v_axi4s_vid_out_0_0/synth/system_v_axi4s_vid_out_0_0.v:57]
+INFO: [Synth 8-638] synthesizing module 'v_axi4s_vid_out_v4_0_5' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/1923/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:76]
+INFO: [Synth 8-638] synthesizing module 'v_axi4s_vid_out_v4_0_5_coupler' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/1923/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:311]
+INFO: [Synth 8-256] done synthesizing module 'v_axi4s_vid_out_v4_0_5_coupler' (31#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/1923/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:311]
+INFO: [Synth 8-638] synthesizing module 'v_axi4s_vid_out_v4_0_5_sync' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/1923/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:822]
+INFO: [Synth 8-256] done synthesizing module 'v_axi4s_vid_out_v4_0_5_sync' (32#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/1923/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:822]
+INFO: [Synth 8-638] synthesizing module 'v_axi4s_vid_out_v4_0_5_formatter' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/1923/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:1453]
+INFO: [Synth 8-256] done synthesizing module 'v_axi4s_vid_out_v4_0_5_formatter' (33#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/1923/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:1453]
+INFO: [Synth 8-256] done synthesizing module 'v_axi4s_vid_out_v4_0_5' (34#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ipshared/1923/hdl/v_axi4s_vid_out_v4_0_vl_rfs.v:76]
+INFO: [Synth 8-256] done synthesizing module 'system_v_axi4s_vid_out_0_0' (35#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_v_axi4s_vid_out_0_0/synth/system_v_axi4s_vid_out_0_0.v:57]
+Finished RTL Elaboration : Time (s): cpu = 00:00:40 ; elapsed = 00:00:46 . Memory (MB): peak = 616.082 ; gain = 406.203
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:40 ; elapsed = 00:00:46 . Memory (MB): peak = 616.082 ; gain = 406.203
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.022 . Memory (MB): peak = 738.352 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:00:48 ; elapsed = 00:01:00 . Memory (MB): peak = 738.352 ; gain = 528.473
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:48 ; elapsed = 00:01:00 . Memory (MB): peak = 738.352 ; gain = 528.473
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:48 ; elapsed = 00:01:00 . Memory (MB): peak = 738.352 ; gain = 528.473
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:49 ; elapsed = 00:01:01 . Memory (MB): peak = 738.352 ; gain = 528.473
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:50 ; elapsed = 00:01:02 . Memory (MB): peak = 738.352 ; gain = 528.473
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:57 ; elapsed = 00:01:09 . Memory (MB): peak = 738.352 ; gain = 528.473
+Finished Timing Optimization : Time (s): cpu = 00:00:58 ; elapsed = 00:01:10 . Memory (MB): peak = 748.188 ; gain = 538.309
+Finished Technology Mapping : Time (s): cpu = 00:00:58 ; elapsed = 00:01:10 . Memory (MB): peak = 757.156 ; gain = 547.277
+Finished IO Insertion : Time (s): cpu = 00:00:58 ; elapsed = 00:01:10 . Memory (MB): peak = 757.156 ; gain = 547.277
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:58 ; elapsed = 00:01:10 . Memory (MB): peak = 757.156 ; gain = 547.277
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:58 ; elapsed = 00:01:10 . Memory (MB): peak = 757.156 ; gain = 547.277
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:58 ; elapsed = 00:01:10 . Memory (MB): peak = 757.156 ; gain = 547.277
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:58 ; elapsed = 00:01:10 . Memory (MB): peak = 757.156 ; gain = 547.277
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:58 ; elapsed = 00:01:10 . Memory (MB): peak = 757.156 ; gain = 547.277
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |    33|
+|2     |LUT1     |    96|
+|3     |LUT2     |    61|
+|4     |LUT3     |    29|
+|5     |LUT4     |    57|
+|6     |LUT5     |    32|
+|7     |LUT6     |    57|
+|8     |MUXCY    |    24|
+|9     |RAMB36E1 |     3|
+|10    |FDCE     |   167|
+|11    |FDPE     |    27|
+|12    |FDRE     |   182|
+|13    |FDSE     |     2|
++------+---------+------+
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:58 ; elapsed = 00:01:10 . Memory (MB): peak = 757.156 ; gain = 547.277
+synth_design: Time (s): cpu = 00:00:57 ; elapsed = 00:01:06 . Memory (MB): peak = 1174.082 ; gain = 854.773

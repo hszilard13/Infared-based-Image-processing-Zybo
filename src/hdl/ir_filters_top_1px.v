@@ -29,21 +29,21 @@ module ir_filters_top_1px#(
   input  [             7:0]  cfg_sharp_coef          ,
   input  [             7:0]  cfg_out_sel             ,
 //--------------------------------Input frame interface---------------------------------------------
-  (* mark_debug = "true" *) input                      frm_val                 , // Master has valid data to be transferred
-  (* mark_debug = "true" *) output                     frm_rdy                 , // Slave is ready to receive the data
-   input  [3*DATA_WIDTH-1:0]  frm_data                , // Data transferred from master to slave
-  (* mark_debug = "true" *) input                      frm_sof                 , // Start of Frame
-  (* mark_debug = "true" *) input                      frm_eof                 , // End of Frame
-  (* mark_debug = "true" *) input                      frm_sol                 , // Start of Line
-  (* mark_debug = "true" *) input                      frm_eol                 , // End of Line
+  input                      frm_val                 , // Master has valid data to be transferred
+  output                     frm_rdy                 , // Slave is ready to receive the data
+  input  [3*DATA_WIDTH-1:0]  frm_data                , // Data transferred from master to slave
+  input                      frm_sof                 , // Start of Frame
+  input                      frm_eof                 , // End of Frame
+  input                      frm_sol                 , // Start of Line
+  input                      frm_eol                 , // End of Line
 //--------------------------------Output frame interface---------------------------------------------   
-  (* mark_debug = "true" *)  output                     filt_val                , // Master has valid data to be transferred      
-  (* mark_debug = "true" *) input                      filt_rdy                , // Slave is ready to receive the data           
-   output [3*DATA_WIDTH-1:0]  filt_data               , // Data transferred from master to slave        
-  (* mark_debug = "true" *) output                     filt_sof                , // Start of Frame                               
-  (* mark_debug = "true" *) output                     filt_eof                , // End of Frame                                 
-  (* mark_debug = "true" *) output                     filt_sol                , // Start of Line                                
-  (* mark_debug = "true" *) output                     filt_eol                , // End of Line                                  
+  output                     filt_val                , // Master has valid data to be transferred      
+  input                      filt_rdy                , // Slave is ready to receive the data           
+  output [3*DATA_WIDTH-1:0]  filt_data               , // Data transferred from master to slave        
+  output                     filt_sof                , // Start of Frame                               
+  output                     filt_eof                , // End of Frame                                 
+  output                     filt_sol                , // Start of Line                                
+  output                     filt_eol                , // End of Line                                  
 //-----------------------------------FIFO interface-------------------------------------------------
   output                     smooth_lb_fifo_push     , // Master pushes data into FIFO
   output [3*2*DATA_WIDTH-1:0]smooth_lb_fifo_pushdata , // Data stored into FIFO

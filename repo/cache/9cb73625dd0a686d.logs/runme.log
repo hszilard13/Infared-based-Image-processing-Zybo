@@ -1,0 +1,75 @@
+
+*** Running vivado
+    with args -log system_system_ila_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_system_ila_0.tcl
+
+
+****** Vivado v2016.4 (64-bit)
+  **** SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+  **** IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source system_system_ila_0.tcl -notrace
+Starting RTL Elaboration : Time (s): cpu = 00:00:15 ; elapsed = 00:00:19 . Memory (MB): peak = 461.895 ; gain = 251.543
+INFO: [Synth 8-638] synthesizing module 'system_system_ila_0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_0/synth/system_system_ila_0.v:203]
+INFO: [Synth 8-638] synthesizing module 'bd_0203' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_0/bd_0/hdl/bd_0203.v:13]
+INFO: [Synth 8-638] synthesizing module 'bd_0203_g_inst_0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_0/bd_0/ip/ip_1/synth/bd_0203_g_inst_0.v:113]
+INFO: [Synth 8-638] synthesizing module 'bd_0203_g_inst_0_gigantic_mux' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_0/bd_0/ip/ip_1/bd_0203_g_inst_0_gigantic_mux.v:63]
+INFO: [Synth 8-256] done synthesizing module 'bd_0203_g_inst_0_gigantic_mux' (1#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_0/bd_0/ip/ip_1/bd_0203_g_inst_0_gigantic_mux.v:63]
+INFO: [Synth 8-256] done synthesizing module 'bd_0203_g_inst_0' (2#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_0/bd_0/ip/ip_1/synth/bd_0203_g_inst_0.v:113]
+INFO: [Synth 8-638] synthesizing module 'bd_0203_ila_lib_0' [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_0/bd_0/ip/ip_0/synth/bd_0203_ila_lib_0.v:84]
+INFO: [Synth 8-638] synthesizing module 'CFGLUT5' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:998]
+INFO: [Synth 8-256] done synthesizing module 'CFGLUT5' (10#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:998]
+INFO: [Synth 8-638] synthesizing module 'CARRY4' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:961]
+INFO: [Synth 8-256] done synthesizing module 'CARRY4' (11#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:961]
+INFO: [Synth 8-638] synthesizing module 'SRLC32E' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43478]
+INFO: [Synth 8-256] done synthesizing module 'SRLC32E' (21#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43478]
+INFO: [Synth 8-638] synthesizing module 'SRL16E' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43328]
+INFO: [Synth 8-256] done synthesizing module 'SRL16E' (23#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43328]
+INFO: [Synth 8-638] synthesizing module 'SRLC16E' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43417]
+INFO: [Synth 8-256] done synthesizing module 'SRLC16E' (25#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:43417]
+INFO: [Synth 8-638] synthesizing module 'FDRE' [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:3964]
+INFO: [Synth 8-256] done synthesizing module 'FDRE' (30#1) [C:/Xilinx/Vivado/2016.4/scripts/rt/data/unisim_comp.v:3964]
+INFO: [Synth 8-256] done synthesizing module 'bd_0203_ila_lib_0' (48#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_0/bd_0/ip/ip_0/synth/bd_0203_ila_lib_0.v:84]
+INFO: [Synth 8-256] done synthesizing module 'bd_0203' (49#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_0/bd_0/hdl/bd_0203.v:13]
+INFO: [Synth 8-256] done synthesizing module 'system_system_ila_0' (50#1) [d:/Projects/2018/Infa-red-based-Image-processing-Zybo/src/bd/system/ip/system_system_ila_0/synth/system_system_ila_0.v:203]
+Finished RTL Elaboration : Time (s): cpu = 00:01:04 ; elapsed = 00:01:11 . Memory (MB): peak = 775.566 ; gain = 565.215
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:01:04 ; elapsed = 00:01:12 . Memory (MB): peak = 775.566 ; gain = 565.215
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.113 . Memory (MB): peak = 885.617 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:01:16 ; elapsed = 00:01:29 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:16 ; elapsed = 00:01:29 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:17 ; elapsed = 00:01:30 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:19 ; elapsed = 00:01:33 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:26 ; elapsed = 00:01:41 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:39 ; elapsed = 00:01:53 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished Timing Optimization : Time (s): cpu = 00:01:39 ; elapsed = 00:01:53 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished Technology Mapping : Time (s): cpu = 00:01:40 ; elapsed = 00:01:54 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished IO Insertion : Time (s): cpu = 00:01:40 ; elapsed = 00:01:55 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:40 ; elapsed = 00:01:55 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:40 ; elapsed = 00:01:55 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:40 ; elapsed = 00:01:55 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:40 ; elapsed = 00:01:55 . Memory (MB): peak = 885.617 ; gain = 675.266
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:40 ; elapsed = 00:01:55 . Memory (MB): peak = 885.617 ; gain = 675.266
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |    38|
+|2     |CFGLUT5  |   107|
+|3     |LUT1     |    22|
+|4     |LUT2     |    61|
+|5     |LUT3     |   115|
+|6     |LUT4     |   163|
+|7     |LUT5     |   121|
+|8     |LUT6     |   501|
+|9     |MUXF7    |    20|
+|10    |RAMB36E1 |     2|
+|11    |SRL16E   |    64|
+|12    |SRLC16E  |     2|
+|13    |SRLC32E  |    17|
+|14    |FDRE     |  1495|
+|15    |FDSE     |     9|
++------+---------+------+
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:40 ; elapsed = 00:01:55 . Memory (MB): peak = 885.617 ; gain = 675.266
+synth_design: Time (s): cpu = 00:01:34 ; elapsed = 00:01:45 . Memory (MB): peak = 885.617 ; gain = 513.359
