@@ -68,7 +68,7 @@ assign start             = cfg_blk_en & (~cfg_blk_en_d)                         
 assign stride_incr       = lastreq_from_line ?  (cfg_stride - cfg_img_width) : 16'd0      ; // Increment or jump stride positions
 assign arsize            = 2'd3                                                           ; // Size is bus 8 for AXI 64 
 assign arburst           = 2'd1                                                           ; // Set burst to incremental
-assign fifo_rdy          = fifo_cnt < (({1'b1,{USEDW_BITS{1'b0}}}) - cfg_max_burst_length); // Fifo ready if more than a burst space is vailable
+assign fifo_rdy          = fifo_cnt < (({1'b1,{USEDW_BITS{1'b0}}}) - cfg_max_burst_length - 1'b1); // Fifo ready if more than a burst space is vailable
 
 assign fifo_in_rst       = fifo_empty & fifo_full;
 
