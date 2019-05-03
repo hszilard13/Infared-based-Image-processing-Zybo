@@ -193,8 +193,8 @@ int main()
 
 	XAxiVdma drv_inst0 = vdma_driver0.get_drv_inst();
 
-	//irpt_ctl.registerHandler(EOF_INTR_ID, &VDMA_crop_handler, &drv_inst0);
-	//irpt_ctl.disableInterrupt(EOF_INTR_ID);
+	irpt_ctl.registerHandler(EOF_INTR_ID, &VDMA_crop_handler, &drv_inst0);
+	irpt_ctl.disableInterrupt(EOF_INTR_ID);
 
 	irpt_ctl.registerHandler(GPIO_INTR_SW, &GPIO_sw_handler, &gpio_drv);
 	irpt_ctl.enableInterrupt(GPIO_INTR_SW);
