@@ -4,9 +4,9 @@
 // Author      : Szilard Hegedus
 // Created     : 09/28/2018
 //--------------------------------------------------------------------------------------------------
-// Description : // Description : Creates 3x6 matrix for 3x3 4px per cycle filter modules
-//               frame input: 4 pixels/cycle
-//               frame output: 3x6 pixels window/cycle
+// Description : // Description : Creates 3x6 matrix for 3x3 1px per cycle filter modules
+//               frame input: 1 pixels/cycle
+//               frame output: 3x3 pixels window/cycle
 //               output image size is equal to the input image size.
 //               The input image is considered to be bordered with cfg_bkg color
 //                               ____                 ____             ____ 
@@ -33,7 +33,7 @@
 // Modification history :
 // 09/28/2018 (SH): Initial version
 // 11/19/2018 (SH): Added configurable background value
-// 01/28/2019 (SH): Rewrite to output 3x3 matrix instead of 3x6, removed 4 px per cycle feature
+// 01/28/2019 (SH): Rewrite to output 3x3 matrix instead of 3x3, removed 1 px per cycle feature
 //--------------------------------------------------------------------------------------------------
 
 module line_buffer#(
@@ -337,31 +337,31 @@ if(sw_rst             ) win_data <= {(9*DATA_WIDTH){1'b0}} ;else
 if(frm_sof & frmvalrdy) win_data <= {9{cfg_bkg}}           ;else
 if(pipe_en            ) win_data <= {win_data[ 8*DATA_WIDTH-1:7*DATA_WIDTH], line2_mid, line2_left, // middle
                                      win_data[ 5*DATA_WIDTH-1:4*DATA_WIDTH], line1_mid, line1_left,
-                                     win_data[ 2*DATA_WIDTH-1:  DATA_WIDTH], line0_mid, line0_left };          
-//	if(win_last_line)begin 
-//	  if(set_sol) win_data <= {cfg_bkg , line2_mid, line2_left, //left-down corner
-//                               cfg_bkg , line1_mid, line1_left,
-//                               {3{cfg_bkg}}                                                }; else
-// 	  if(set_eol) win_data <= {win_data[8*DATA_WIDTH-1:7*DATA_WIDTH], line2_mid, cfg_bkg , //right-down corner
-//                               win_data[5*DATA_WIDTH-1:4*DATA_WIDTH], line1_mid, cfg_bkg ,
-//                              {3{cfg_bkg}}                                                 }; else
-//							  
-//			      win_data <= {win_data[8*DATA_WIDTH-1:7*DATA_WIDTH], line2_mid, line2_left, // down row
-//                               win_data[5*DATA_WIDTH-1:4*DATA_WIDTH], line1_mid, line1_left,
-//                               {3{cfg_bkg}}                                                  };
-//	end else
-//	if(mask_sol) win_data <= {cfg_bkg, line2_mid, line2_left, // left column
-//                              cfg_bkg, line1_mid, line1_left,
-//                              cfg_bkg, line0_mid, line0_left }; else
-// //Mask right border								      
-//    if(mask_eol) win_data <= {win_data[8*DATA_WIDTH-1:7*DATA_WIDTH], line2_mid, cfg_bkg,// right column
-//                              win_data[5*DATA_WIDTH-1:4*DATA_WIDTH], line1_mid, cfg_bkg,
-//                              win_data[2*DATA_WIDTH-1:  DATA_WIDTH], line0_mid, cfg_bkg }; else
-//															
-//                win_data <= {win_data[ 8*DATA_WIDTH-1:7*DATA_WIDTH], line2_mid, line2_left, // middle
-//                             win_data[ 5*DATA_WIDTH-1:4*DATA_WIDTH], line1_mid, line1_left,
-//                             win_data[ 2*DATA_WIDTH-1:  DATA_WIDTH], line0_mid, line0_left };
-//	end
+                                     win_data[ 2*DATA_WIDTH-1:  DATA_WIDTH], line0_mid, line0_left };else          
+if(win_last_line)begin 
+           if(set_sol) win_data <= {cfg_bkg , line2_mid, line2_left, //left-down corner
+                                    cfg_bkg , line1_mid, line1_left,
+                                    {3{cfg_bkg}}                                                }; else
+	       if(set_eol) win_data <= {win_data[8*DATA_WIDTH-1:7*DATA_WIDTH], line2_mid, cfg_bkg , //right-down corner
+                                    win_data[5*DATA_WIDTH-1:4*DATA_WIDTH], line1_mid, cfg_bkg ,
+                                   {3{cfg_bkg}}                                                 }; else
+						  
+		      win_data <= {win_data[8*DATA_WIDTH-1:7*DATA_WIDTH], line2_mid, line2_left, // down row
+                           win_data[5*DATA_WIDTH-1:4*DATA_WIDTH], line1_mid, line1_left,
+                          {3{cfg_bkg}}                                                  };
+end else
+if(mask_sol) win_data <= {cfg_bkg, line2_mid, line2_left, // left column
+                          cfg_bkg, line1_mid, line1_left,
+                          cfg_bkg, line0_mid, line0_left }; else
+//Mask right border								      
+   if(mask_eol) win_data <= {win_data[8*DATA_WIDTH-1:7*DATA_WIDTH], line2_mid, cfg_bkg,// right column
+                             win_data[5*DATA_WIDTH-1:4*DATA_WIDTH], line1_mid, cfg_bkg,
+                             win_data[2*DATA_WIDTH-1:  DATA_WIDTH], line0_mid, cfg_bkg }; else
+														
+               win_data <= {win_data[ 8*DATA_WIDTH-1:7*DATA_WIDTH], line2_mid, line2_left, // middle
+                            win_data[ 5*DATA_WIDTH-1:4*DATA_WIDTH], line1_mid, line1_left,
+                            win_data[ 2*DATA_WIDTH-1:  DATA_WIDTH], line0_mid, line0_left };
+
 
 /////////////////////////////////////////////////////////////////////
 // DEBUG BELOW //////////////////////////////////////////////////////

@@ -963,6 +963,7 @@ public:
 	void ov5647_set_virtual_channel(int channel);
 	void init();
 	Errc reset();
+	Errc stop();
 	Errc set_mode(OV5647_cfg::mode_t mode)
 	{
 		if (mode >= OV5647_cfg::mode_t::MODE_END)

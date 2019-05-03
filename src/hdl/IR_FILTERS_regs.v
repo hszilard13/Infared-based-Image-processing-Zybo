@@ -4,37 +4,6 @@
 *    based on CSV reg. file: IR_FILTERS_regs.csv
 */
 
-//---------------------------------------------------------------------
-// The material in this file is proprietary of Fotonation Inc.
-// Title: apb slave template used by ../script/apb_slave_gen.pl
-// File: $Id: apb_slave_template.v,v 1.1.1.1 2014/05/26 14:14:35 liviua Exp $
-// Author: Mihai Munteanu
-// Created: 25/11/2008
-// Last Modified: $Date: 2014/05/26 14:14:35 $
-//----------------------------------------------------------------------
-// Description : 
-//               
-//               
-//----------------------------------------------------------------------
-// Modification history :
-// $Log: apb_slave_template.v,v $
-// Revision 1.1.1.1  2014/05/26 14:14:35  liviua
-// no message
-//
-// Revision 1.1.1.1  2014/03/27 10:54:35  liviua
-// no message
-//
-// Revision 1.1.1.1  2013/05/14 09:36:26  liviua
-// no message
-//
-// Revision 1.1.1.1  2011/06/22 13:34:53  liviua
-// no message
-//
-//
-//----------------------------------------------------------------------
-
-//`include "timescale.v"
-
 module IR_FILTERS_regs (
 
     sw_rst,

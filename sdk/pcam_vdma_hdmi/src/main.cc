@@ -3,7 +3,7 @@
 
 using namespace digilent;
 
-bool change_config;
+bool test_en;
 
 void pipeline_mode_change(AXI_VDMA<ScuGicInterruptController>& vdma_driver0 , AXI_VDMA<ScuGicInterruptController>& vdma_driver1,
 		OV5647& cam, VideoOutput& vid, Resolution res, OV5647_cfg::mode_t mode)
@@ -12,9 +12,16 @@ void pipeline_mode_change(AXI_VDMA<ScuGicInterruptController>& vdma_driver0 , AX
 	{
 		vdma_driver0.resetWrite();
 		vdma_driver1.resetWrite();
+		if(test_en)
+		{
+			cam.stop();
+			disable_test();
+			enable_test();
+		}
 		MIPI_CSI_2_RX_mWriteReg(XPAR_MIPI_CSI_2_RX_0_S_AXI_LITE_BASEADDR, CR_OFFSET, (CR_RESET_MASK & ~CR_ENABLE_MASK));
 		MIPI_D_PHY_RX_mWriteReg(XPAR_MIPI_D_PHY_RX_0_S_AXI_LITE_BASEADDR, CR_OFFSET, (CR_RESET_MASK & ~CR_ENABLE_MASK));
 		cam.reset();
+
 	}
 
 	{
@@ -48,7 +55,6 @@ void pipeline_mode_change(AXI_VDMA<ScuGicInterruptController>& vdma_driver0 , AX
 		vdma_driver0.enableRead();
 		vdma_driver1.enableRead();
 	}
-	change_config = false;
 }
 
 ScuGicInterruptController irpt_ctl(IRPT_CTL_DEVID);
@@ -73,7 +79,13 @@ void VDMA_crop_handler(void* drv_inst)
 	int source_addr = VDMA1_BASE_ADDR + (cpy_frm * VDMA_FRM_ADDR_INCR);
 	int dest_addr   = VDMA0_BASE_ADDR + (cpy_frm * VDMA_FRM_ADDR_INCR);
 
-	Xil_DCacheInvalidateRange(dest_addr, 3 * IMG_W * IMG_H /2);
+	if(cpy_frm == 4)
+	{
+		Xil_DCacheInvalidateRange(VDMA0_BASE_ADDR, 3 * IMG_W * IMG_H);
+		Xil_DCacheInvalidateRange(VDMA1_BASE_ADDR, 3 * IMG_W * IMG_H);
+	}
+	Xil_DCacheInvalidateRange(dest_addr  , 3 * IMG_W * IMG_H/2);
+	Xil_DCacheInvalidateRange(source_addr, 3 * IMG_W * IMG_H/2);
 
 	//Copy half of the input image to the filtered image
 	int line_nr;
@@ -93,12 +105,21 @@ u8 sw_config;
 void GPIO_sw_handler(void* gpio_drv)
 {
 	XGpio_InterruptClear((XGpio*)gpio_drv, GPIO_INTR_MASK);
-	u16 config = pl_gpio_read((XGpio*)gpio_drv);
-	u8 btn_config = config >> 4; // Shift lower byte to remain only with the config
+	u8 btn_config = pl_gpio_read((XGpio*)gpio_drv, BTN_CH);
 
 	if(btn_config == 0x04)
 	{
 		enable_split = ~enable_split;
+		if(enable_split)
+		{
+			//Enable DMA interrupt for splitting screen
+			irpt_ctl.enableInterrupt(EOF_INTR_ID);
+		}
+		else
+		{
+			//Disable DMA interrupt for splitting screen
+			irpt_ctl.disableInterrupt(EOF_INTR_ID);
+		}
 	}
 
 	// Increase/decrease threshold only if pix_corr or sharp filter is configured
@@ -135,19 +156,23 @@ int main()
 
 
     //Read switch value and configure filters
-	u16 config = pl_gpio_read(&gpio_drv);
+	u8 config = pl_gpio_read(&gpio_drv, SW_CH);
 	sw_config = config & 0x0f; // Mask upper byte
 	switch_cfg(sw_config);
-
-	if(sw_config & 8)
-	{
-		//Enable test_mode if sw3 is active
-		enable_test();
-	}
 
 	threshold = 50;
 	enable_split = false;
 
+	if(sw_config & 8)
+	{
+		//Enable test_mode if sw3 is active
+		test_en = true;
+		enable_test();
+	}
+	else
+	{
+		test_en = false;
+	}
 	PS_GPIO<ScuGicInterruptController> gpio_driver(GPIO_DEVID, irpt_ctl, GPIO_IRPT_ID);
 
 	OV5647 cam(gpio_driver);
@@ -163,9 +188,13 @@ int main()
 
 	pipeline_mode_change(vdma_driver0,vdma_driver1, cam, vid, Resolution::R1920_1080_60_PP, OV5647_cfg::mode_t::MODE_1920x1080);
 
+	if(test_en)
+		cam.stop();
+
 	XAxiVdma drv_inst0 = vdma_driver0.get_drv_inst();
 
-	irpt_ctl.registerHandler(EOF_INTR_ID, &VDMA_crop_handler, &drv_inst0);
+	//irpt_ctl.registerHandler(EOF_INTR_ID, &VDMA_crop_handler, &drv_inst0);
+	//irpt_ctl.disableInterrupt(EOF_INTR_ID);
 
 	irpt_ctl.registerHandler(GPIO_INTR_SW, &GPIO_sw_handler, &gpio_drv);
 	irpt_ctl.enableInterrupt(GPIO_INTR_SW);
@@ -174,16 +203,6 @@ int main()
 
 	while (1)
 	{
-		if(enable_split)
-		{
-			//Enable DMA interrupt for splitting screen
-			irpt_ctl.enableInterrupt(EOF_INTR_ID);
-		}
-		else
-		{
-			//Disable DMA interrupt for splitting screen
-			irpt_ctl.disableInterrupt(EOF_INTR_ID);
-		}
 
 	}
 	cleanup_platform();

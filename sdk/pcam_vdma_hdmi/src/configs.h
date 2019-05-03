@@ -45,7 +45,7 @@ void sharp_cfg();
 void smooth_laplace();
 void smooth_sharp_laplace();
 
-void switch_cfg(u8);
+void switch_cfg(u8 sw_cfg);
 
 
 #endif /* SRC_CONFIGS_H_ */

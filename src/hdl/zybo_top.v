@@ -1,3 +1,9 @@
+// Project     : ir_filters
+// Module Name : zybo_top#
+// Author      : Szilard Hegedus
+// Created     : 3/3/2019
+//------------------------------------------------
+//Description : top module
 
 module zybo_top#(
   parameter DATA_WIDTH = 8, 
@@ -51,22 +57,8 @@ wire        AXI_Stream_Master_tready;
 wire [0:0]  AXI_Stream_Master_tuser ;
 wire        AXI_Stream_Master_tvalid;
 
-wire [0:0]  rst_n              ;
-wire        s_axil_clk_50      ;
-wire[23:0]  video_in_tdata     ;
-wire        video_in_tlast     ;
-wire        video_in_tready    ;
-wire        video_in_tuser     ;
-wire        video_in_tvalid    ;  
-  
-wire        s_frm_val ;  
-wire        s_frm_rdy ;  
-wire [23:0] s_frm_data;  
-wire        s_frm_sof ;  
-wire        s_frm_eof ;  
-wire        s_frm_sol ;  
-wire        s_frm_eol ;
-
+wire [0:0]  rst_n                  ;
+ 
 
 wire        laplace_lb_fifo_push      ;
 wire  [47:0]laplace_lb_fifo_pushdata  ;
@@ -104,14 +96,6 @@ wire  [47:0]pix_corr_lb_fifo_popdata   ;
 wire        pix_corr_lb_fifo_empty     ;
 wire [10:0] pix_corr_lb_fifo_usedwords ;
 
-wire       frm_val ; 
-wire       frm_rdy ;
-wire [23:0]frm_data;
-wire       frm_sof ;
-wire       frm_eof ;
-wire       frm_sol ;
-wire       frm_eol ;
-
 wire       test_frm_val ; 
 wire       test_frm_rdy ;
 wire [23:0]test_frm_data;
@@ -120,6 +104,31 @@ wire       test_frm_eof ;
 wire       test_frm_sol ;
 wire       test_frm_eol ;
 
+wire       cam_frm_val ; 
+wire       cam_frm_rdy ;
+wire [23:0]cam_frm_data;
+wire       cam_frm_sof ;
+wire       cam_frm_eof ;
+wire       cam_frm_sol ;
+wire       cam_frm_eol ;
+
+wire       filt_in_frm_val ; 
+wire       filt_in_frm_rdy ;
+wire [23:0]filt_in_frm_data;
+wire       filt_in_frm_sof ;
+wire       filt_in_frm_eof ;
+wire       filt_in_frm_sol ;
+wire       filt_in_frm_eol ;
+
+wire       dma_in_frm_val ; 
+wire       dma_in_frm_rdy ;
+wire [23:0]dma_in_frm_data;
+wire       dma_in_frm_sof ;
+wire       dma_in_frm_eof ;
+wire       dma_in_frm_sol ;
+wire       dma_in_frm_eol ;
+
+
 wire clk;
 
 wire [23:0] S_AXIS_S2MM_tdata ;
@@ -127,6 +136,18 @@ wire        S_AXIS_S2MM_tlast ;
 wire        S_AXIS_S2MM_tready;
 wire [0:0]  S_AXIS_S2MM_tuser ;
 wire        S_AXIS_S2MM_tvalid;
+
+wire [23:0] AXI_Stream_Master_tdata ;
+wire        AXI_Stream_Master_tlast ;
+wire        AXI_Stream_Master_tready;
+wire [0:0]  AXI_Stream_Master_tuser ;
+wire        AXI_Stream_Master_tvalid;
+
+wire [23:0] M_AXIS_MM2S_tdata ;
+wire        M_AXIS_MM2S_tlast ;
+wire        M_AXIS_MM2S_tready;
+wire [0:0]  M_AXIS_MM2S_tuser ;
+wire        M_AXIS_MM2S_tvalid;
 
 
 wire [31:0] APB_M_paddr  ;
@@ -141,7 +162,7 @@ wire        APB_M_pwrite ;
 
 wire [15:0] cfg_img_width      ;   // Image width
 wire [15:0] cfg_img_height     ;   // Image height
-wire [10:0] cfg_stride         ;   // Stride
+wire [15:0] cfg_stride         ;   // Stride
 wire [31:0] cfg_map0_ba        ;   // Map 0 base address
 wire [31:0] cfg_map1_ba        ;   // Map 1 base address
 wire [31:0] cfg_map2_ba        ;   // Map 2 base address
@@ -314,7 +335,10 @@ wire pix_corr_lb_fifo_clr;
 wire wr_eof_intr;
 wire rd_eof_intr;
 
-               
+wire sts_axi_error;
+wire sts_read_done;
+wire sts_idle     ;               
+
 assign S00_AXI_arcache = 4'd0;
 assign S00_AXI_arlock = 1'd0; 
 assign S00_AXI_arprot = 3'd0;
@@ -384,6 +408,11 @@ system_wrapper i_system_wrapper
   .APB_M_pslverr            (APB_M_pslverr            ),
   .APB_M_pwdata             (APB_M_pwdata             ),
   .APB_M_pwrite             (APB_M_pwrite             ),
+  .AXI_Stream_Master_tdata  (AXI_Stream_Master_tdata  ),
+  .AXI_Stream_Master_tlast  (AXI_Stream_Master_tlast  ),
+  .AXI_Stream_Master_tready (AXI_Stream_Master_tready ),
+  .AXI_Stream_Master_tuser  (AXI_Stream_Master_tuser  ),
+  .AXI_Stream_Master_tvalid (AXI_Stream_Master_tvalid ),
   .DDR_addr                 (DDR_addr                 ),
   .DDR_ba                   (DDR_ba                   ),
   .DDR_cas_n                (DDR_cas_n                ),
@@ -453,33 +482,34 @@ system_wrapper i_system_wrapper
   .FIXED_IO_ps_clk          (FIXED_IO_ps_clk          ),
   .FIXED_IO_ps_porb         (FIXED_IO_ps_porb         ),
   .FIXED_IO_ps_srstb        (FIXED_IO_ps_srstb        ),
-  .M_AXIS_MM2S_tdata        (AXI_Stream_Master_tdata  ), 
-  .M_AXIS_MM2S_tkeep        (                         ), 
-  .M_AXIS_MM2S_tlast        (AXI_Stream_Master_tlast  ), 
-  .M_AXIS_MM2S_tready       (AXI_Stream_Master_tready ),
-  .M_AXIS_MM2S_tuser        (AXI_Stream_Master_tuser  ),
-  .M_AXIS_MM2S_tvalid       (AXI_Stream_Master_tvalid ),
-  .S_AXIS_S2MM_tdata        (S_AXIS_S2MM_tdata        ),
+  //First DMA output
+  .M_AXIS_MM2S_tdata        (M_AXIS_MM2S_tdata         ), 
+  .M_AXIS_MM2S_tkeep        (                          ), 
+  .M_AXIS_MM2S_tlast        (M_AXIS_MM2S_tlast         ), 
+  .M_AXIS_MM2S_tready       (M_AXIS_MM2S_tready        ),
+  .M_AXIS_MM2S_tuser        (M_AXIS_MM2S_tuser         ),
+  .M_AXIS_MM2S_tvalid       (M_AXIS_MM2S_tvalid        ),
+  //First DMA input
+  .S_AXIS_S2MM_1_tdata      (dma_in_frm_data          ),
+  .S_AXIS_S2MM_1_tkeep      (3'b111                   ),
+  .S_AXIS_S2MM_1_tlast      (dma_in_frm_eol           ),
+  .S_AXIS_S2MM_1_tready     (dma_in_frm_rdy           ),
+  .S_AXIS_S2MM_1_tuser      (dma_in_frm_sof           ),
+  .S_AXIS_S2MM_1_tvalid     (dma_in_frm_val           ),
+  //Second DMA input
+  .S_AXIS_S2MM_tdata        (filt_data                ),
   .S_AXIS_S2MM_tkeep        (3'b111                   ),
-  .S_AXIS_S2MM_tlast        (S_AXIS_S2MM_tlast        ),
-  .S_AXIS_S2MM_tready       (S_AXIS_S2MM_tready       ),
-  .S_AXIS_S2MM_tuser        (S_AXIS_S2MM_tuser        ),
-  .S_AXIS_S2MM_tvalid       (S_AXIS_S2MM_tvalid       ),
-  .axi_clk_0                (clk                      ),
-  .axi_clk_1                (clk                      ),
-  .axi_clk_2                (clk                      ),
-  .axi_rst_0                (rst_n                    ),
-  .axi_rst_1                (rst_n                    ),
-  .axi_rst_2                (rst_n                    ),
+  .S_AXIS_S2MM_tlast        (filt_eol                 ),
+  .S_AXIS_S2MM_tready       (filt_rdy                 ),
+  .S_AXIS_S2MM_tuser        (filt_sof                 ),
+  .S_AXIS_S2MM_tvalid       (filt_val                 ),
+  .axi_fifo_rst0            (~rst_n                   ),
+  .axi_fifo_rst1            (~rst_n                   ),
+  .axi_fifo_rst2            (~rst_n                   ),
   .cam_gpio_tri_io          (cam_gpio_tri_io          ),
   .cam_iic_scl_io           (cam_iic_scl_io           ),
   .cam_iic_sda_io           (cam_iic_sda_io           ),
   .clk                      (clk                      ),
-  .clk_1                    (clk                      ),
-  .clk_2                    (clk                      ),
-  .clk_3                    (clk                      ),
-  .clk_4                    (clk                      ),
-  .clk_5                    (clk                      ),
   .data_count               (laplace_lb_fifo_usedwords),
   .data_count_1             (sharp_lb_fifo_usedwords  ),
   .data_count_2             (smooth_lb_fifo_usedwords ),
@@ -615,11 +645,12 @@ system_wrapper i_system_wrapper
   .S02_AXI_wvalid           (S02_AXI_wvalid           ),
   .wr_eof_intr              (wr_eof_intr              ),
   .rd_eof_intr              (rd_eof_intr              ),
-  .gpio_tri_i               ({gpio_btn,gpio_sw}       )
+  .gpio_btn_tri_i           (gpio_btn                 ),
+  .gpio_sw_tri_i            (gpio_sw                  )
   );
     
-IR_FILTERS_regs regs(
-    .sw_rst              (                    ),
+IR_FILTERS_regs register_bank(
+    .sw_rst              (1'b0                ),
     .cfg_img_width       (cfg_img_width       ),
     .cfg_img_height      (cfg_img_height      ),
     .cfg_stride          (cfg_stride          ),
@@ -644,7 +675,7 @@ IR_FILTERS_regs regs(
 	.cfg_test_mode_en    (cfg_test_mode_en    ),
 	.cfg_bkg             (cfg_bkg             ),
 	.cfg_eof_intr_ack    (cfg_eof_intr_ack    ),
-    .PCLK                (clk_axi             ),
+    .PCLK                (clk                 ),
     .PRESETn             (rst_n               ), 
     .PADDR               (APB_M_paddr[15:0]   ),  
     .PENABLE             (APB_M_penable       ),  
@@ -660,7 +691,7 @@ IR_FILTERS_regs regs(
  
 axi_stream2frame#(
   .DATA_WIDTH(3*DATA_WIDTH)
-)interface_conv(
+)interface_conv4cam(
   .clk                (clk                     ), // System clock
   .rst_n              (rst_n                   ), // Asynchronous reset active low
   .cfg_img_w          (cfg_img_width[11:0]     ), // Image width
@@ -670,13 +701,35 @@ axi_stream2frame#(
   .m_axi_stream_tready(AXI_Stream_Master_tready), // End of frame
   .m_axi_stream_tuser (AXI_Stream_Master_tuser ), // Data transferred from slave to master
   .m_axi_stream_tvalid(AXI_Stream_Master_tvalid), // Master is ready to receive the data
-  .s_frm_val          (s_frm_val               ), // Master has valid data to be transferred
-  .s_frm_rdy          (s_frm_rdy               ), // Slave is ready to receive the data
-  .s_frm_data         (s_frm_data              ), // Data transferred from master to slave
-  .s_frm_sof          (s_frm_sof               ), // Start of Frame
-  .s_frm_eof          (s_frm_eof               ), // End of Frame
-  .s_frm_sol          (s_frm_sol               ), // Start of Line
-  .s_frm_eol          (s_frm_eol               )  // End of Line
+  .s_frm_val          (cam_frm_val             ), // Master has valid data to be transferred
+  .s_frm_rdy          (cam_frm_rdy             ), // Slave is ready to receive the data
+  .s_frm_data         (cam_frm_data            ), // Data transferred from master to slave
+  .s_frm_sof          (cam_frm_sof             ), // Start of Frame
+  .s_frm_eof          (cam_frm_eof             ), // End of Frame
+  .s_frm_sol          (cam_frm_sol             ), // Start of Line
+  .s_frm_eol          (cam_frm_eol             )  // End of Line
+);
+
+
+axi_stream2frame#(
+  .DATA_WIDTH(3*DATA_WIDTH)
+)interface_conv4filt(
+  .clk                (clk                     ), // System clock
+  .rst_n              (rst_n                   ), // Asynchronous reset active low
+  .cfg_img_w          (cfg_img_width[11:0]     ), // Image width
+  .cfg_img_h          (cfg_img_height[11:0]    ), // Image height
+  .m_axi_stream_tdata (M_AXIS_MM2S_tdata       ), // Start of frame 
+  .m_axi_stream_tlast (M_AXIS_MM2S_tlast       ), // Slave has valid data to be transferred
+  .m_axi_stream_tready(M_AXIS_MM2S_tready      ), // End of frame
+  .m_axi_stream_tuser (M_AXIS_MM2S_tuser       ), // Data transferred from slave to master
+  .m_axi_stream_tvalid(M_AXIS_MM2S_tvalid      ), // Master is ready to receive the data
+  .s_frm_val          (filt_in_frm_val         ), // Master has valid data to be transferred
+  .s_frm_rdy          (filt_in_frm_rdy         ), // Slave is ready to receive the data
+  .s_frm_data         (filt_in_frm_data        ), // Data transferred from master to slave
+  .s_frm_sof          (filt_in_frm_sof         ), // Start of Frame
+  .s_frm_eof          (filt_in_frm_eof         ), // End of Frame
+  .s_frm_sol          (filt_in_frm_sol         ), // Start of Line
+  .s_frm_eol          (filt_in_frm_eol         )  // End of Line
 );
 
 
@@ -696,20 +749,20 @@ ir_filters_top_1px#(
   .cfg_pix_corr_thr          (cfg_pix_corr_thr          ), // Output selection
   .cfg_sharp_coef            (cfg_sharp_coef            ), // Pixel correction threshold
   .cfg_out_sel               (cfg_output_sel            ),  // Sharpening filter coeficient  
-  .frm_val                   (frm_val                   ), // Master has valid data to be transferred
-  .frm_rdy                   (frm_rdy                   ), // Slave is ready to receive the data
-  .frm_data                  (frm_data                  ), // Data transferred from master to slave
-  .frm_sof                   (frm_sof                   ), // Start of Frame
-  .frm_eof                   (frm_eof                   ), // End of Frame
-  .frm_sol                   (frm_sol                   ), // Start of Line
-  .frm_eol                   (frm_eol                   ), // End of Line  
-  .filt_val                  (S_AXIS_S2MM_tvalid        ), // Master has valid data to be transferred      
-  .filt_rdy                  (S_AXIS_S2MM_tready        ), // Slave is ready to receive the data           
-  .filt_data                 (S_AXIS_S2MM_tdata         ), // Data transferred from master to slave        
-  .filt_sof                  (S_AXIS_S2MM_tuser         ), // Start of Frame                               
+  .frm_val                   (filt_in_frm_val           ), // Master has valid data to be transferred
+  .frm_rdy                   (filt_in_frm_rdy           ), // Slave is ready to receive the data
+  .frm_data                  (filt_in_frm_data          ), // Data transferred from master to slave
+  .frm_sof                   (filt_in_frm_sof           ), // Start of Frame
+  .frm_eof                   (filt_in_frm_eof           ), // End of Frame
+  .frm_sol                   (filt_in_frm_sol           ), // Start of Line
+  .frm_eol                   (filt_in_frm_eol           ), // End of Line  
+  .filt_val                  (filt_val                  ), // Master has valid data to be transferred      
+  .filt_rdy                  (filt_rdy                  ), // Slave is ready to receive the data           
+  .filt_data                 (filt_data                 ), // Data transferred from master to slave        
+  .filt_sof                  (filt_sof                  ), // Start of Frame                               
   .filt_eof                  (filt_eof                  ), // End of Frame                                 
-  .filt_sol                  (                          ), // Start of Line                                
-  .filt_eol                  (S_AXIS_S2MM_tlast         ), // End of Line                            
+  .filt_sol                  (filt_sol                  ), // Start of Line                                
+  .filt_eol                  (filt_eol                  ), // End of Line                            
   .laplace_lb_fifo_push      (laplace_lb_fifo_push      ), // Master pushes data into FIFO
   .laplace_lb_fifo_pushdata  (laplace_lb_fifo_pushdata  ), // Data stored into FIFO
   .laplace_lb_fifo_full      (laplace_lb_fifo_full      ), // FIFO full
@@ -772,7 +825,8 @@ intr_gen i_rd_eof_intr(
 
 axi2frame#(
   .MEM_WIDTH (64  ), 
-  .ADDR_WIDTH(10  )
+  .ADDR_WIDTH(32  ),
+  .USEDW_BITS(USEDW_BITS) 
 )test_mode(
   .clk                 (clk                 ), // System clock
   .rst_n               (rst_n               ), // Asynchronous reset active low
@@ -862,13 +916,13 @@ selector_2i#(
   .clk         (clk             ), // System clock
   .rst_n       (rst_n           ), // Asynchronous reset active low
   .sel         (cfg_test_mode_en), // Mux selection bit
-  .in0_frm_val (s_frm_val       ), // Master has valid data to be transferred
-  .in0_frm_rdy (s_frm_rdy       ), // Slave is ready to receive the data
-  .in0_frm_data(s_frm_data      ), // Data transferred from master to slave
-  .in0_frm_sof (s_frm_sof       ), // Start of Frame
-  .in0_frm_eof (s_frm_eof       ), // End of Frame
-  .in0_frm_sol (s_frm_sol       ), // Start of Line
-  .in0_frm_eol (s_frm_eol       ), // End of Line         
+  .in0_frm_val (cam_frm_val     ), // Master has valid data to be transferred
+  .in0_frm_rdy (cam_frm_rdy     ), // Slave is ready to receive the data
+  .in0_frm_data(cam_frm_data    ), // Data transferred from master to slave
+  .in0_frm_sof (cam_frm_sof     ), // Start of Frame
+  .in0_frm_eof (cam_frm_eof     ), // End of Frame
+  .in0_frm_sol (cam_frm_sol     ), // Start of Line
+  .in0_frm_eol (cam_frm_eol     ), // End of Line         
   .in1_frm_val (test_frm_val    ), // Master has valid data to be transferred
   .in1_frm_rdy (test_frm_rdy    ), // Slave is ready to receive the data
   .in1_frm_data(test_frm_data   ), // Data transferred from master to slave
@@ -876,13 +930,13 @@ selector_2i#(
   .in1_frm_eof (test_frm_eof    ), // End of Frame
   .in1_frm_sol (test_frm_sol    ), // Start of Line
   .in1_frm_eol (test_frm_eol    ), // End of Line 
-  .out_frm_val (frm_val         ), // Master has valid data to be transferred      
-  .out_frm_rdy (frm_rdy         ), // Slave is ready to receive the data           
-  .out_frm_data(frm_data        ), // Data transferred from master to slave        
-  .out_frm_sof (frm_sof         ), // Start of Frame                               
-  .out_frm_eof (frm_eof         ), // End of Frame                                 
-  .out_frm_sol (frm_sol         ), // Start of Line                                
-  .out_frm_eol (frm_eol         )  // End of Line                                  
+  .out_frm_val (dma_in_frm_val  ), // Master has valid data to be transferred      
+  .out_frm_rdy (dma_in_frm_rdy  ), // Slave is ready to receive the data           
+  .out_frm_data(dma_in_frm_data ), // Data transferred from master to slave        
+  .out_frm_sof (dma_in_frm_sof  ), // Start of Frame                               
+  .out_frm_eof (dma_in_frm_eof  ), // End of Frame                                 
+  .out_frm_sol (dma_in_frm_sol  ), // Start of Line                                
+  .out_frm_eol (dma_in_frm_eol  )  // End of Line                                  
 );
 
 endmodule

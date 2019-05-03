@@ -1,5 +1,4 @@
 //--------------------------------------------------------------------------------------------------
-// The material in this file is property of FotoNation
 // Project     : 
 // Module Name : frame2fifo
 // Author      : Szilard Hegedus

@@ -50,6 +50,13 @@ Errc OV5647::reset()
 	return OK;
 }
 
+Errc OV5647::stop()
+{
+	gpio_.clearBit(gpio_.Bits::CAM_GPIO0);
+	gpio_.clearBit(gpio_.Bits::CAM_GPIO1);
+	return OK;
+}
+
 //Errc OV5647::set_mode(OV5647_cfg::mode_t mode)
 //{
 //	if (mode >= OV5647_cfg::mode_t::MODE_END)

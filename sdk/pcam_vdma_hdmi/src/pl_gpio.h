@@ -15,6 +15,6 @@
 #define GPIO_INTR_MASK      0x000000FF
 
 void pl_gpio_init(XGpio *pl_gpio);
-int pl_gpio_read(XGpio *InstancePtr);
+int pl_gpio_read(XGpio *InstancePtr, unsigned ch);
 
 #endif /* SRC_PL_GPIO_H_ */

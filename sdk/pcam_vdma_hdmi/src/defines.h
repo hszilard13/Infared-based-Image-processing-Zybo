@@ -57,4 +57,7 @@
 #define GPIO_DEV_ID         XPAR_AXI_GPIO_0_DEVICE_ID
 #define GPIO_INTR_SW        XPAR_FABRIC_AXI_GPIO_0_IP2INTC_IRPT_INTR
 
+#define SW_CH  1
+#define BTN_CH 2
+
 #endif /* SRC_DEFINES_H_ */

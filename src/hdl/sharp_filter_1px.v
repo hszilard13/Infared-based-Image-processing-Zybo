@@ -1,5 +1,5 @@
 // Project     : ir_outers
-// Module Name : laplace_outer_4px
+// Module Name : laplace_filter_1px
 // Author      : Szilard Hegedus
 // Created     : 11/15/2018
 //--------------------------------------------------------------------------------------------------

@@ -1,31 +1,4 @@
-//---------------------------------------------------------------------
-// The material in this file is proprietary of Fotonation Inc.
-// Title: Simple RW register field
-// File: $Id: apb_reg_field_rw.v,v 1.2 2014/06/03 11:10:42 liviua Exp $
-// Author: Mihai Munteanu
-// Created: 25/11/2008
-// Last Modified: $Date: 2014/06/03 11:10:42 $
-//----------------------------------------------------------------------
-// Description: Simple APB RW (configuration) register field. 
-//              Address decoding must be done at a higher level
-//----------------------------------------------------------------------
-// Modification history :
-// $Log: apb_reg_field_rw.v,v $
-// Revision 1.2  2014/06/03 11:10:42  liviua
-// Modified macros to use `define in order to know if to compile a macro or not
-//
-// Revision 1.1.1.1  2014/05/26 14:14:35  liviua
-// no message
-//
-// Revision 1.1.1.1  2013/05/14 09:36:27  liviua
-// no message
-//
-//
-//
-//
-//----------------------------------------------------------------------
-
-//`include "timescale.v"
+//Automatic generated code
 
 `ifndef FN_APB_REG_FIELD_RW_COMPILED
 

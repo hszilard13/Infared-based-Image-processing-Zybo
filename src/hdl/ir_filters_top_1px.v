@@ -1,5 +1,4 @@
 //--------------------------------------------------------------------------------------------------
-// The material in this file is property of FotoNation
 // Project     : IR_filters
 // Module Name : ir_filters_top
 // Author      : SZILARD HEGEDUS

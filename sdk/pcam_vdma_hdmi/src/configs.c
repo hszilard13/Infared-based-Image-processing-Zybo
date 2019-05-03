@@ -41,7 +41,6 @@ void axi_rd_cfg()
 
 void enable_test()
 {
-	Xil_Out32(APB_BASE_ADDR + CFG_BLK_EN_ADDR, 0);
 	Xil_Out32(APB_BASE_ADDR + CFG_TEST_MODE_EN_ADDR, 1);
 	Xil_Out32(APB_BASE_ADDR + CFG_BLK_EN_ADDR, 1);
 }
